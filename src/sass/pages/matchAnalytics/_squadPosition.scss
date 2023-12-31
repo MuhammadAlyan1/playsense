@@ -1,0 +1,16 @@
+@use '../../abstract/index' as *;
+
+.match-analytics {
+  .squad-position {
+    &__sub-heading {
+      @include subHeading;
+    }
+
+    .squad-position__container {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}

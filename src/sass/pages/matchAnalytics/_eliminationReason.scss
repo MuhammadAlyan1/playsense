@@ -1,0 +1,16 @@
+@use '../../abstract/index' as *;
+
+.match-analytics {
+  .elimination-reason {
+    &__sub-heading {
+      @include subHeading;
+    }
+
+    &__eliminations-container {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}

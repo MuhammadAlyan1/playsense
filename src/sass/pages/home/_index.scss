@@ -1,0 +1,44 @@
+@use '../../abstract/index' as *;
+@forward './createPost';
+
+.home {
+  margin-inline: $default-margin-inline;
+
+  &__filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  &__filter-button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    font-size: $text-xl;
+    color: $clr-text-primary;
+    text-transform: uppercase;
+    border-radius: $rounded-lg;
+    border: 2px solid $clr-text-primary;
+    padding: 0.25rem 0.5rem;
+    transition: all 100ms ease-in;
+    gap: 0.25rem;
+    cursor: pointer;
+    @include glassEffect;
+  }
+
+  &__filter-button--selected {
+    border: 2px solid $clr-secondary;
+  }
+
+  &__filter-button--selected {
+    color: $clr-secondary;
+    border: 2px solid $clr-secondary;
+
+    svg {
+      fill: $clr-secondary;
+    }
+  }
+}

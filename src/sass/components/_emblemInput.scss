@@ -1,0 +1,50 @@
+@use '../abstract/index' as *;
+
+.emblem-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  border: 2px solid $clr-text-primary;
+  border-radius: $rounded-lg;
+  height: 45px;
+  @include glassEffect;
+
+  @include md {
+    width: 300px;
+  }
+
+  @include xl {
+    width: 250px;
+  }
+
+  &__emblem {
+    width: 32px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: $text-xl;
+  }
+
+  &__input {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    color: $clr-text-primary;
+    outline: transparent;
+    font-size: $text-2xl;
+    text-align: right;
+  }
+
+  &__input::-webkit-outer-spin-button,
+  &__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &__input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}

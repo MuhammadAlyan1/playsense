@@ -1,0 +1,73 @@
+@use './variables' as *;
+
+// Breakpoints
+
+@mixin xs() {
+  @media (min-width: map-get($breakpoints, 'xs')) {
+    @content;
+  }
+}
+
+@mixin sm() {
+  @media (min-width: map-get($breakpoints, 'sm')) {
+    @content;
+  }
+}
+
+@mixin md() {
+  @media (min-width: map-get($breakpoints, 'md')) {
+    @content;
+  }
+}
+
+@mixin lg() {
+  @media (min-width: map-get($breakpoints, 'lg')) {
+    @content;
+  }
+}
+
+@mixin xl() {
+  @media (min-width: map-get($breakpoints, 'xl')) {
+    @content;
+  }
+}
+
+@mixin xxl() {
+  @media (min-width: map-get($breakpoints, 'xxl')) {
+    @content;
+  }
+}
+
+// styles
+
+@mixin glassEffect($color: $clr-bg-primary, $blur: 5px) {
+  background-color: rgba($color, 0.2);
+  backdrop-filter: blur($blur);
+}
+
+@mixin heading {
+  margin-top: 2rem;
+  color: $clr-accent;
+  font-weight: 500;
+  font-size: $text-3xl;
+  text-transform: uppercase;
+}
+
+@mixin subHeading {
+  margin-top: 2rem;
+  color: $clr-primary;
+  font-size: $text-xl;
+  text-transform: uppercase;
+}
+
+@mixin role($backgroundColor: $clr-role-user, $color: $clr-text-primary) {
+  font-size: $text-sm;
+  text-transform: uppercase;
+  color: $color;
+  background-color: $backgroundColor;
+  padding: 4px 8px;
+  border-radius: $rounded-base;
+  font-weight: 400;
+  letter-spacing: 1px;
+  user-select: none;
+}

@@ -1,0 +1,9 @@
+@use '../../abstract/index' as *;
+
+.skillify {
+  margin-inline: $default-margin-inline;
+
+  &__heading {
+    @include heading;
+  }
+}

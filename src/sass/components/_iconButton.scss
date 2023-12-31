@@ -1,0 +1,27 @@
+@use '../abstract/index' as *;
+
+.icon-button {
+  width: 100px;
+  height: 100px;
+  border-radius: $rounded-3xl;
+  border: 2px solid $clr-text-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 250ms ease-in;
+
+  &:hover {
+    border-color: $clr-secondary;
+  }
+
+  &--selected {
+    border-color: $clr-secondary;
+  }
+
+  & svg {
+    width: 75px;
+    height: 75px;
+    fill: $clr-text-primary;
+  }
+}

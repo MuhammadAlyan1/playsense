@@ -1,0 +1,35 @@
+@use '../../abstract/index' as *;
+
+.profile {
+  .friends {
+    margin-block: 2rem;
+    display: grid;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-inline: $default-margin-inline;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    .friend {
+      position: relative;
+      padding: 1rem;
+      border-radius: $rounded-3xl;
+      @include glassEffect;
+
+      &__avatar-container {
+        width: 100px;
+        height: 100px;
+        margin-inline: auto;
+      }
+
+      &__username {
+        color: $clr-text-primary;
+        font-size: $text-xl;
+        margin-top: 1rem;
+        font-weight: medium;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

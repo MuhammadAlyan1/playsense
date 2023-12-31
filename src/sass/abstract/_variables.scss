@@ -1,0 +1,68 @@
+// colors
+$clr-text-primary: #f0f0f0;
+$clr-text-secondary: #c0c0c0;
+$clr-bg-primary: #020202;
+$clr-bg-secondary: #2a2d34;
+$clr-primary: #00ffff;
+$clr-secondary: #ffa500;
+$clr-accent: #e30b5c;
+$clr-info: #1e95d6;
+$clr-warning: #f68a1c;
+$clr-error: #d84646;
+$clr-success: #4e9a52;
+$clr-white: #fff;
+
+// logo colors
+$clr-discord: #5865f2;
+$clr-twitter: #1da1f2;
+$clr-youtube: #ff0000;
+$clr-twitch: #5a3e85;
+
+// role colors
+$clr-role-user: #16a085;
+$clr-role-moderator: #3498db;
+$clr-role-game-developer: #e67e22;
+$clr-role-coach: #e84393;
+$clr-role-content-creator: #9b59b6;
+$clr-role-admin: #e74c3c;
+$clr-role-esport-elite: #ff0000;
+
+// border-radius
+$rounded-none: 0px;
+$rounded-sm: 0.125rem; /* 2px */
+$rounded-base: 0.25rem; /* 4px */
+$rounded-md: 0.375rem; /* 6px */
+$rounded-lg: 0.5rem; /* 8px */
+$rounded-xl: 0.75rem; /* 12px */
+$rounded-2xl: 1rem; /* 16px */
+$rounded-3xl: 1.25rem; /* 20px */
+$rounded-4xl: 1.5rem; /* 24px */
+$rounded-full: 9999px;
+
+// font size
+$text-xs: 0.75rem; /* 12px */
+$text-sm: 0.875rem; /* 14px */
+$text-base: 1rem; /* 16px */
+$text-lg: 1.125rem; /* 18px */
+$text-xl: 1.25rem; /* 20px */
+$text-2xl: 1.5rem; /* 24px */
+$text-3xl: 1.875rem; /* 30px */
+$text-4xl: 2.25rem; /* 36px */
+$text-5xl: 3rem; /* 48px */
+$text-6xl: 3.75rem; /* 60px */
+$text-7xl: 4rem; /* 64px */
+$text-8xl: 4.5rem; /* 72px */
+$text-9xl: 8rem; /* 128px */
+
+// breakpoints
+$breakpoints: (
+  'xs': 420px,
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  'xxl': 1536px
+);
+
+// margin
+$default-margin-inline: 10%;

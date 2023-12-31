@@ -1,0 +1,49 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+@forward './navigation';
+@forward './personalization';
+@forward './aboutMe';
+
+.edit-profile {
+  position: relative;
+  min-height: 90vh;
+  padding-bottom: 6rem;
+  margin-inline: $default-margin-inline;
+
+  &__buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    position: absolute;
+    right: 0px;
+    bottom: 20px;
+  }
+
+  &__button {
+    @include button--outlined($clr-secondary, $clr-secondary);
+    @include glassEffect;
+  }
+
+  &__button--next,
+  &__button--finish {
+    @include button--outlined($clr-primary, $clr-primary);
+  }
+
+  &__button:disabled {
+    @include button--outlined($clr-bg-secondary, $clr-bg-secondary);
+  }
+
+  .socials {
+    &__heading {
+      @include subHeading;
+    }
+  }
+
+  .peripherals {
+    &__heading {
+      @include subHeading;
+    }
+  }
+}

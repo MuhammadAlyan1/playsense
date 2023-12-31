@@ -1,0 +1,16 @@
+@use '../../abstract/index' as *;
+
+.match-analytics {
+  .map-selection {
+    &__sub-heading {
+      @include subHeading;
+    }
+
+    &__maps-container {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}

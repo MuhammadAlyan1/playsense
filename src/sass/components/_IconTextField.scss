@@ -1,0 +1,40 @@
+@use '../abstract/index' as *;
+
+.icon-text-field {
+  margin-block: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  outline: 2px solid $clr-text-secondary;
+  border-radius: $rounded-3xl;
+  padding: 0.25rem 0.5rem;
+  @include glassEffect;
+
+  &:focus-within {
+    outline-color: $clr-secondary;
+  }
+
+  &__icon-container {
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $rounded-lg;
+  }
+
+  &__icon {
+    width: 21px;
+    display: block;
+  }
+
+  &__input-field {
+    border: none;
+    outline: transparent;
+    font-size: $text-base;
+    width: 100%;
+    background-color: transparent;
+    color: $clr-text-primary;
+  }
+}

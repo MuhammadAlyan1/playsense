@@ -1,0 +1,203 @@
+@use '../../abstract/index' as *;
+@use '../../components/index' as *;
+
+.profile {
+  .header {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 150px;
+    border-radius: 0px 0px 20px 20px;
+    overflow: hidden;
+    background-color: $clr-bg-primary;
+    padding-block: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-direction: column;
+
+    @include md {
+      padding: 1rem 2rem;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__user-contents {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 1rem;
+
+      @include md {
+        flex-direction: row;
+      }
+    }
+
+    &__user-picture-platform-container {
+      position: relative;
+    }
+
+    &__user-picture-container {
+      width: 215px;
+      height: 215px;
+    }
+
+    &__platform-container {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: $rounded-full;
+      background-color: $clr-accent;
+      top: 10px;
+      left: 15px;
+    }
+
+    &__platform-icon {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    &__username {
+      font-size: $text-3xl;
+      font-weight: 600;
+      @include glassEffect;
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: $rounded-md;
+    }
+
+    &__socials-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+
+      @include md {
+        justify-content: flex-start;
+      }
+    }
+
+    &__socials-link {
+      display: block;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: $rounded-lg;
+      @include glassEffect;
+    }
+
+    &__socials-icon {
+      width: 21px;
+      display: block;
+    }
+
+    &__socials-icon--twitch {
+      fill: $clr-twitch;
+    }
+
+    &__socials-icon--twitter {
+      fill: $clr-twitter;
+    }
+
+    &__socials-icon--youtube {
+      fill: $clr-youtube;
+    }
+
+    &__socials-icon--discord {
+      fill: $clr-discord;
+    }
+
+    &__user-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-self: flex-end;
+    }
+
+    &__user-action-button {
+      @include glassEffect;
+    }
+
+    &__user-action-button--add-friend {
+      @include button--outlined($clr-secondary, $clr-secondary);
+    }
+
+    &__user-action-button--remove-friend {
+      @include button--outlined($clr-error, $clr-error);
+    }
+
+    &__user-action-button--chat {
+      @include button--outlined($clr-primary, $clr-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 32px;
+    }
+
+    &__chat-icon {
+      width: 18px;
+      fill: $clr-primary;
+    }
+
+    &__action-menu {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+    }
+
+    &__action-menu-icon {
+      fill: $clr-secondary;
+      font-size: $text-3xl;
+      cursor: pointer;
+    }
+
+    &__action-menu-list {
+      position: absolute;
+      right: 0px;
+      top: 30px;
+      width: max-content;
+      background-color: $clr-bg-secondary;
+      padding-left: 0px;
+      list-style: none;
+      border-radius: $rounded-lg;
+      transition: transform 150ms ease-in;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform-origin: top right;
+      padding-block: 1rem;
+      z-index: 2;
+    }
+
+    &__action-menu-list--visible {
+      transform: scale(1);
+    }
+
+    &__action-menu-list--hidden {
+      transform: scale(0);
+    }
+
+    &__action-menu-item {
+      text-align: left;
+      text-transform: uppercase;
+      font-size: $text-base;
+      color: $clr-text-primary;
+    }
+
+    &__action-menu-item:hover {
+      background-color: $clr-bg-primary;
+    }
+
+    &__action-menu-link {
+      padding: 0.5rem 1rem;
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

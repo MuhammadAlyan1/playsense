@@ -1,0 +1,52 @@
+@use '../../abstract/index' as *;
+
+.profile {
+  .navigation {
+    margin-top: 1rem;
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    max-width: fit-content;
+    margin-inline: auto;
+    padding: 0.5rem 2rem;
+    border-radius: 60px;
+    @include glassEffect;
+
+    &__item {
+      position: relative;
+      color: $clr-primary;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding-block: 1rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: all 250ms ease-in;
+      user-select: none;
+    }
+
+    &__item:hover {
+      color: $clr-secondary;
+    }
+
+    &__item::before {
+      content: '';
+      position: absolute;
+      height: 0px;
+      width: 0px;
+      bottom: 5px;
+      background-color: $clr-secondary;
+      transition: width ease-in 200ms;
+    }
+
+    &__item--active {
+      color: $clr-secondary;
+    }
+
+    &__item--active::before {
+      width: 100%;
+      height: 3px;
+      border-radius: 2px 2px 0px 0px;
+    }
+  }
+}

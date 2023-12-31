@@ -1,0 +1,23 @@
+@use '../../abstract/index' as *;
+
+.match-analytics {
+  .legends {
+    &__sub-heading {
+      @include subHeading;
+    }
+
+    &__legends-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    &__legends {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+}

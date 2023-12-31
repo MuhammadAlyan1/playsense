@@ -1,0 +1,13 @@
+@forward './friends';
+@forward './peripherals';
+@forward './header';
+@forward './navigation';
+@forward './about';
+@use '../../abstract/index' as *;
+
+.profile {
+  .posts {
+    margin-inline: $default-margin-inline;
+    margin-top: 2rem;
+  }
+}

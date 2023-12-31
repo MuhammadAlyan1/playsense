@@ -1,0 +1,72 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+.edit-profile {
+  .personalization {
+    &__heading {
+      @include subHeading;
+    }
+
+    &__profile-picture-container {
+      margin-top: 1rem;
+      width: 110px;
+      height: 110px;
+    }
+
+    &__banner-container {
+      margin-top: 1rem;
+      height: 150px;
+      border-radius: $rounded-3xl;
+      overflow: hidden;
+
+      @include sm {
+        height: 250px;
+      }
+    }
+
+    &__banner {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    &__upload-button::file-selector-button {
+      @include button--outlined($clr-secondary, $clr-secondary);
+      margin-top: 1rem;
+      @include glassEffect;
+    }
+
+    &__platforms {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    &__platform-button {
+      cursor: pointer;
+      border-radius: $rounded-3xl;
+      background-color: transparent;
+      text-transform: uppercase;
+      border: 2px solid $clr-text-secondary;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include glassEffect;
+    }
+
+    &__platform-button--selected {
+      border: 2px solid $clr-secondary;
+    }
+
+    &__platform-icon {
+      width: 65px;
+      height: 65px;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@use '../../abstract/index' as *;
+
+.match-analytics {
+  .elimination-location {
+    margin-top: 1rem;
+
+    &__sub-heading {
+      @include subHeading;
+    }
+
+    &__map-container {
+      position: relative;
+      margin-top: 1rem;
+      border-radius: $rounded-3xl;
+      width: 100%;
+      max-width: 800px;
+      @include glassEffect;
+    }
+
+    &__map {
+      cursor: crosshair;
+      width: 100%;
+    }
+
+    &__marker {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: $rounded-full;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

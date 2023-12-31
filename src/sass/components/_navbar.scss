@@ -1,0 +1,213 @@
+@use '../abstract/index' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  transition: right ease-in 250ms;
+  padding: 1rem;
+  z-index: 8;
+  @include glassEffect;
+
+  @include xl {
+    position: sticky;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 0px 0px;
+    padding: 0px 1rem;
+    border-radius: 0px 0px 8px 8px;
+    transition: background-color 200ms ease-in;
+  }
+
+  &--hidden {
+    right: -320px;
+  }
+
+  &__logo-container {
+    width: 200px;
+    margin-top: 0.5rem;
+
+    @include xl {
+      margin-top: 0px;
+    }
+  }
+
+  &__logo {
+    width: 100%;
+  }
+
+  &__list {
+    list-style-type: none;
+    @include xl {
+      display: flex;
+      gap: 1.5rem;
+      list-style-type: none;
+    }
+  }
+
+  &__item {
+    margin-block: 3rem;
+
+    @include xl {
+      margin-block: 1.5rem;
+    }
+  }
+
+  &__link {
+    font-size: $text-base;
+    color: $clr-text-primary;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color ease-in 200ms;
+    position: relative;
+    font-weight: medium;
+  }
+
+  &__link--active {
+    color: $clr-accent;
+  }
+
+  &__link::before {
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    content: '';
+    bottom: -5px;
+    background-color: $clr-accent;
+    transition: width ease-in 200ms;
+  }
+
+  &__link--active::before {
+    width: 100%;
+    height: 3px;
+    border-radius: 2px 2px 0px 0px;
+  }
+
+  &__link:hover {
+    color: $clr-accent;
+  }
+
+  &__user-panel {
+    display: flex;
+    gap: 1.5rem;
+
+    @include xl {
+      gap: 1rem;
+    }
+  }
+
+  &__profile-container {
+    position: relative;
+  }
+
+  &__user-panel-icon-button {
+    background-color: transparent;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    @include glassEffect;
+  }
+
+  &__user-panel-icon-badge {
+    position: absolute;
+    min-width: 20px;
+    height: 20px;
+    padding-block: 0.1rem;
+    padding-inline: 0.25rem;
+    background-color: $clr-accent;
+    color: $clr-text-primary;
+    font-size: $text-xs;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    top: -5px;
+    right: -8px;
+  }
+
+  &__user-panel-icon {
+    width: 21px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  &__profile-menu {
+    position: absolute;
+    right: -135px;
+    top: 40px;
+    width: max-content;
+    background-color: $clr-bg-secondary;
+    padding-left: 0px;
+    list-style: none;
+    border-radius: $rounded-lg;
+    transition: transform 150ms ease-in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: top left;
+    padding-block: 1rem;
+    z-index: 2;
+
+    @include xl {
+      right: 0px;
+      transform-origin: top right;
+    }
+  }
+
+  &__profile-menu--visible {
+    transform: scale(1);
+  }
+
+  &__profile-menu--hidden {
+    transform: scale(0);
+  }
+
+  &__profile-menu-item {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: $text-base;
+    color: $clr-text-primary;
+  }
+
+  &__profile-menu-item:hover {
+    background-color: $clr-bg-primary;
+  }
+
+  &__profile-menu-link {
+    color: inherit;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+  }
+
+  &__button {
+    fill: $clr-accent;
+    font-size: 2rem;
+    position: fixed;
+    top: 30px;
+    right: 10px;
+    z-index: 10;
+    cursor: pointer;
+    padding: 0.125rem;
+    border-radius: $rounded-md;
+    @include glassEffect;
+
+    @include xl {
+      display: none;
+    }
+  }
+}

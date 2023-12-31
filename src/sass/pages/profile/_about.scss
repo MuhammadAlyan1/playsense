@@ -1,0 +1,67 @@
+@use '../../abstract/index' as *;
+
+.profile {
+  .about {
+    margin-inline: $default-margin-inline;
+    &__heading {
+      @include subHeading;
+    }
+
+    &__bio {
+      font-size: $text-base;
+      color: $clr-text-primary;
+      max-width: 600px;
+      margin-top: 1rem;
+      line-height: 1.3;
+    }
+
+    &__roles-container {
+      margin-top: 1rem;
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      max-width: 350px;
+    }
+
+    &__role--user {
+      @include role($clr-role-user);
+    }
+
+    &__role--moderator {
+      @include role($clr-role-moderator);
+    }
+
+    &__role--admin {
+      @include role($clr-role-admin);
+    }
+
+    &__role--game-developer {
+      @include role($clr-role-game-developer);
+    }
+
+    &__role--content-creator {
+      @include role($clr-role-content-creator);
+    }
+
+    &__role--coach {
+      @include role($clr-role-coach);
+    }
+
+    &__role--esport-elite {
+      @include role($clr-role-esport-elite);
+    }
+
+    &__country {
+      font-size: $text-base;
+      margin-top: 1rem;
+      text-transform: capitalize;
+    }
+
+    &__created-at {
+      font-size: $text-base;
+      margin-top: 1rem;
+      text-transform: capitalize;
+    }
+  }
+}

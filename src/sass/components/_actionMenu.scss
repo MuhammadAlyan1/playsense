@@ -1,0 +1,57 @@
+@use '../abstract/index' as *;
+
+.action-menu {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+
+  &__icon {
+    fill: $clr-secondary;
+    font-size: $text-3xl;
+    cursor: pointer;
+  }
+
+  &__list {
+    position: absolute;
+    right: 0px;
+    top: 30px;
+    width: max-content;
+    background-color: $clr-bg-secondary;
+    padding-left: 0px;
+    list-style: none;
+    border-radius: $rounded-lg;
+    transition: transform 150ms ease-in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: top right;
+    padding-block: 1rem;
+    z-index: 2;
+  }
+
+  &__list--visible {
+    transform: scale(1);
+  }
+
+  &__list--hidden {
+    transform: scale(0);
+  }
+
+  &__item {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: $text-sm;
+    color: $clr-text-primary;
+  }
+
+  &__item:hover {
+    background-color: $clr-bg-primary;
+  }
+
+  &__link {
+    padding: 0.5rem 1rem;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+}

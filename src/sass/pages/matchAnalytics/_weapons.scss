@@ -1,0 +1,73 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+.match-analytics {
+  .weapons {
+    &__sub-heading {
+      @include subHeading();
+    }
+
+    &__weapon {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-block: 2rem;
+      flex-wrap: wrap;
+    }
+
+    &__icon {
+      height: 45px;
+      flex-shrink: 0;
+      width: 100px;
+      min-height: 45px;
+    }
+
+    &__widgets {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    &__delete-button {
+      border: none;
+      background-color: transparent;
+      height: 45px;
+      padding: 0rem 0.2rem;
+      border: 2px solid $clr-error;
+      width: fit-content;
+      border-radius: $rounded-lg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      @include glassEffect;
+    }
+
+    &__delete-button-icon {
+      font-size: 2rem;
+      height: 45px;
+      fill: $clr-error;
+    }
+
+    &__modal-button {
+      @include button--outlined($clr-secondary, $clr-secondary);
+      font-size: $text-lg;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-block: 1rem;
+    }
+
+    &__modal-button-icon {
+      width: 32px;
+      height: 32px;
+      fill: $clr-secondary;
+    }
+
+    &__icon-button {
+      & svg {
+        height: 45px;
+      }
+    }
+  }
+}

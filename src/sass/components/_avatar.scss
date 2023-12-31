@@ -1,0 +1,18 @@
+@use '../abstract/index' as *;
+
+.avatar-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid transparent;
+  outline: 2px solid $clr-secondary;
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+}

@@ -1,0 +1,32 @@
+@use '../../abstract/index' as *;
+
+.edit-profile {
+  .navigation {
+    &__indicator {
+      display: flex;
+      gap: 1rem;
+      margin-block: 1rem;
+    }
+
+    &__bar {
+      max-width: 100px;
+      flex: 1;
+      height: 5px;
+      border-radius: 10px;
+      background-color: $clr-bg-secondary;
+
+      &--completed {
+        background-color: $clr-text-primary;
+      }
+
+      &--current {
+        background-color: $clr-primary;
+      }
+    }
+
+    &__step-name {
+      font-size: $text-4xl;
+      color: $clr-accent;
+    }
+  }
+}

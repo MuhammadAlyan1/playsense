@@ -1,0 +1,16 @@
+@use '../../abstract/index' as *;
+
+.match-analytics {
+  .modes {
+    &__sub-heading {
+      @include subHeading;
+    }
+
+    &__modes-container {
+      display: flex;
+      gap: 1rem;
+      margin-block: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}

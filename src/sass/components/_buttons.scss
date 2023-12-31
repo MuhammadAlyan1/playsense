@@ -1,0 +1,36 @@
+@use '../abstract/variables' as *;
+@use '../abstract/_mixins' as *;
+
+@mixin button--text($color, $font-size: $text-base) {
+  color: $color;
+  font-size: $font-size;
+  font-family: inherit;
+  border: none;
+  background-color: transparent;
+  padding: 0em;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@mixin button--contained($color, $background-color, $font-size: $text-base) {
+  font-size: $font-size;
+  font-family: inherit;
+  padding: 0.35em 1em;
+  border: none;
+  cursor: pointer;
+  border-radius: $rounded-lg;
+  color: $color;
+  background-color: $background-color;
+}
+
+@mixin button--outlined($color, $border-color, $font-size: $text-base) {
+  font-size: $font-size;
+  font-family: inherit;
+  padding: 0.1em 0.5em;
+  cursor: pointer;
+  border-radius: $rounded-lg;
+  background-color: transparent;
+  text-transform: uppercase;
+  color: $color;
+  border: 2px solid $border-color;
+}

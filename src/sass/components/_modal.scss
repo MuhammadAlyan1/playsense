@@ -1,0 +1,54 @@
+@use '../abstract/index' as *;
+
+.modal {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  @include glassEffect;
+
+  @include md {
+    padding-top: 10rem;
+  }
+
+  &--visible {
+    transform: scale(1);
+  }
+
+  &__content-container {
+    position: relative;
+    height: fit-content;
+    background-color: $clr-bg-secondary;
+    padding: 1rem;
+    max-width: 850px;
+    margin: 1rem;
+    border-radius: $rounded-3xl;
+  }
+
+  &__title {
+    @include subHeading;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  &__close-button {
+    margin: 0px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+  &__close-button-icon {
+    fill: $clr-error;
+    font-size: 2rem;
+  }
+}

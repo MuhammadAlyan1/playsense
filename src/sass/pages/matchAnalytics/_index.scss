@@ -1,0 +1,20 @@
+@use '../../abstract/index' as *;
+@forward './weapons';
+@forward './legends';
+@forward './modes';
+@forward './mapSelection';
+@forward './eliminationReason';
+@forward './squadPosition';
+@forward './eliminationLocation';
+
+.match-analytics {
+  margin-inline: $default-margin-inline;
+
+  &__heading {
+    @include heading;
+  }
+
+  &__sub-heading {
+    @include subHeading;
+  }
+}

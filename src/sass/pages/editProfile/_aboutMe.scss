@@ -1,0 +1,141 @@
+@use '../../abstract/index' as *;
+
+.edit-profile {
+  .about-me {
+    margin-bottom: 5rem;
+    background-position: left;
+    object-fit: fill;
+
+    &__heading {
+      @include subHeading;
+    }
+
+    &__bio-container {
+      position: relative;
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+
+    &__bio-input {
+      width: 100%;
+      background-color: transparent;
+      border: 2px solid $clr-text-secondary;
+      border-radius: 20px;
+      color: $clr-text-primary;
+      font-size: $text-base;
+      padding: 1rem;
+      padding-bottom: 2rem;
+      resize: none;
+      outline: transparent;
+      @include glassEffect;
+    }
+
+    &__bio-input:focus {
+      border: 2px solid $clr-secondary;
+    }
+
+    &__bio-length {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      font-size: $text-xs;
+      pointer-events: none;
+      padding: 0.25rem;
+      border-radius: $rounded-lg;
+      @include glassEffect;
+    }
+
+    &__role-select {
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    &__role-select-button {
+      text-transform: uppercase;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border-radius: $rounded-3xl;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.25rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      background-color: transparent;
+      border: 2px solid $clr-text-secondary;
+      color: $clr-text-primary;
+      font-size: $text-base;
+      @include glassEffect;
+    }
+
+    &__role-select-button:focus-within {
+      border: 2px solid $clr-secondary;
+    }
+
+    &__icon-text-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    &__start-icon-container {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $rounded-lg;
+      position: relative;
+      overflow: hidden;
+    }
+
+    &__dropdown-icon {
+      font-size: $text-xl;
+      transition: transform 250ms ease-in;
+      background-color: transparent;
+      color: $clr-text-primary;
+    }
+
+    &__dropdown-menu {
+      list-style-type: none;
+      position: absolute;
+      border-radius: $rounded-3xl;
+      z-index: 10;
+      left: 0;
+      right: 0;
+      bottom: -260px;
+      cursor: default;
+      box-shadow: 0px 4px 4px rgba(0 0 0 / 0.5);
+      background-color: $clr-bg-secondary;
+      color: $clr-text-primary;
+      transform: scale(0);
+      transform-origin: top;
+      transition: transform 250ms ease-in;
+      height: 250px;
+      overflow-y: scroll;
+    }
+
+    &__role-select-button:focus + &__dropdown-menu,
+    &__role-select-button:focus-within + &__dropdown-menu,
+    &__dropdown-menu:focus,
+    &__dropdown-menu:focus-within {
+      transform: scale(1);
+    }
+
+    &__role-select-button:focus &__dropdown-icon,
+    &__role-select-button:focus-within &__dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    &__dropdown-menu-item {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      margin-block: 0.5rem;
+    }
+
+    &__dropdown-menu-item:hover {
+      background-color: $clr-bg-primary;
+    }
+  }
+}

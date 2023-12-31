@@ -1,0 +1,9 @@
+@use '../../abstract/index' as *;
+
+.game-database {
+  margin-inline: $default-margin-inline;
+
+  &__heading {
+    @include heading;
+  }
+}
