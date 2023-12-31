@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Weapons from './Weapons';
 import Legends from './Legends';
 import Modes from './Modes';

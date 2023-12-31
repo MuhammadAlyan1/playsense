@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Posts from '../shared/Posts';
 import FilterIcon from '../../assets/icons/misc/filter.svg?react';
 import TrendingIcon from '../../assets/icons/misc/trending.svg?react';
 import TopIcon from '../../assets/icons/misc/top.svg?react';
 import NewIcon from '../../assets/icons/misc/new.svg?react';
-import CreatePost from './createPost';
+import CreatePost from './CreatePost';
 
 const Home = () => {
   const [selectedFilter, setSelectedFilter] = useState('trending');

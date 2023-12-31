@@ -3,7 +3,6 @@ import UpvoteIcon from '../../assets/icons/misc/upvote.svg?react';
 import DownvoteIcon from '../../assets/icons/misc/downvote.svg?react';
 import CommentIcon from '../../assets/icons/misc/comment.svg?react';
 import { Link } from 'react-router-dom';
-import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import ActionMenu from '../ui/ActionMenu';
 
 type PostType = {
@@ -35,12 +34,24 @@ const Post: React.FC<PostType> = ({
   comments,
   commentedBy
 }) => {
-  console.log(getFormattedAmount(1350, 50));
   const [hasLiked, setHasLiked] = useState(false);
   const [hasDisliked, setHasDisliked] = useState(false);
   const [hasCommented, setHasCommented] = useState(false);
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
+
+  console.log(
+    'POST USERID: ',
+    userId,
+    'POST LIKED BY: ',
+    likedBy,
+    'POST DISLIKED BY: ',
+    dislikedBy,
+    'POST COMMENTED BY: ',
+    commentedBy,
+    isActionMenuOpen,
+    setHasCommented
+  );
 
   const handleLike = () => {
     setHasLiked((prev) => !prev);
@@ -172,7 +183,7 @@ const getTimeDifference = (date: Date): string => {
     (new Date().getTime() - date.getTime()) / 1000
   );
 
-  const intervals = [
+  const intervals: [string, number][] = [
     ['year', 365 * 24 * 3600],
     ['month', 30 * 24 * 3600],
     ['week', 7 * 24 * 3600],

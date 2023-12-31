@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import RepeaterIcon from '../../assets/icons/weapons/30-30-repeater.svg?react';
 import AlternatorIcon from '../../assets/icons/weapons/alternator.svg?react';
 import BocekBowIcon from '../../assets/icons/weapons/bocek-bow.svg?react';

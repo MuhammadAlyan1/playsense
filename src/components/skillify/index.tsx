@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Skillify = () => {
   return (
     <div className="skillify">

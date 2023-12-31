@@ -1,9 +1,16 @@
-import React from 'react';
 import HeadphonesIcon from '../../assets/icons/peripherals/headphones.svg?react';
 import KeyboardIcon from '../../assets/icons/peripherals/keyboard.svg?react';
 import MonitorIcon from '../../assets/icons/peripherals/monitor.svg?react';
 import MouseIcon from '../../assets/icons/peripherals/mouse.svg?react';
 import MousepadIcon from '../../assets/icons/peripherals/mousepad.svg?react';
+
+type PeripheralsType = {
+  mouse: string;
+  keyboard: string;
+  mousepad: string;
+  monitor: string;
+  headphones: string;
+};
 
 const peripherals = {
   mouse: 'Logitech G Pro',
@@ -38,7 +45,9 @@ const Peripherals = () => {
             <div className="peripherals__icon-container">
               {getPeripheralsIcon(key)}
             </div>
-            <p className="peripherals__name">{peripherals[key]}</p>
+            <p className="peripherals__name">
+              {peripherals[key as keyof PeripheralsType]}
+            </p>
           </div>
         );
       })}

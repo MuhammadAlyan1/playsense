@@ -36,7 +36,7 @@ const EliminationLocation: React.FC<EliminationLocationPropsType> = ({
   const handleClick = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
-    const mapImage = event.target;
+    const mapImage = event.target as HTMLImageElement;
     const xCoordinate = (event.nativeEvent.offsetX / mapImage.width) * 100;
     const yCoordinate = (event.nativeEvent.offsetY / mapImage.height) * 100;
 

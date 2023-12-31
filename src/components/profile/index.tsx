@@ -1,15 +1,4 @@
-/// <reference types="vite-plugin-svgr/client" />
-import React, { useRef, useState, useEffect } from 'react';
-import pcIcon from '../../assets/icons/platform/PC.svg';
-import xboxIcon from '../../assets/icons/platform/xbox.svg';
-import playstationIcon from '../../assets/icons/platform/playstation.svg';
-import TwitchIcon from '../../assets/icons/socials/twitch.svg?react';
-import YoutubeIcon from '../../assets/icons/socials/youtube.svg?react';
-import TwitterIcon from '../../assets/icons/socials/twitter.svg?react';
-import DiscordIcon from '../../assets/icons/socials/discord.svg?react';
-import ChatIcon from '../../assets/icons/misc/chat.svg?react';
-import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Header from './Header';
 import Navigation from './Navigation';
 import About from './About';

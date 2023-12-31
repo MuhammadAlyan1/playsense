@@ -13,6 +13,7 @@ const Friend: React.FC<FriendsPropType> = ({
   isInFriendlist,
   avatar
 }) => {
+  console.log('FRIEND ID: ', id, 'IS IN FRIENDLIST: ', isInFriendlist);
   return (
     <div className="friend">
       <div className="friend__avatar-container avatar-container">

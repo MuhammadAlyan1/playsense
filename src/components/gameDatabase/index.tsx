@@ -1,5 +1,3 @@
-import React from 'react';
-
 const GameDatabase = () => {
   return (
     <div className="game-database">

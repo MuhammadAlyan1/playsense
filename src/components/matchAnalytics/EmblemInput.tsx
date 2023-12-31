@@ -16,9 +16,8 @@ const EmblemInput: React.FC<EmblemInputPropsType> = ({
   setWeapons,
   Icon
 }) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const weapon = weapons.find((weapon: WeaponType) => weapon.id === id);
-
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedWeaponData = weapons.map((weapon) => {
       if (weapon.id === id) {
@@ -34,6 +33,8 @@ const EmblemInput: React.FC<EmblemInputPropsType> = ({
     setWeapons(updatedWeaponData);
   };
 
+  console.log(weapon);
+
   return (
     <div className="emblem-input" onClick={() => inputRef?.current?.focus()}>
       <Icon className="emblem-input__emblem" />
@@ -42,7 +43,10 @@ const EmblemInput: React.FC<EmblemInputPropsType> = ({
         ref={inputRef}
         type="number"
         className="emblem-input__input"
-        value={weapon?.[label.toLowerCase()]}
+        // value={weapon?.[label.toLowerCase()]}
+        value={
+          (weapon as Record<string, number> | undefined)?.[label.toLowerCase()]
+        }
         onChange={(e) => handleValueChange(e)}
         min={0}
       />

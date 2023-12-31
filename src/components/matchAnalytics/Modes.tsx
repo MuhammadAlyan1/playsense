@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import BattleRoyaleIcon from '../../assets/icons/modes/battle-royale.svg?react';
 import ControlIcon from '../../assets/icons/modes/control.svg?react';
 import RankedIcon from '../../assets/icons/modes/ranked.svg?react';

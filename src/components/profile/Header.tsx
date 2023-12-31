@@ -1,5 +1,5 @@
 /// <reference types="vite-plugin-svgr/client" />
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import pcIcon from '../../assets/icons/platform/PC.svg';
 import xboxIcon from '../../assets/icons/platform/xbox.svg';
 import playstationIcon from '../../assets/icons/platform/playstation.svg';

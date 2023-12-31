@@ -53,7 +53,7 @@ const Signup = () => {
           id="username"
           type="text"
         />
-        <label htmlFor="username" className="signup__label">
+        <label htmlFor="password" className="signup__label">
           Password
         </label>
         <IconTextField

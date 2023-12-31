@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import pcIcon from '../../assets/icons/platform/PC.svg';
 import playstationIcon from '../../assets/icons/platform/playstation.svg';
 import xboxIcon from '../../assets/icons/platform/xbox.svg';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AddIcon from '../../assets/icons/misc/add.svg?react';
 import AshIcon from '../../assets/icons/characters/ash.svg?react';
 import BangaloreIcon from '../../assets/icons/characters/bangalore.svg?react';

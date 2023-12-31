@@ -1,5 +1,3 @@
-import React from 'react';
-
 const FeedbackHub = () => {
   return (
     <div className="feedback-hub">
