@@ -1,4 +1,5 @@
 @use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
 @forward './weapons';
 @forward './legends';
 @forward './modes';
@@ -16,5 +17,10 @@
 
   &__sub-heading {
     @include subHeading;
+  }
+
+  &__submit-button {
+    margin-block: 1rem;
+    @include button--outlined($clr-primary, $clr-primary);
   }
 }

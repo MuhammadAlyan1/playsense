@@ -27,8 +27,15 @@ import VantageIcon from '../../assets/icons/characters/vantage.svg?react';
 import SeerIcon from '../../assets/icons/characters/seer.svg?react';
 import Modal from '../ui/Modal';
 
-const Legends = () => {
-  const [selectedCharacter, setSelectedCharacter] = useState('');
+type LegendsType = {
+  selectedCharacter: string;
+  setSelectedCharacter: (value: string) => void;
+};
+
+const Legends: React.FC<LegendsType> = ({
+  selectedCharacter,
+  setSelectedCharacter
+}) => {
   const [isCharactersModalOpen, setIsCharactersModalOpen] = useState(false);
 
   return (

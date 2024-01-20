@@ -5,6 +5,7 @@ import Personalization from './Personalization';
 import AboutMe from './AboutMe';
 import Socials from './Socials';
 import Peripherals from './Peripherals';
+import { uploadImage } from '../../utils/uploadImage';
 
 const EditProfile = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -22,23 +23,6 @@ const EditProfile = () => {
   const [keyboard, setKeyboard] = useState('');
   const [mouse, setMouse] = useState('');
   const [mousepad, setMousepad] = useState('');
-
-  console.log({
-    profilePicture,
-    banner,
-    platform,
-    bio,
-    country,
-    twitchUrl,
-    youtubeUrl,
-    twitterUrl,
-    discordUsername,
-    monitor,
-    headphones,
-    keyboard,
-    mouse,
-    mousepad
-  });
 
   const steps: stepType[] = [
     {
@@ -58,6 +42,32 @@ const EditProfile = () => {
       name: 'My Gear'
     }
   ];
+
+  const handleSubmit = async () => {
+    console.log({
+      profilePicture,
+      banner,
+      platform,
+      bio,
+      country,
+      twitchUrl,
+      youtubeUrl,
+      twitterUrl,
+      discordUsername,
+      monitor,
+      headphones,
+      keyboard,
+      mouse,
+      mousepad
+    });
+
+    const profilePictureUrl =
+      profilePicture && (await uploadImage(profilePicture));
+    const bannerUrl = banner && (await uploadImage(banner));
+
+    console.log('Profile Picture URL:', profilePictureUrl);
+    console.log('Banner URL:', bannerUrl);
+  };
 
   return (
     <section className="edit-profile">
@@ -124,7 +134,10 @@ const EditProfile = () => {
             NEXT
           </button>
         ) : (
-          <button className="edit-profile__button edit-profile__button--finish">
+          <button
+            className="edit-profile__button edit-profile__button--finish"
+            onClick={handleSubmit}
+          >
             FINISH
           </button>
         )}

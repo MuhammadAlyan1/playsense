@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { EliminationReasonPropsType } from '../../types/EliminationReasonPropsType';
 
-const EliminationReason = () => {
-  const [selectedReason, setSelectedReason] = useState('Fair Fight');
+const EliminationReason: React.FC<EliminationReasonPropsType> = ({
+  eliminationReason,
+  setEliminationReason
+}) => {
   return (
     <div className="elimination-reason">
       <h2 className="elimination-reason__sub-heading">Elimination Reason</h2>
@@ -11,9 +13,9 @@ const EliminationReason = () => {
             <div
               key={reason.name}
               className={`elimination-reason__elimination text-button ${
-                selectedReason === reason.name ? 'text-button--selected' : ''
+                eliminationReason === reason.name ? 'text-button--selected' : ''
               }`}
-              onClick={() => setSelectedReason(reason.name)}
+              onClick={() => setEliminationReason(reason.name)}
             >
               <p className="elimination-reason__elimination-reason text-button__text">
                 {reason.name}

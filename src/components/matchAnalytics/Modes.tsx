@@ -1,13 +1,11 @@
-import { useState } from 'react';
 import BattleRoyaleIcon from '../../assets/icons/modes/battle-royale.svg?react';
 import ControlIcon from '../../assets/icons/modes/control.svg?react';
 import RankedIcon from '../../assets/icons/modes/ranked.svg?react';
 import TeamDeathMatchIcon from '../../assets/icons/modes/team-death-match.svg?react';
 import OthersIcon from '../../assets/icons/modes/others.svg?react';
+import { ModesPropsType } from '../../types/ModesPropsType';
 
-const Modes = () => {
-  const [selectedMode, setSelectedMode] = useState('Battle Royale');
-
+const Modes: React.FC<ModesPropsType> = ({ selectedMode, setSelectedMode }) => {
   return (
     <div className="modes">
       <h2 className="modes__sub-heading">Mode</h2>

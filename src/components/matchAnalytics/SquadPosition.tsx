@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { SquadPositionPropsType } from '../../types/SquadPositionPropsType';
 
-const SquadPosition = () => {
-  const [selectedPosition, setSelectedPosition] = useState('First Place');
+const SquadPosition: React.FC<SquadPositionPropsType> = ({
+  selectedPosition,
+  setSelectedPosition
+}) => {
   return (
     <div className="squad-position">
       <h2 className="squad-position__sub-heading">Squad Position</h2>

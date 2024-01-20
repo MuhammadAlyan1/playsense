@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import kingsCanyon from '../../assets/maps/kings-canyon.svg';
 import worldsEdge from '../../assets/maps/worlds-edge.svg';
 import olympus from '../../assets/maps/olympus.svg';
 import stormPoint from '../../assets/maps/storm-point.svg';
 import brokenMoon from '../../assets/maps/broken-moon.svg';
-
-type EliminationLocationPropsType = {
-  selectedMap: string;
-};
+import { EliminationLocationPropsType } from '../../types/EliminationLocationPropsType';
 
 const EliminationLocation: React.FC<EliminationLocationPropsType> = ({
-  selectedMap
+  selectedMap,
+  coordinates,
+  setCoordinates
 }) => {
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
-
-  console.log('SELECTED MAP: ', selectedMap);
-
   const getMap = (name = 'kings canyon') => {
     switch (name) {
       case 'Kings Canyon':

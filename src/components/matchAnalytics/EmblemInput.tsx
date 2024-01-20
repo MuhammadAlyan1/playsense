@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { WeaponType } from '../../types/WeaponType';
 
 type EmblemInputPropsType = {
-  id: string;
+  name: string;
   label: string;
   weapons: WeaponType[];
   setWeapons: (value: WeaponType[]) => void;
@@ -10,17 +10,17 @@ type EmblemInputPropsType = {
 };
 
 const EmblemInput: React.FC<EmblemInputPropsType> = ({
-  id,
+  name,
   label,
   weapons,
   setWeapons,
   Icon
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const weapon = weapons.find((weapon: WeaponType) => weapon.id === id);
+  const weapon = weapons.find((weapon: WeaponType) => weapon.name === name);
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedWeaponData = weapons.map((weapon) => {
-      if (weapon.id === id) {
+      if (weapon.name === name) {
         return {
           ...weapon,
           [label.toLowerCase()]: parseInt(e.target.value)
