@@ -5,9 +5,30 @@ import TrendingIcon from '../../assets/icons/misc/trending.svg?react';
 import TopIcon from '../../assets/icons/misc/top.svg?react';
 import NewIcon from '../../assets/icons/misc/new.svg?react';
 import CreatePost from './CreatePost';
-
+// import useRefreshToken from '../../hooks/useRefreshToken';
+import useAuth from '../../hooks/useAuth';
+// import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { axiosPrivate } from '../../api/axios';
 const Home = () => {
   const [selectedFilter, setSelectedFilter] = useState('trending');
+  const auth = useAuth();
+  console.log('USEAUTH: ', auth?.auth);
+  // const useAxiosPrivate = useAxiosPrivate();
+
+  // useEffect(() => {
+  //   console.log('AUTH: ', authContext?.auth);
+  // }, [authContext?.auth?.accessToken]);
+
+  const deleteUser = async () => {
+    const response = await axiosPrivate.delete(
+      `/users/delete/${auth?.auth?.userId}`,
+      {
+        withCredentials: true
+      }
+    );
+
+    console.log('DELETE USER RESPONSE: ', response);
+  };
 
   return (
     <div className="home">
@@ -41,6 +62,7 @@ const Home = () => {
           Top
         </button>
       </div>
+      <button onClick={deleteUser}>DELETE</button>
       <CreatePost />
       <Posts />
     </div>

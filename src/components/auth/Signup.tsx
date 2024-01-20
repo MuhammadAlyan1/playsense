@@ -5,6 +5,9 @@ import PasswordIcon from '../../assets/icons/misc/password.svg?react';
 import UsernameIcon from '../../assets/icons/misc/person.svg?react';
 import { Link } from 'react-router-dom';
 import WraithImage from '../../assets/characters/wraith.svg?react';
+import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +15,8 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [isRememberMeChecked, setIsRememberMeChecked] = useState(false);
+  const navigate = useNavigate();
+  const authContext = useAuth();
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +28,30 @@ const Signup = () => {
       return;
     }
 
-    setIsLoading(false);
+    try {
+      const response = await axios.post(
+        '/users/signup',
+        {
+          email: email.toLowerCase(),
+          username,
+          password
+        },
+        {
+          withCredentials: true
+        }
+      );
+      console.log(response);
+
+      if (response?.data?.success === true) {
+        console.log('SIGNUP->RESPONSE->DATA->USER: ', response?.data?.data);
+        authContext?.setAuth(response?.data?.data);
+        navigate('/');
+      }
+    } catch (error) {
+      console.log('There was an issue while trying to signup: ', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

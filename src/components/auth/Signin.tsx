@@ -4,12 +4,17 @@ import EmailIcon from '../../assets/icons/misc/email.svg?react';
 import PasswordIcon from '../../assets/icons/misc/password.svg?react';
 import { Link } from 'react-router-dom';
 import PathfinderImage from '../../assets/characters/pathfinder.svg?react';
+import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRememberMeChecked, setIsRememberMeChecked] = useState(false);
+  const navigate = useNavigate();
+  const authContext = useAuth();
 
   const handleSignin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +26,29 @@ const Signin = () => {
       return;
     }
 
-    setIsLoading(false);
+    try {
+      const response = await axios.post(
+        '/users/signin',
+        {
+          email: email.toLowerCase(),
+          password
+        },
+        {
+          withCredentials: true
+        }
+      );
+      console.log(response);
+
+      if (response?.data?.success === true) {
+        console.log('RESPONSE->DATA->USER: ', response?.data?.data);
+        authContext?.setAuth(response?.data?.data);
+        navigate('/');
+      }
+    } catch (error) {
+      console.log('There was an issue while trying to signin: ', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
