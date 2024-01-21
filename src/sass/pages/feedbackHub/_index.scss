@@ -1,9 +1,28 @@
 @use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+@forward './feedback';
 
 .feedback-hub {
   margin-inline: $default-margin-inline;
 
+  &__header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
   &__heading {
     @include heading;
+  }
+
+  &__button {
+    @include button--outlined($clr-secondary, $clr-secondary);
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
   }
 }
