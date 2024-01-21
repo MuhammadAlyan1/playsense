@@ -1,63 +1,97 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import Navigation from './Navigation';
 import About from './About';
 import Posts from '../shared/Posts';
 import Friends from './Friends';
 import Peripherals from './Peripherals';
-
-const profileData = {
-  id: 'xyz123',
-  username: 'LethalFlakes',
-  email: 'alyan0332@gmail.com',
-  isInFriendlist: false,
-  avatar:
-    'https://wallpapers.com/images/hd/gaming-profile-pictures-tmjjc9v0w80azoeh.jpg',
-  banner:
-    'https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  platform: 'pc',
-  country: 'pakistan',
-  region: 'asia',
-  bio: 'With honed reflexes and unwavering determination, I turn every game into a tactical masterpiece. My mission: to rise to the top of the FPS elite. Victory is the only option. In the high-stakes arena of FPS gaming, my name will be etched among the legends, my skills renowned, and my victories celebrated.',
-  createdAt: new Date(),
-  roles: [
-    'user',
-    'moderator',
-    'admin',
-    'game developer',
-    'content creator',
-    'coach',
-    'esport elite'
-  ],
-  socials: {
-    twitch: 'https://twitch.com',
-    youtube: 'https://youtube.com',
-    twitter: 'https://twitter.com',
-    discord: 'LethalFlakes#2777'
-  }
-};
+import useAuth from '../../hooks/useAuth';
+import { ProfileType } from '../../types/ProfileType';
+import { PostType } from '../../types/PostType';
+import axios from '../../api/axios';
 
 const Profile = () => {
   const [currentNavigationItem, setCurrentNavigationItem] = useState('about');
+  const [posts, setPosts] = useState<PostType[]>([]);
+  const [profileData, setProfileData] = useState<ProfileType>({
+    _id: '',
+    userId: '',
+    username: '',
+    roles: ['user'],
+    platform: 'pc',
+    bio: '',
+    profilePicture:
+      'https://res.cloudinary.com/dcc8txmdw/image/upload/v1705819981/playsense-profile/vgiadrbjgmgd6qhdwoy2.jpg',
+    banner:
+      'https://res.cloudinary.com/dcc8txmdw/image/upload/v1705819985/playsense-profile/bozzoqaani8tgamqdqfg.jpg',
+    country: 'Pakistan',
+    twitchUrl: 'https://www.twitch.tv/',
+    youtubeUrl: 'https://www.youtube.com/',
+    twitterUrl: 'https://twitter.com/',
+    discordUsername: 'PlaySense',
+    monitor: '',
+    keyboard: '',
+    headphones: '',
+    mouse: '',
+    mousepad: '',
+    createdAt: '',
+    updatedAt: '',
+    __v: 0
+  });
+
+  const auth = useAuth();
+
+  useEffect(() => {
+    auth?.auth && setProfileData(auth?.auth);
+
+    const fetchPosts = async (profileId: string) => {
+      const response = await axios.get(`/posts?profileId=${profileId}`);
+      if (response.data.success) {
+        setPosts(response.data.data);
+      }
+    };
+
+    auth?.auth?._id && fetchPosts(auth?.auth?._id);
+  }, [auth?.auth?._id]);
 
   return (
     <div className="profile">
-      <Header />
+      <Header
+        _id={profileData?._id}
+        profilePicture={profileData?.profilePicture}
+        banner={profileData?.banner}
+        username={profileData?.username}
+        twitchUrl={profileData?.twitchUrl}
+        twitterUrl={profileData?.twitterUrl}
+        youtubeUrl={profileData?.youtubeUrl}
+        discordUsername={profileData?.discordUsername}
+        platform={profileData?.platform}
+      />
       <Navigation
         currentItem={currentNavigationItem}
         setCurrentItem={setCurrentNavigationItem}
       />
       {currentNavigationItem === 'about' && (
         <About
-          bio={profileData.bio}
-          roles={profileData.roles}
-          country={profileData.country}
-          createdAt={profileData.createdAt}
+          bio={profileData?.bio}
+          roles={profileData?.roles}
+          country={profileData?.country}
+          createdAt={profileData?.createdAt}
         />
       )}
-      {currentNavigationItem === 'posts' && <Posts />}
+      {currentNavigationItem === 'posts' && <Posts posts={posts} />}
       {currentNavigationItem === 'friends' && <Friends />}
-      {currentNavigationItem === 'peripherals' && <Peripherals />}
+      {currentNavigationItem === 'peripherals' && (
+        <Peripherals
+          peripherals={{
+            headphones: profileData?.headphones,
+            mouse: profileData?.mouse,
+            mousepad: profileData?.mousepad,
+            keyboard: profileData?.keyboard,
+            monitor: profileData.monitor
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -11,36 +11,36 @@ import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
-const profileData = {
-  id: 'xyz123',
-  username: 'LethalFlakes',
-  email: 'alyan0332@gmail.com',
-  avatar:
-    'https://wallpapers.com/images/hd/gaming-profile-pictures-tmjjc9v0w80azoeh.jpg',
-  banner:
-    'https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  platform: 'pc',
-  country: 'pakistan',
-  isInFriendList: true,
-  region: 'asia',
-  bio: 'With honed reflexes and unwavering determination, I turn every game into a tactical masterpiece. My mission: to rise to the top of the FPS elite. Victory is the only option. In the high-stakes arena of FPS gaming, my name will be etched among the legends, my skills renowned, and my victories celebrated.',
-  createdAt: new Date(),
-  roles: [
-    'user',
-    'moderator',
-    'admin',
-    'game developer',
-    'content creator',
-    'coach',
-    'esport elite'
-  ],
-  socials: {
-    twitch: 'https://twitch.com',
-    youtube: 'https://youtube.com',
-    twitter: 'https://twitter.com',
-    discord: 'LethalFlakes#2777'
-  }
-};
+// const profileData = {
+//   id: 'xyz123',
+//   username: 'LethalFlakes',
+//   email: 'alyan0332@gmail.com',
+//   avatar:
+//     'https://wallpapers.com/images/hd/gaming-profile-pictures-tmjjc9v0w80azoeh.jpg',
+//   banner:
+//     'https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+//   platform: 'pc',
+//   country: 'pakistan',
+//   isInFriendList: true,
+//   region: 'asia',
+//   bio: 'With honed reflexes and unwavering determination, I turn every game into a tactical masterpiece. My mission: to rise to the top of the FPS elite. Victory is the only option. In the high-stakes arena of FPS gaming, my name will be etched among the legends, my skills renowned, and my victories celebrated.',
+//   createdAt: new Date(),
+//   roles: [
+//     'user',
+//     'moderator',
+//     'admin',
+//     'game developer',
+//     'content creator',
+//     'coach',
+//     'esport elite'
+//   ],
+//   socials: {
+//     twitch: 'https://twitch.com',
+//     youtube: 'https://youtube.com',
+//     twitter: 'https://twitter.com',
+//     discord: 'LethalFlakes#2777'
+//   }
+// };
 
 const getPlatformIcon = (platform: string) => {
   if (platform === 'playstation') {
@@ -67,10 +67,32 @@ const actionMenuItems = [
   }
 ];
 
-const Header = () => {
+type HeaderPropsType = {
+  _id: string;
+  username: string;
+  platform: 'pc' | 'playstation' | 'xbox';
+  profilePicture: string;
+  banner: string;
+  twitchUrl: string;
+  youtubeUrl: string;
+  twitterUrl: string;
+  discordUsername: string;
+};
+
+const Header: React.FC<HeaderPropsType> = ({
+  _id,
+  profilePicture,
+  banner,
+  username,
+  twitchUrl,
+  twitterUrl,
+  youtubeUrl,
+  discordUsername,
+  platform
+}) => {
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
-
+  const [isAFriend, setIsAFriend] = useState(false);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -88,56 +110,58 @@ const Header = () => {
     };
   }, []);
 
+  const handleFriendStatusChange = () => {
+    console.log('_ID: ', _id);
+    setIsAFriend((prev) => !prev);
+  };
+
   return (
-    <section
-      className="header"
-      style={{ backgroundImage: `URL(${profileData.banner})` }}
-    >
+    <section className="header" style={{ backgroundImage: `URL(${banner})` }}>
       <div className="header__user-details">
         <div className="header__user-contents">
           <div className="header__user-picture-platform-container">
             <div className="header__user-picture-container avatar-container">
               <img
-                src={profileData.avatar}
-                alt={profileData.username}
+                src={profilePicture}
+                alt={username}
                 className="header__user-picture avatar-container__avatar"
               />
             </div>
             <div className="header__platform-container">
               <img
-                src={getPlatformIcon(profileData.platform)}
-                alt={profileData.platform}
+                src={getPlatformIcon(platform)}
+                alt={platform}
                 className="header__platform-icon"
               />
             </div>
           </div>
           <div className="header__username-socials-container">
-            <h1 className="header__username">{profileData.username}</h1>
+            <h1 className="header__username">{username}</h1>
             <div className="header__socials-container">
               <a
                 target="_blank"
-                href={profileData.socials.twitch}
+                href={twitchUrl}
                 className="header__socials-link"
               >
                 <TwitchIcon className="header__socials-icon header__socials-icon--twitch" />
               </a>
               <a
                 target="_blank"
-                href={profileData.socials.youtube}
+                href={youtubeUrl}
                 className="header__socials-link"
               >
                 <YoutubeIcon className="header__socials-icon header__socials-icon--youtube" />
               </a>
               <a
                 target="_blank"
-                href={profileData.socials.twitter}
+                href={twitterUrl}
                 className="header__socials-link"
               >
                 <TwitterIcon className="header__socials-icon header__socials-icon--twitter" />
               </a>
               <a
                 target="_blank"
-                href={profileData.socials.discord}
+                href={discordUsername}
                 className="header__socials-link"
               >
                 <DiscordIcon className="header__socials-icon header__socials-icon--discord" />
@@ -150,15 +174,16 @@ const Header = () => {
         <button className="header__user-action-button header__user-action-button--chat">
           <ChatIcon className="header__chat-icon" />
         </button>
-        {profileData.isInFriendList ? (
-          <button className="header__user-action-button header__user-action-button--remove-friend">
-            Remove friend
-          </button>
-        ) : (
-          <button className="header__user-action-button header__user-action-button--add-friend">
-            Add friend
-          </button>
-        )}
+        <button
+          className={`header__user-action-button ${
+            isAFriend
+              ? 'header__user-action-button--remove-friend'
+              : 'header__user-action-button--add-friend'
+          }`}
+          onClick={handleFriendStatusChange}
+        >
+          {isAFriend ? 'Remove friend' : 'Add friend'}
+        </button>
       </div>
       <div className="header__action-menu" ref={actionMenuRef}>
         <BiDotsHorizontalRounded

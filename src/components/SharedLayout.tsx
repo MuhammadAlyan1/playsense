@@ -2,10 +2,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
 import { useEffect } from 'react';
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 
 const SharedLayout = () => {
   const navigate = useNavigate();
+  const auth = useAuth();
   useEffect(() => {
+    const setAuth = auth?.setAuth && auth?.setAuth;
     const checkAuth = async () => {
       try {
         const response = await axios.get(
@@ -14,10 +17,10 @@ const SharedLayout = () => {
             withCredentials: true
           }
         );
-        console.log('DATA: ', response.request.data);
 
         if (response?.data?.success === true) {
           console.log('Succesfully signed in');
+          response.data.data && setAuth && setAuth(response.data.data);
         } else if (response?.data?.success === false) {
           console.log(response.data.message);
         }

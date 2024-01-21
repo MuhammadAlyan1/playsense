@@ -4,7 +4,7 @@ type AboutPropsType = {
   bio: string;
   roles: Array<string>;
   country: string;
-  createdAt: Date;
+  createdAt: string;
 };
 
 const About: React.FC<AboutPropsType> = ({
@@ -36,7 +36,7 @@ const About: React.FC<AboutPropsType> = ({
       <p className="about__country">{country}</p>
       <h2 className="about__heading">Member Since</h2>
       <p className="about__created-at">
-        {createdAt.toLocaleString('en-us', {
+        {new Date(createdAt).toLocaleString('en-us', {
           weekday: 'long',
           year: 'numeric',
           month: 'long',

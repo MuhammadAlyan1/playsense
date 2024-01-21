@@ -5,22 +5,16 @@ import MouseIcon from '../../assets/icons/peripherals/mouse.svg?react';
 import MousepadIcon from '../../assets/icons/peripherals/mousepad.svg?react';
 
 type PeripheralsType = {
-  mouse: string;
-  keyboard: string;
-  mousepad: string;
-  monitor: string;
-  headphones: string;
+  peripherals: {
+    mouse: string;
+    keyboard: string;
+    mousepad: string;
+    monitor: string;
+    headphones: string;
+  };
 };
 
-const peripherals = {
-  mouse: 'Logitech G Pro',
-  keyboard: 'Razer BlackWidow',
-  mousepad: 'SteelSeries QcK',
-  monitor: 'ASUS ROG Swift',
-  headphones: 'HyperX Cloud II'
-};
-
-const getPeripheralsIcon = (key: string): any => {
+const getPeripheralsIcon = (key: string): React.ReactElement => {
   if (key === 'mouse') {
     return <MouseIcon className="peripherals__icon" />;
   } else if (key === 'mousepad') {
@@ -36,7 +30,8 @@ const getPeripheralsIcon = (key: string): any => {
   }
 };
 
-const Peripherals = () => {
+const Peripherals: React.FC<PeripheralsType> = ({ peripherals }) => {
+  console.log('PERIPHERALS: ', peripherals);
   return (
     <section className="peripherals">
       {Object.keys(peripherals).map((key) => {
@@ -46,7 +41,16 @@ const Peripherals = () => {
               {getPeripheralsIcon(key)}
             </div>
             <p className="peripherals__name">
-              {peripherals[key as keyof PeripheralsType]}
+              {
+                peripherals[
+                  key as
+                    | 'mouse'
+                    | 'headphones'
+                    | 'keyboard'
+                    | 'monitor'
+                    | 'mousepad'
+                ]
+              }
             </p>
           </div>
         );
