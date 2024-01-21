@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navigation from './Navigation';
 import { stepType } from '../../types/stepType';
 import Personalization from './Personalization';
@@ -6,11 +6,14 @@ import AboutMe from './AboutMe';
 import Socials from './Socials';
 import Peripherals from './Peripherals';
 import { uploadImage } from '../../utils/uploadImage';
+import useAuth from '../../hooks/useAuth';
+import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
-  const [banner, setBanner] = useState<File | null>(null);
+  const [profilePicture, setProfilePicture] = useState<File | string>('');
+  const [banner, setBanner] = useState<File | string>('');
   const [platform, setPlatform] = useState<'pc' | 'xbox' | 'playstation'>('pc');
   const [bio, setBio] = useState('');
   const [country, setCountry] = useState('pakistan');
@@ -23,6 +26,8 @@ const EditProfile = () => {
   const [keyboard, setKeyboard] = useState('');
   const [mouse, setMouse] = useState('');
   const [mousepad, setMousepad] = useState('');
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   const steps: stepType[] = [
     {
@@ -43,6 +48,29 @@ const EditProfile = () => {
     }
   ];
 
+  useEffect(() => {
+    const profileData = auth?.auth && auth?.auth;
+
+    if (!profileData) {
+      return;
+    }
+
+    setProfilePicture(profileData?.profilePicture);
+    setBanner(profileData?.banner);
+    setPlatform(profileData?.platform);
+    setBio(profileData?.bio);
+    setCountry(profileData?.country);
+    setTwitchUrl(profileData?.twitchUrl);
+    setYoutubeUrl(profileData?.youtubeUrl);
+    setTwitterUrl(profileData?.twitterUrl);
+    setDiscordUsername(profileData?.discordUsername);
+    setMonitor(profileData?.monitor);
+    setHeadphones(profileData.headphones);
+    setKeyboard(profileData.keyboard);
+    setMouse(profileData?.mouse);
+    setMousepad(profileData?.mousepad);
+  }, [auth?.auth?._id]);
+
   const handleSubmit = async () => {
     console.log({
       profilePicture,
@@ -61,12 +89,47 @@ const EditProfile = () => {
       mousepad
     });
 
-    const profilePictureUrl =
-      profilePicture && (await uploadImage(profilePicture));
-    const bannerUrl = banner && (await uploadImage(banner));
+    try {
+      const profilePictureUrl =
+        typeof profilePicture !== 'string' &&
+        (await uploadImage(profilePicture));
+      const bannerUrl =
+        typeof banner !== 'string' && (await uploadImage(banner));
 
-    console.log('Profile Picture URL:', profilePictureUrl);
-    console.log('Banner URL:', bannerUrl);
+      console.log('Profile Picture URL:', profilePictureUrl);
+      console.log('Banner URL:', bannerUrl);
+
+      const response = await axios.put(
+        '/profile/',
+        {
+          profilePicture: profilePictureUrl || null,
+          banner: bannerUrl || null,
+          platform,
+          bio,
+          country,
+          twitchUrl,
+          youtubeUrl,
+          twitterUrl,
+          discordUsername,
+          monitor,
+          headphones,
+          keyboard,
+          mouse,
+          mousepad
+        },
+        {
+          withCredentials: true
+        }
+      );
+
+      console.log(response);
+      if (response?.data?.success) {
+        auth?.setAuth && auth?.setAuth({ ...response?.data?.data });
+        navigate('/profile');
+      }
+    } catch (error) {
+      console.log('Failed to save profile changes: ', error);
+    }
   };
 
   return (

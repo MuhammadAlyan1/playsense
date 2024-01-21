@@ -2,14 +2,12 @@ import React from 'react';
 import pcIcon from '../../assets/icons/platform/PC.svg';
 import playstationIcon from '../../assets/icons/platform/playstation.svg';
 import xboxIcon from '../../assets/icons/platform/xbox.svg';
-import placeholderBanner from '../../assets/placeholders/banner.jpg';
-import placeholderProfilePicture from '../../assets/placeholders/profile-picture.svg';
 
 type PersonalizationPropType = {
-  profilePicture: File | null;
-  setProfilePicture: (file: File | null) => void;
-  banner: File | null;
-  setBanner: (file: File | null) => void;
+  profilePicture: File | string;
+  setProfilePicture: (file: File | string) => void;
+  banner: File | string;
+  setBanner: (file: File | string) => void;
   platform: 'pc' | 'xbox' | 'playstation';
   setPlatform: (platform: 'pc' | 'xbox' | 'playstation') => void;
 };
@@ -30,9 +28,9 @@ const Personalization: React.FC<PersonalizationPropType> = ({
           <img
             className="personalization__profile-picture avatar-container__avatar"
             src={
-              profilePicture
+              typeof profilePicture !== 'string'
                 ? URL.createObjectURL(profilePicture)
-                : placeholderProfilePicture
+                : profilePicture
             }
             alt="profile picture"
           />
@@ -50,7 +48,11 @@ const Personalization: React.FC<PersonalizationPropType> = ({
         <div className="personalization__banner-container">
           <img
             className="personalization__banner"
-            src={banner ? URL.createObjectURL(banner) : placeholderBanner}
+            src={
+              typeof banner !== 'string'
+                ? URL.createObjectURL(banner as File)
+                : banner
+            }
             alt="banner"
           />
         </div>
