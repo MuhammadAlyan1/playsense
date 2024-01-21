@@ -1,9 +1,150 @@
 @use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
 
 .skillify {
   margin-inline: $default-margin-inline;
+  $clr-rating: #faaf00;
 
   &__heading {
     @include heading;
+  }
+
+  &__services {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+    margin-block: 2rem;
+
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include xl {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .service {
+    min-width: 250px;
+    border-radius: $rounded-lg;
+    overflow: hidden;
+    background-color: $clr-bg-secondary;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    &__image {
+      width: 100%;
+      display: block;
+    }
+
+    &__title {
+      color: $clr-text-primary;
+      font-size: $text-lg;
+      margin-inline: 1rem;
+    }
+
+    &__interactions {
+      margin-block: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-inline: 1rem;
+    }
+
+    &__price {
+      font-size: $text-xl;
+      color: $clr-primary;
+    }
+
+    &__chat-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: $clr-primary;
+    }
+
+    &__chat-icon {
+      fill: $clr-primary;
+    }
+
+    &__buttons-container {
+      margin-inline: 1rem;
+      margin-bottom: 1rem;
+      margin-top: auto;
+    }
+
+    &__order-button {
+      width: 100%;
+      text-transform: uppercase;
+      @include button--contained($clr-bg-secondary, $clr-secondary);
+    }
+  }
+
+  .coach {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: $rounded-lg;
+    background-color: $clr-bg-secondary;
+    margin-inline: 1rem;
+    position: relative;
+    top: -2rem;
+    box-shadow: 0px 0px 10px rgba($color: $clr-text-primary, $alpha: 0.4);
+
+    &__username-profile-picture-container {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    &__profile-picture-container {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    &__profile-picture {
+      display: block;
+      width: 100%;
+    }
+
+    &__username {
+      font-size: $text-lg;
+      color: $clr-text-primary;
+    }
+
+    &__rating-reviews-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    &__rating {
+      color: $clr-rating;
+      display: flex;
+      align-items: center;
+      gap: 0.125rem;
+      font-size: 1rem;
+    }
+
+    &__rating-icon {
+      fill: $clr-rating;
+      font-size: 1.25rem;
+    }
+
+    &__reviews {
+      font-size: $text-sm;
+      color: $clr-text-secondary;
+    }
   }
 }
