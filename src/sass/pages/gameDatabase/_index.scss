@@ -6,4 +6,48 @@
   &__heading {
     @include heading;
   }
+
+  .legends {
+    &__sub-heading {
+      @include subHeading;
+      margin-block: 1rem;
+      margin-top: 2rem;
+    }
+
+    &__legends-container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .weapons {
+    &__sub-heading {
+      @include subHeading;
+      margin-block: 1rem;
+      margin-top: 2rem;
+    }
+
+    &__container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    &__weapon {
+      outline: 2px solid $clr-text-primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      padding: 1rem;
+      border-radius: $rounded-3xl;
+      transition: outline 250ms ease-in;
+      &:hover {
+        cursor: pointer;
+        outline: 2px solid $clr-secondary;
+      }
+    }
+  }
 }
