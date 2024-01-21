@@ -7,6 +7,8 @@ import EliminationReason from './EliminationReason';
 import SquadPosition from './SquadPosition';
 import EliminationLocation from './EliminationLocation';
 import { WeaponType } from '../../types/WeaponType';
+import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 const MatchAnalytics = () => {
   const [selectedMap, setSelectedMap] = useState<string>('Kings Canyon');
@@ -16,17 +18,37 @@ const MatchAnalytics = () => {
   const [eliminationReason, setEliminationReason] = useState('Fair Fight');
   const [selectedPosition, setSelectedPosition] = useState('First Place');
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    console.log({
-      selectedMap,
-      selectedCharacter,
-      selectedWeapons,
-      selectedMode,
-      eliminationReason,
-      selectedPosition,
-      coordinates
-    });
+    try {
+      setIsLoading(true);
+
+      const response = await axios.post(
+        '/match-analytics',
+        {
+          map: selectedMap,
+          character: selectedCharacter,
+          weapons: selectedWeapons,
+          mode: selectedMode,
+          eliminationReason: eliminationReason,
+          position: selectedPosition,
+          mapCoordinates: coordinates
+        },
+        {
+          withCredentials: true
+        }
+      );
+      console.log(response);
+      if (response?.data?.success) {
+        navigate('/analytics');
+      }
+    } catch (error) {
+      console.log('Failed to save match analytics: ', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,8 +77,12 @@ const MatchAnalytics = () => {
         coordinates={coordinates}
         setCoordinates={setCoordinates}
       />
-      <button className="match-analytics__submit-button" onClick={handleSubmit}>
-        Submit
+      <button
+        disabled={isLoading}
+        className="match-analytics__submit-button"
+        onClick={handleSubmit}
+      >
+        {isLoading ? 'Loading..' : 'Submit'}
       </button>
     </div>
   );

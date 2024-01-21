@@ -9,10 +9,14 @@ import useAuth from '../../hooks/useAuth';
 import { ProfileType } from '../../types/ProfileType';
 import { PostType } from '../../types/PostType';
 import axios from '../../api/axios';
+import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
+import MatchAnalyticsTable from '../analytics/matchAnalyticsTable';
 
 const Profile = () => {
   const [currentNavigationItem, setCurrentNavigationItem] = useState('about');
   const [posts, setPosts] = useState<PostType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [matchData, setMatchData] = useState<MatchAnalyticsType[] | []>([]);
   const [profileData, setProfileData] = useState<ProfileType>({
     _id: '',
     userId: '',
@@ -51,7 +55,34 @@ const Profile = () => {
       }
     };
 
+    const fetchMatchAnalytics = async (profileId: string) => {
+      if (!profileId) return;
+
+      try {
+        setIsLoading(true);
+
+        const response = await axios.get(
+          `/match-analytics?profileId=${profileId}`,
+          {
+            withCredentials: true
+          }
+        );
+
+        if (response?.data?.success) {
+          setMatchData(response?.data?.data);
+        }
+      } catch (error) {
+        console.log(
+          'There was an error while fetching match analytics: ',
+          error
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     auth?.auth?._id && fetchPosts(auth?.auth?._id);
+    auth?.auth?._id && fetchMatchAnalytics(auth?.auth?._id);
   }, [auth?.auth?._id]);
 
   return (
@@ -81,6 +112,15 @@ const Profile = () => {
       )}
       {currentNavigationItem === 'posts' && <Posts posts={posts} />}
       {currentNavigationItem === 'friends' && <Friends />}
+      {currentNavigationItem === 'analysis' && (
+        <div className="profile__analysis">
+          {isLoading ? (
+            'Loading..'
+          ) : (
+            <MatchAnalyticsTable matchData={matchData} />
+          )}
+        </div>
+      )}
       {currentNavigationItem === 'peripherals' && (
         <Peripherals
           peripherals={{
