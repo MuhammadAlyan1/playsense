@@ -4,63 +4,62 @@ import DownvoteIcon from '../../assets/icons/misc/downvote.svg?react';
 import CommentIcon from '../../assets/icons/misc/comment.svg?react';
 import { Link } from 'react-router-dom';
 import ActionMenu from '../ui/ActionMenu';
-
-type PostType = {
-  id: string;
-  userId: string;
-  username: string;
-  avatar: string;
-  content: string;
-  createdAt: Date;
-  likes: number;
-  likedBy: Array<string>;
-  dislikes: number;
-  dislikedBy: Array<string>;
-  comments: number;
-  commentedBy: Array<string>;
-};
+import { PostType } from '../../types/PostType';
+import axios from '../../api/axios';
+import { getTimeDifference } from '../../utils/getTimeDifference';
+import { getFormattedAmount } from '../../utils/getFormattedAmount';
 
 const Post: React.FC<PostType> = ({
-  id,
-  username,
-  avatar,
-  userId,
-  content,
-  createdAt,
-  likes,
+  _id,
+  contents,
   likedBy,
-  dislikes,
   dislikedBy,
-  comments,
-  commentedBy
+  profileId,
+  createdAt,
+  comments
 }) => {
-  const [hasLiked, setHasLiked] = useState(false);
-  const [hasDisliked, setHasDisliked] = useState(false);
-  const [hasCommented, setHasCommented] = useState(false);
+  const [hasLiked, setHasLiked] = useState(likedBy.includes(profileId._id));
+  const [hasDisliked, setHasDisliked] = useState(
+    dislikedBy.includes(profileId._id)
+  );
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
 
-  console.log(
-    'POST USERID: ',
-    userId,
-    'POST LIKED BY: ',
-    likedBy,
-    'POST DISLIKED BY: ',
-    dislikedBy,
-    'POST COMMENTED BY: ',
-    commentedBy,
-    isActionMenuOpen,
-    setHasCommented
-  );
-
-  const handleLike = () => {
+  console.log('isActionMenuOpen: ', isActionMenuOpen);
+  const handleLike = async () => {
     setHasLiked((prev) => !prev);
     setHasDisliked(false);
+    try {
+      const response = await axios.post(
+        `/posts/feedback/${_id}`,
+        {
+          like: true
+        },
+        { withCredentials: true }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log('There was an error while liking the post: ', error);
+    }
   };
 
-  const handleDislike = () => {
+  const handleDislike = async () => {
     setHasDisliked((prev) => !prev);
     setHasLiked(false);
+    try {
+      const response = await axios.post(
+        `/posts/feedback/${_id}`,
+        {
+          dislike: true
+        },
+        { withCredentials: true }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log('There was an error while liking the post: ', error);
+    }
   };
 
   const actionMenuItems = [
@@ -88,21 +87,21 @@ const Post: React.FC<PostType> = ({
   }, []);
 
   return (
-    <div key={id} className="post">
+    <div key={_id} className="post">
       <div className="post__header">
         <div className="avatar-container post__avatar-container">
           <img
-            src={avatar}
+            src={profileId?.profilePicture}
             className="avatar-container__avatar post__avatar"
-            alt={username}
+            alt={profileId?.username}
           />
         </div>
         <div className="post__username-created-at-container">
-          <p className="post__username">{username}</p>
+          <p className="post__username">{profileId?.username}</p>
           <p className="post__created-at">{getTimeDifference(createdAt)}</p>
         </div>
       </div>
-      <p className="post__content">{content}</p>
+      <p className="post__content">{contents}</p>
       <div className="post__feedback">
         <div className="post__likes-dislikes">
           <UpvoteIcon
@@ -123,10 +122,18 @@ const Post: React.FC<PostType> = ({
             }`}
           >
             {hasLiked
-              ? getFormattedAmount(likes - dislikes + 1)
+              ? getFormattedAmount(
+                  likedBy?.length -
+                    dislikedBy?.length +
+                    (likedBy.includes(profileId._id) ? 0 : 1)
+                )
               : hasDisliked
-              ? getFormattedAmount(likes - dislikes - 1)
-              : getFormattedAmount(likes - dislikes)}
+              ? getFormattedAmount(
+                  likedBy?.length -
+                    dislikedBy?.length -
+                    (dislikedBy.includes(profileId._id) ? 0 : 1)
+                )
+              : getFormattedAmount(likedBy?.length - dislikedBy?.length)}
           </p>
           <DownvoteIcon
             className={`post__feedback-button post__feedback-button--dislike ${
@@ -139,18 +146,10 @@ const Post: React.FC<PostType> = ({
         </div>
         <div className="post__comments">
           <CommentIcon
-            className={`post__feedback-button post__feedback-button--comments ${
-              hasCommented
-                ? 'post__feedback-button--commented'
-                : 'post__feedback-button--commented'
-            }`}
+            className={`post__feedback-button post__feedback-button--comments`}
           />
-          <p
-            className={`post__comments-amount ${
-              hasCommented ? 'post__comments-amount--commented' : ''
-            }`}
-          >
-            {getFormattedAmount(comments)}
+          <p className={`post__comments-amount`}>
+            {getFormattedAmount(comments.length)}
           </p>
         </div>
       </div>
@@ -177,42 +176,3 @@ const Post: React.FC<PostType> = ({
 };
 
 export default Post;
-
-const getTimeDifference = (date: Date): string => {
-  const timeDifferenceInSeconds = Math.floor(
-    (new Date().getTime() - date.getTime()) / 1000
-  );
-
-  const intervals: [string, number][] = [
-    ['year', 365 * 24 * 3600],
-    ['month', 30 * 24 * 3600],
-    ['week', 7 * 24 * 3600],
-    ['day', 24 * 3600],
-    ['hour', 3600],
-    ['minute', 60],
-    ['second', 1]
-  ];
-
-  let result = '';
-  for (const [name, count] of intervals) {
-    const value = Math.floor(timeDifferenceInSeconds / count) as number;
-    if (value) {
-      result = `${value} ${name}${value > 1 ? 's' : ''} ago`;
-      break;
-    }
-  }
-
-  return result;
-};
-
-const getFormattedAmount = (amount: number): string => {
-  if (amount < -999) {
-    return (amount / 1000).toFixed(1) + 'k';
-  }
-
-  if (amount > 999) {
-    return (amount / 1000).toFixed(1) + 'k';
-  }
-
-  return amount.toString();
-};

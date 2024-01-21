@@ -1,15 +1,43 @@
 import { useState } from 'react';
+import axios from '../../api/axios';
+import { PostType } from '../../types/PostType';
 
-const CreatePost = () => {
+type CreatePostPropsType = {
+  posts: PostType[];
+  setPosts: (value: PostType[]) => void;
+};
+
+const CreatePost: React.FC<CreatePostPropsType> = ({ posts, setPosts }) => {
   const [postData, setPostData] = useState('');
   const MAX_POST_LENGTH = 500;
 
-  const handleCreatePost = (): void => {
-    if (!postData) {
-      console.log('Please enter all fields');
-      return;
+  const handleCreatePost = async (): Promise<void> => {
+    try {
+      if (!postData.trim()) {
+        console.log('Please enter all fields');
+        return;
+      }
+
+      const response = await axios.post(
+        '/posts',
+        {
+          contents: postData
+        },
+        {
+          withCredentials: true
+        }
+      );
+      console.log(response);
+      if (response?.data?.success === true) {
+        if (response?.data?.data as PostType) {
+          setPosts([response.data.data, ...posts]);
+        }
+      }
+    } catch (error) {
+      console.log('Failed to create post', error);
+    } finally {
+      setPostData('');
     }
-    console.log('Posted');
   };
 
   return (

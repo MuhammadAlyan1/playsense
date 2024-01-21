@@ -1,0 +1,23 @@
+export type ProfileType = {
+  _id: string;
+  userId: string;
+  username: string;
+  roles: string[];
+  platform: 'pc' | 'playstation' | 'xbox';
+  bio: string;
+  profilePicture: string;
+  banner: string;
+  country: string;
+  twitchUrl: string;
+  youtubeUrl: string;
+  twitterUrl: string;
+  discordUsername: string;
+  monitor: string;
+  headphones: string;
+  keyboard: string;
+  mouse: string;
+  mousepad: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
