@@ -10,6 +10,7 @@ import Analytics from './components/analytics';
 import FeedbackHub from './components/feedbackHub';
 import GameDatabase from './components/gameDatabase';
 import Skillify from './components/skillify';
+import PostComments from './components/shared/posts/PostWithComments';
 import { AuthProvider } from './context/authContext';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/feedback-hub" element={<FeedbackHub />} />
               <Route path="/game-database" element={<GameDatabase />} />
               <Route path="/skillify" element={<Skillify />} />
+              <Route path="/post/:postId" element={<PostComments />} />
             </Route>
             <Route path="*" element={<h1>404</h1>} />
           </Routes>

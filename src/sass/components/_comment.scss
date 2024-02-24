@@ -1,0 +1,41 @@
+@use '../components/avatar' as *;
+@use '../abstract/index' as *;
+
+.comment {
+  padding: 1rem;
+  margin-block: 1rem;
+  outline: 2px solid $clr-text-secondary;
+  border-radius: $rounded-4xl;
+  position: relative;
+  @include glassEffect;
+
+  &__avatar-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__username {
+    font-size: $text-xl;
+    font-weight: medium;
+    color: $clr-text-primary;
+  }
+
+  &__created-at {
+    font-size: $text-xs;
+    color: $clr-text-secondary;
+    margin-top: 0.2rem;
+  }
+
+  &__content {
+    font-size: $text-base;
+    color: $clr-text-primary;
+    line-height: 1.4;
+    margin-top: 1rem;
+  }
+}

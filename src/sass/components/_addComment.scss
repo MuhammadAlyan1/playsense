@@ -1,0 +1,51 @@
+@use '../abstract/index' as *;
+@use '../components/buttons' as *;
+
+.add-comment {
+  &__heading {
+    margin-top: 2rem;
+    font-size: $text-xl;
+    color: $clr-secondary;
+    text-transform: uppercase;
+  }
+
+  &__comment-container {
+    position: relative;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+
+  &__comment-input {
+    width: 100%;
+    background-color: transparent;
+    border: 2px solid $clr-text-secondary;
+    border-radius: 20px;
+    color: $clr-text-primary;
+    font-size: $text-base;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    resize: none;
+    outline: transparent;
+    @include glassEffect;
+  }
+
+  &__comment-input:focus {
+    border: 2px solid $clr-secondary;
+  }
+
+  &__comment-length {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: $text-xs;
+    pointer-events: none;
+    padding: 0.25rem;
+    border-radius: $rounded-lg;
+    @include glassEffect;
+  }
+
+  &__submit-button {
+    margin-block: 1rem;
+    @include button--outlined($clr-secondary, $clr-secondary);
+  }
+}

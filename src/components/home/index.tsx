@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Posts from '../shared/Posts';
+import Posts from '../shared/posts';
 import FilterIcon from '../../assets/icons/misc/filter.svg?react';
 import TrendingIcon from '../../assets/icons/misc/trending.svg?react';
 import TopIcon from '../../assets/icons/misc/top.svg?react';
 import NewIcon from '../../assets/icons/misc/new.svg?react';
-import CreatePost from './CreatePost';
+import CreatePost from '../shared/posts/CreatePost';
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
 import { PostType } from '../../types/PostType';

@@ -1,6 +1,7 @@
+import { CommentType } from './CommentType';
 import { ProfileType } from './ProfileType';
 
-export type PostType = {
+export type PostWithCommentsType = {
   _id: string;
   contents: string;
   likedBy: string[];
@@ -9,6 +10,5 @@ export type PostType = {
   createdAt: string;
   updatedAt: string;
   __v: number;
-  comments: string[];
-  areCommentsDisabled?: boolean;
+  comments: CommentType[];
 };

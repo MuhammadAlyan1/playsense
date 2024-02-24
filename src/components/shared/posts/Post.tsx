@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import UpvoteIcon from '../../assets/icons/misc/upvote.svg?react';
-import DownvoteIcon from '../../assets/icons/misc/downvote.svg?react';
-import CommentIcon from '../../assets/icons/misc/comment.svg?react';
+import UpvoteIcon from '../../../assets/icons/misc/upvote.svg?react';
+import DownvoteIcon from '../../../assets/icons/misc/downvote.svg?react';
+import CommentIcon from '../../../assets/icons/misc/comment.svg?react';
 import { Link } from 'react-router-dom';
-import ActionMenu from '../ui/ActionMenu';
-import { PostType } from '../../types/PostType';
-import axios from '../../api/axios';
-import { getTimeDifference } from '../../utils/getTimeDifference';
-import { getFormattedAmount } from '../../utils/getFormattedAmount';
-
+import ActionMenu from '../../ui/ActionMenu';
+import { PostType } from '../../../types/PostType';
+import axios from '../../../api/axios';
+import { getTimeDifference } from '../../../utils/getTimeDifference';
+import { getFormattedAmount } from '../../../utils/getFormattedAmount';
+import { useNavigate } from 'react-router-dom';
 const Post: React.FC<PostType> = ({
   _id,
   contents,
@@ -16,8 +16,10 @@ const Post: React.FC<PostType> = ({
   dislikedBy,
   profileId,
   createdAt,
-  comments
+  comments,
+  areCommentsDisabled = false
 }) => {
+  const navigate = useNavigate();
   const [hasLiked, setHasLiked] = useState(likedBy.includes(profileId._id));
   const [hasDisliked, setHasDisliked] = useState(
     dislikedBy.includes(profileId._id)
@@ -60,6 +62,12 @@ const Post: React.FC<PostType> = ({
     } catch (error) {
       console.log('There was an error while liking the post: ', error);
     }
+  };
+
+  const handleCommentsClick = () => {
+    if (areCommentsDisabled) return;
+
+    navigate(`/post/${_id}`);
   };
 
   const actionMenuItems = [
@@ -144,7 +152,7 @@ const Post: React.FC<PostType> = ({
             onClick={handleDislike}
           />
         </div>
-        <div className="post__comments">
+        <div className="post__comments" onClick={handleCommentsClick}>
           <CommentIcon
             className={`post__feedback-button post__feedback-button--comments`}
           />

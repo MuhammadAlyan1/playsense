@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from './Header';
 import Navigation from './Navigation';
 import About from './About';
-import Posts from '../shared/Posts';
+import Posts from '../shared/posts';
 import Friends from './Friends';
 import Peripherals from './Peripherals';
 import useAuth from '../../hooks/useAuth';

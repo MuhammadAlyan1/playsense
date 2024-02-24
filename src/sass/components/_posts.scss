@@ -1,108 +1,106 @@
 @use '../components/avatar' as *;
 @use '../abstract/index' as *;
 
-.posts {
-  .post {
-    padding: 1rem;
+.post {
+  padding: 1rem;
+  margin-block: 1rem;
+  outline: 2px solid $clr-text-secondary;
+  border-radius: $rounded-4xl;
+  @include glassEffect;
+
+  &__avatar-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__username {
+    font-size: $text-xl;
+    font-weight: medium;
+    color: $clr-text-primary;
+  }
+
+  &__created-at {
+    font-size: $text-xs;
+    color: $clr-text-secondary;
+    margin-top: 0.2rem;
+  }
+
+  &__content {
+    font-size: $text-base;
+    color: $clr-text-primary;
+    line-height: 1.4;
     margin-block: 1rem;
-    outline: 2px solid $clr-text-secondary;
-    border-radius: $rounded-4xl;
-    @include glassEffect;
+  }
 
-    &__avatar-container {
-      width: 40px;
-      height: 40px;
-    }
+  &__feedback {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
-    &__header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+  &__feedback-button {
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+    fill: $clr-text-primary;
+  }
 
-    &__username {
-      font-size: $text-xl;
-      font-weight: medium;
-      color: $clr-text-primary;
-    }
+  &__feedback-button--liked {
+    fill: $clr-success;
+  }
 
-    &__created-at {
-      font-size: $text-xs;
-      color: $clr-text-secondary;
-      margin-top: 0.2rem;
-    }
+  &__feedback-button--dislike {
+    fill: $clr-text-primary;
+  }
 
-    &__content {
-      font-size: $text-base;
-      color: $clr-text-primary;
-      line-height: 1.4;
-      margin-block: 1rem;
-    }
+  &__feedback-button--disliked {
+    fill: $clr-error;
+  }
 
-    &__feedback {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+  &__feedback-button--comments {
+    fill: $clr-info;
+  }
 
-    &__feedback-button {
-      width: 21px;
-      height: 21px;
-      cursor: pointer;
-      fill: $clr-text-primary;
-    }
+  &__likes-dislikes {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
 
-    &__feedback-button--liked {
-      fill: $clr-success;
-    }
+  &__likes-dislikes-count {
+    font-size: $text-xl;
+    color: $clr-text-primary;
+    min-width: 60px;
+    text-align: center;
+    user-select: none;
+  }
 
-    &__feedback-button--dislike {
-      fill: $clr-text-primary;
-    }
+  &__likes-dislikes-count--liked {
+    color: $clr-success;
+  }
 
-    &__feedback-button--disliked {
-      fill: $clr-error;
-    }
+  &__likes-dislikes-count--disliked {
+    color: $clr-error;
+  }
 
-    &__feedback-button--comments {
-      fill: $clr-info;
-    }
+  &__comments {
+    display: flex;
+    cursor: pointer;
+    gap: 0.5rem;
+  }
 
-    &__likes-dislikes {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
+  &__comments-amount {
+    font-size: $text-xl;
+    user-select: none;
+  }
 
-    &__likes-dislikes-count {
-      font-size: $text-xl;
-      color: $clr-text-primary;
-      min-width: 60px;
-      text-align: center;
-      user-select: none;
-    }
-
-    &__likes-dislikes-count--liked {
-      color: $clr-success;
-    }
-
-    &__likes-dislikes-count--disliked {
-      color: $clr-error;
-    }
-
-    &__comments {
-      display: flex;
-      cursor: pointer;
-      gap: 0.5rem;
-    }
-
-    &__comments-amount {
-      font-size: $text-xl;
-      user-select: none;
-    }
-
-    &__comments-amount--commented {
-      color: $clr-info;
-    }
+  &__comments-amount--commented {
+    color: $clr-info;
   }
 }

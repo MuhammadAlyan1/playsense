@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from '../../api/axios';
-import { PostType } from '../../types/PostType';
+import axios from '../../../api/axios';
+import { PostType } from '../../../types/PostType';
 
 type CreatePostPropsType = {
   posts: PostType[];

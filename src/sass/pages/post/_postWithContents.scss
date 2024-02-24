@@ -1,0 +1,10 @@
+@use '../../abstract/index' as *;
+
+.post-with-comments {
+  margin-inline: $default-margin-inline;
+
+  &__comments {
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+}
