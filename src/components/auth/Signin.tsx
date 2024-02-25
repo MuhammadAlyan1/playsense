@@ -8,27 +8,7 @@ import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
-
-type AxiosErrorType = {
-  code: string;
-  config: object;
-  message: string;
-  name: string;
-  request: object;
-  response: {
-    config: object;
-    data: {
-      success: boolean;
-      message: string;
-      data: object | null;
-    };
-    headers: object;
-    request: object;
-    status: number;
-    statusText: string;
-  };
-  stack: string;
-};
+import { AxiosErrorType } from '../../types/AxiosErrorType';
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
