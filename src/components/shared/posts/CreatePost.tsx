@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from '../../../api/axios';
 import { PostType } from '../../../types/PostType';
+import toast from 'react-hot-toast';
+import { AxiosErrorType } from '../../../types/AxiosErrorType';
 
 type CreatePostPropsType = {
   posts: PostType[];
@@ -14,7 +16,7 @@ const CreatePost: React.FC<CreatePostPropsType> = ({ posts, setPosts }) => {
   const handleCreatePost = async (): Promise<void> => {
     try {
       if (!postData.trim()) {
-        console.log('Please enter all fields');
+        toast.error('Please enter post contents.');
         return;
       }
 
@@ -27,14 +29,18 @@ const CreatePost: React.FC<CreatePostPropsType> = ({ posts, setPosts }) => {
           withCredentials: true
         }
       );
-      console.log(response);
       if (response?.data?.success === true) {
         if (response?.data?.data as PostType) {
           setPosts([response.data.data, ...posts]);
+          toast.success('Your post is live!');
         }
       }
     } catch (error) {
       console.log('Failed to create post', error);
+      toast.error(
+        (error as AxiosErrorType)?.response?.data?.message ||
+          'Failed to create post'
+      );
     } finally {
       setPostData('');
     }

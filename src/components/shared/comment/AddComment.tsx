@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from '../../../api/axios';
 import { CommentType } from '../../../types/CommentType';
+import toast from 'react-hot-toast';
+import { AxiosErrorType } from '../../../types/AxiosErrorType';
 
 type AddCommentPropsType = {
   comments: CommentType[];
@@ -36,10 +38,15 @@ const AddComment: React.FC<AddCommentPropsType> = ({
       if (response?.data?.success === true) {
         if (response?.data?.data as CommentType) {
           setComments([response.data.data, ...comments]);
+          toast.success('Comment added!');
         }
       }
     } catch (error) {
       console.log('Failed to add comment', error);
+      toast.error(
+        (error as AxiosErrorType)?.response?.data?.message ||
+          'Failed to add comment'
+      );
     } finally {
       setCommentData('');
     }
