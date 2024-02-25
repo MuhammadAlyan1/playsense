@@ -12,11 +12,22 @@ import GameDatabase from './components/gameDatabase';
 import Skillify from './components/skillify';
 import PostComments from './components/shared/posts/PostWithComments';
 import { AuthProvider } from './context/authContext';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <>
       <div className="background-image"></div>
+      <Toaster
+        toastOptions={{
+          duration: 5000,
+          position: 'bottom-left',
+          style: {
+            background: '#333',
+            color: '#fff'
+          }
+        }}
+      />
       <BrowserRouter>
         <AuthProvider>
           <Routes>

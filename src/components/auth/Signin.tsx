@@ -7,6 +7,28 @@ import PathfinderImage from '../../assets/characters/pathfinder.svg?react';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
+
+type AxiosErrorType = {
+  code: string;
+  config: object;
+  message: string;
+  name: string;
+  request: object;
+  response: {
+    config: object;
+    data: {
+      success: boolean;
+      message: string;
+      data: object | null;
+    };
+    headers: object;
+    request: object;
+    status: number;
+    statusText: string;
+  };
+  stack: string;
+};
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,12 +62,15 @@ const Signin = () => {
       console.log(response);
 
       if (response?.data?.success === true) {
-        console.log('RESPONSE->DATA->USER: ', response?.data?.data);
         authContext?.setAuth(response?.data?.data);
+        toast.success('Successfully signed in!');
         navigate('/');
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.log('There was an issue while trying to signin: ', error);
+      toast.error(
+        (error as AxiosErrorType)?.response?.data?.message || 'Failed to signin'
+      );
     } finally {
       setIsLoading(false);
     }
