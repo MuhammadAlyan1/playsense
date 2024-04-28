@@ -13,6 +13,7 @@ import Skillify from './components/skillify';
 import PostComments from './components/shared/posts/PostWithComments';
 import { AuthProvider } from './context/authContext';
 import { Toaster } from 'react-hot-toast';
+import FeedbackWithComments from './components/feedbackHub/feedbackWithComments';
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
               <Route path="/game-database" element={<GameDatabase />} />
               <Route path="/skillify" element={<Skillify />} />
               <Route path="/post/:postId" element={<PostComments />} />
+              <Route
+                path="/feedback/:feedbackId"
+                element={<FeedbackWithComments />}
+              />
             </Route>
             <Route path="*" element={<h1>404</h1>} />
           </Routes>

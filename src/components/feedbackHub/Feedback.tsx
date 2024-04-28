@@ -2,25 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import UpvoteIcon from '../../assets/icons/misc/upvote.svg?react';
 import DownvoteIcon from '../../assets/icons/misc/downvote.svg?react';
 import CommentIcon from '../../assets/icons/misc/comment.svg?react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ActionMenu from '../ui/ActionMenu';
 import { getTimeDifference } from '../../utils/getTimeDifference';
 import { getFormattedAmount } from '../../utils/getFormattedAmount';
-import { ProfileType } from '../../types/ProfileType';
 import ApexLegendsIcon from '../../assets/icons/modes/battle-royale.svg?react';
-
-type FeedbackType = {
-  _id: string;
-  contents: string;
-  likedBy: string[];
-  dislikedBy: string[];
-  profileId: ProfileType;
-  createdAt: string;
-  comments: string[];
-  game: string;
-  tag: string;
-  status: string;
-};
+import { FeedbackType } from '../../types/FeedbacKType';
+import axios from '../../api/axios';
+import toast from 'react-hot-toast';
 
 const Feedback: React.FC<FeedbackType> = ({
   _id,
@@ -31,7 +20,7 @@ const Feedback: React.FC<FeedbackType> = ({
   createdAt,
   comments,
   game,
-  tag,
+  type,
   status
 }) => {
   const [hasLiked, setHasLiked] = useState(likedBy.includes(profileId._id));
@@ -40,16 +29,51 @@ const Feedback: React.FC<FeedbackType> = ({
   );
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   console.log('isActionMenuOpen: ', isActionMenuOpen);
   const handleLike = async () => {
     setHasLiked((prev) => !prev);
     setHasDisliked(false);
+
+    try {
+      const response = await axios.post(
+        `/feedback/feedback/${_id}`,
+        {
+          like: true
+        },
+        { withCredentials: true }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log('There was an error while liking the feedback: ', error);
+      toast.error('Failed to like feedback');
+    }
   };
 
   const handleDislike = async () => {
     setHasDisliked((prev) => !prev);
     setHasLiked(false);
+
+    try {
+      const response = await axios.post(
+        `/feedback/feedback/${_id}`,
+        {
+          dislike: true
+        },
+        { withCredentials: true }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log('There was an error while liking the feedback: ', error);
+      toast.error('Failed to dislike feedback');
+    }
+  };
+
+  const handleCommentsClick = () => {
+    navigate(`/feedback/${_id}`);
   };
 
   const actionMenuItems = [
@@ -83,7 +107,7 @@ const Feedback: React.FC<FeedbackType> = ({
           <ApexLegendsIcon className="feedback__game-icon" />
           <p className="feedback__game-name">{game}</p>
         </div>
-        <p className="feedback__tag">{tag}</p>
+        <p className="feedback__tag">{type}</p>
         <p className="feedback__status">{status}</p>
       </div>
       <div className="feedback__header">
@@ -142,7 +166,7 @@ const Feedback: React.FC<FeedbackType> = ({
             onClick={handleDislike}
           />
         </div>
-        <div className="feedback__comments">
+        <div className="feedback__comments" onClick={handleCommentsClick}>
           <CommentIcon
             className={`feedback__feedback-button feedback__feedback-button--comments`}
           />

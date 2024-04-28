@@ -54,7 +54,8 @@ const PostWithComments = () => {
       <AddComment
         comments={comments}
         setComments={setComments}
-        postId={postData._id}
+        id={postData._id}
+        type="posts"
       />
       <div className="post-with-comments__comments">
         {comments.map((comment) => {

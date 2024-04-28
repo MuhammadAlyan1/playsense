@@ -7,13 +7,15 @@ import { AxiosErrorType } from '../../../types/AxiosErrorType';
 type AddCommentPropsType = {
   comments: CommentType[];
   setComments: (value: CommentType[]) => void;
-  postId: string;
+  id: string;
+  type: string;
 };
 
 const AddComment: React.FC<AddCommentPropsType> = ({
   comments,
   setComments,
-  postId
+  id,
+  type = 'posts'
 }) => {
   const [CommentData, setCommentData] = useState('');
   const MAX_COMMENT_LENGTH = 500;
@@ -26,7 +28,7 @@ const AddComment: React.FC<AddCommentPropsType> = ({
       }
 
       const response = await axios.post(
-        `posts/feedback/${postId}`,
+        `${type}/feedback/${id}`,
         {
           comment: true,
           commentContents: CommentData
