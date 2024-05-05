@@ -1,0 +1,37 @@
+@use '../abstract/index' as *;
+@use '../components/buttons' as *;
+
+.word-counter-textarea {
+  position: relative;
+  margin-top: 1rem;
+  overflow: hidden;
+
+  &__textarea {
+    width: 100%;
+    background-color: transparent;
+    border: 2px solid $clr-text-secondary;
+    border-radius: 20px;
+    color: $clr-text-primary;
+    font-size: $text-base;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    resize: none;
+    outline: transparent;
+    @include glassEffect;
+
+    &:focus {
+      border: 2px solid $clr-secondary;
+    }
+  }
+
+  &__word-counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: $text-xs;
+    pointer-events: none;
+    padding: 0.25rem;
+    border-radius: $rounded-lg;
+    @include glassEffect;
+  }
+}
