@@ -7,6 +7,9 @@ import ActionMenu from '../ui/ActionMenu';
 import { getTimeDifference } from '../../utils/getTimeDifference';
 import { getFormattedAmount } from '../../utils/getFormattedAmount';
 import ApexLegendsIcon from '../../assets/icons/modes/battle-royale.svg?react';
+import WarzoneIcon from '../../assets/icons/games/warzone.svg?react';
+import TypeIcon from '../../assets/icons/tag.svg?react';
+import CsgoIcon from '../../assets/icons/games/csgo.svg?react';
 import { FeedbackType } from '../../types/FeedbacKType';
 import axios from '../../api/axios';
 import toast from 'react-hot-toast';
@@ -104,10 +107,19 @@ const Feedback: React.FC<FeedbackType> = ({
     <div key={_id} className="feedback">
       <div className="feedback__meta-data">
         <div className="feedback__game">
-          <ApexLegendsIcon className="feedback__game-icon" />
+          {game === 'apex legends' && (
+            <ApexLegendsIcon className="feedback__game-icon" />
+          )}
+          {game === 'warzone' && (
+            <WarzoneIcon className="feedback__game-icon" />
+          )}
+          {game === 'csgo' && <CsgoIcon className="feedback__game-icon" />}
           <p className="feedback__game-name">{game}</p>
         </div>
-        <p className="feedback__tag">{type}</p>
+        <p className="feedback__tag">
+          <TypeIcon className="feedback__game-icon" />
+          {type}
+        </p>
         <p className="feedback__status">{status}</p>
       </div>
       <div className="feedback__header">
