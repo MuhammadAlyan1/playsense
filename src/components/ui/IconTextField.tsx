@@ -4,8 +4,8 @@ type IconTextFieldProps = {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   isRequired: boolean;
   placeholder: string;
-  value: string;
-  setValue: (value: string) => void;
+  value: string | number;
+  setValue: React.Dispatch<React.SetStateAction<string | number>>;
   id?: string;
   type?: string;
 };
