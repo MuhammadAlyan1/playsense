@@ -6,11 +6,8 @@
   z-index: 11;
   display: flex;
   justify-content: center;
+  align-items: center;
   @include glassEffect;
-
-  @include md {
-    padding-top: 10rem;
-  }
 
   &--visible {
     transform: scale(1);
@@ -24,6 +21,8 @@
     max-width: 850px;
     margin: 1rem;
     border-radius: $rounded-3xl;
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   &__title {
