@@ -1,0 +1,37 @@
+@use '../abstract/index' as *;
+@use '../components/buttons' as *;
+
+.image-upload {
+  &__image-container {
+    margin-top: 1rem;
+    height: 150px;
+    border-radius: $rounded-3xl;
+    overflow: hidden;
+
+    @include sm {
+      height: 250px;
+    }
+  }
+
+  &__label {
+    text-transform: uppercase;
+    margin-bottom: -0.5rem;
+    margin-left: 0.25rem;
+    letter-spacing: 1px;
+    margin-top: 1.5rem;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__upload-button::file-selector-button {
+    @include button--outlined($clr-secondary, $clr-secondary);
+    margin-top: 1rem;
+    @include glassEffect;
+  }
+}
