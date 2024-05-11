@@ -3,10 +3,12 @@ import axios from '../../api/axios';
 import toast from 'react-hot-toast';
 import { ServiceType } from '../../types/ServiceType';
 import Service from './service';
+import AddService from './addService';
 
 const Skillify = () => {
   const [services, setServices] = useState<ServiceType[] | []>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAddServiceModalOpen, setIsAddServiceModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -26,15 +28,29 @@ const Skillify = () => {
     fetchServices();
   }, []);
 
-  console.log('SERVICES: ', services);
-
   if (isLoading) {
     <h1>Loading..</h1>;
   }
 
   return (
     <div className="skillify">
-      <h1 className="skillify__heading">Skillify</h1>
+      <div className="skillify__header">
+        <h1 className="skillify__heading">Skillify</h1>
+        <button
+          className="skillify__button"
+          onClick={() => {
+            setIsAddServiceModalOpen((prev) => !prev);
+          }}
+        >
+          Publish service
+        </button>
+      </div>
+      <AddService
+        isModalOpen={isAddServiceModalOpen}
+        setIsModalOpen={setIsAddServiceModalOpen}
+        services={services}
+        setServices={setServices}
+      />
       <div className="skillify__services">
         {services.map((service) => (
           <Service key={service._id} service={service} />
