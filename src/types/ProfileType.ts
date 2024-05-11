@@ -20,4 +20,5 @@ export type ProfileType = {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  accessToken?: string;
 };
