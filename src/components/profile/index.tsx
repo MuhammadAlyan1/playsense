@@ -10,7 +10,7 @@ import { ProfileType } from '../../types/ProfileType';
 import { PostType } from '../../types/PostType';
 import axios from '../../api/axios';
 import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
-import MatchAnalyticsTable from '../analytics/matchAnalyticsTable';
+import MatchAnalyticsTable from '../analytics/MatchAnalyticsTable';
 
 const Profile = () => {
   const [currentNavigationItem, setCurrentNavigationItem] = useState('about');
