@@ -7,13 +7,13 @@ import Home from './components/home';
 import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
 import Analytics from './components/analytics';
-import FeedbackHub from './components/feedbackHub';
+import FeedbackHub from './components/feedbackHub/index';
 import GameDatabase from './components/gameDatabase';
 import Skillify from './components/skillify';
 import PostComments from './components/shared/posts/PostWithComments';
 import { AuthProvider } from './context/authContext';
 import { Toaster } from 'react-hot-toast';
-import FeedbackWithComments from './components/feedbackHub/feedbackWithComments';
+import FeedbackWithComments from './components/feedbackHub/FeedbackWithComments';
 
 function App() {
   return (
