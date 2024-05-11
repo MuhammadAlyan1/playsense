@@ -30,7 +30,9 @@ const UploadImage: React.FC<UploadImageType> = ({
       <input
         className="image-upload__upload-button"
         type="file"
-        onChange={(e) => setImage(e.target.files && e.target.files[0])}
+        onChange={(e) =>
+          setImage(e.target.files && e.target.files[0] ? e.target.files[0] : '')
+        }
       />
     </div>
   );
