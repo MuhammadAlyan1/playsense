@@ -1,47 +1,70 @@
 import React from 'react';
 import { getTimeDifference } from '../../utils/getTimeDifference';
 import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
+import DataGrid from '../dataGrid';
+import { TableColumn } from 'react-data-table-component';
 
 type MatchAnalyticsTablePropsType = {
   matchData: MatchAnalyticsType[] | [];
 };
 
+const tableHeaders: TableColumn<MatchAnalyticsType>[] = [
+  {
+    name: 'Id',
+    maxWidth: '80px',
+    sortable: true,
+    selector: (row: MatchAnalyticsType) =>
+      row.sNo != undefined ? row.sNo : row._id
+  },
+  {
+    name: 'Time',
+    sortable: true,
+    minWidth: '150px',
+    selector: (row: MatchAnalyticsType) =>
+      getTimeDifference(row?.createdAt) || 'Just now'
+  },
+  {
+    name: 'Character',
+    sortable: true,
+    minWidth: '150px',
+    selector: (row: MatchAnalyticsType) => row.character
+  },
+  {
+    name: 'Mode',
+    sortable: true,
+    minWidth: '180px',
+    selector: (row: MatchAnalyticsType) => row.mode
+  },
+  {
+    name: 'Kills',
+    sortable: true,
+    minWidth: '50px',
+    selector: (row: MatchAnalyticsType) => row.kills
+  },
+  {
+    name: 'Damage',
+    sortable: true,
+    minWidth: '150px',
+    selector: (row: MatchAnalyticsType) => row.damage
+  },
+  {
+    name: 'Position',
+    sortable: true,
+    minWidth: '150px',
+    selector: (row: MatchAnalyticsType) => row.position
+  },
+  {
+    name: 'Map',
+    sortable: true,
+    minWidth: '150px',
+    selector: (row: MatchAnalyticsType) => row.map
+  }
+];
+
 const MatchAnalyticsTable: React.FC<MatchAnalyticsTablePropsType> = ({
   matchData
 }) => {
-  return (
-    <div className="analytics__data-container">
-      {matchData?.length !== 0 && (
-        <table className="analytics__table">
-          <tr className="analytics__table-row">
-            <th className="analytics__table-heading">Time</th>
-            <th className="analytics__table-heading">Character</th>
-            <th className="analytics__table-heading">Mode</th>
-            <th className="analytics__table-heading">Kills</th>
-            <th className="analytics__table-heading">Damage</th>
-            <th className="analytics__table-heading">Position</th>
-          </tr>
-          {matchData?.map((match: MatchAnalyticsType) => {
-            return (
-              <tr className="analytics__table-row">
-                <td className="analytics__table-data">
-                  {getTimeDifference(match?.createdAt) || 'Just now'}
-                </td>
-                <td className="analytics__table-data">{match?.character}</td>
-                <td className="analytics__table-data">{match?.mode}</td>
-                <td className="analytics__table-data">{match?.kills}</td>
-                <td className="analytics__table-data">{match?.damage}</td>
-                <td className="analytics__table-data">{match?.position}</td>
-              </tr>
-            );
-          })}
-        </table>
-      )}
-      {matchData?.length === 0 && (
-        <h2 className="analytics__no-data">No match analytics found.</h2>
-      )}
-    </div>
-  );
+  return <DataGrid columns={tableHeaders} data={matchData} />;
 };
 
 export default MatchAnalyticsTable;
