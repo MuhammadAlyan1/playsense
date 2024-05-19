@@ -1,0 +1,54 @@
+@use '../abstract/index' as *;
+
+.rdt_Table {
+  background-color: transparent !important;
+  margin-top: 1rem;
+  @include glassEffect;
+
+  .rdt_TableHeadRow {
+    background: transparent;
+  }
+
+  .rdt_TableCol {
+    color: $clr-primary;
+    background-color: transparent;
+    font-size: $text-xl;
+    text-transform: uppercase;
+  }
+
+  .rdt_TableBody {
+    background-color: transparent !important;
+  }
+
+  .rdt_TableRow {
+    background-color: transparent !important;
+    color: $clr-text-primary !important;
+    font-size: $text-base !important;
+  }
+
+  .sortIcon {
+    fill: $clr-primary;
+    display: flex;
+    align-items: center;
+    margin-left: 0.25rem;
+  }
+}
+
+.rdt_Pagination {
+  background-color: transparent !important;
+  color: $clr-text-primary !important;
+  @include glassEffect;
+
+  & button svg {
+    fill: $clr-primary !important;
+  }
+
+  & button:disabled,
+  & button[disabled] {
+    background-color: transparent;
+  }
+  & button:disabled svg,
+  & button[disabled] svg {
+    fill: $clr-text-primary !important;
+  }
+}
