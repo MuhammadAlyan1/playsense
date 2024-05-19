@@ -2,6 +2,7 @@ import { WeaponType } from './WeaponType';
 
 export type MatchAnalyticsType = {
   _id: string;
+  sNo?: number;
   profileId: string;
   kills: number;
   damage: number;
