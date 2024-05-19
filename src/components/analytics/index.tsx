@@ -27,7 +27,16 @@ const Analytics = () => {
         );
 
         if (response?.data?.success) {
-          setMatchData(response?.data?.data);
+          setMatchData(
+            response?.data?.data.map(
+              (data: MatchAnalyticsType, index: number) => {
+                return {
+                  ...data,
+                  sNo: index + 1
+                };
+              }
+            )
+          );
         }
       } catch (error) {
         console.log(
