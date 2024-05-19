@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
-import MatchAnalyticsTable from './matchAnalyticsTable';
+import MatchAnalyticsTable from './MatchAnalyticsTable';
 import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
 
 const Analytics = () => {
