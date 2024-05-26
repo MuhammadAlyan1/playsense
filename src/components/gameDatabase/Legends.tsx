@@ -23,8 +23,10 @@ import WraithIcon from '../../assets/icons/characters/wraith.svg?react';
 import ValkyrieIcon from '../../assets/icons/characters/valkyrie.svg?react';
 import VantageIcon from '../../assets/icons/characters/vantage.svg?react';
 import SeerIcon from '../../assets/icons/characters/seer.svg?react';
+import { useNavigate } from 'react-router-dom';
 
 const Legends = () => {
+  const navigate = useNavigate();
   return (
     <div className="legends">
       <h2 className="legends__sub-heading">Legend</h2>
@@ -35,6 +37,11 @@ const Legends = () => {
               title={legend.name}
               className={`icon-button`}
               key={legend.name}
+              onClick={() =>
+                navigate(
+                  `/game-database/legends/${legend?.name?.toLowerCase()}`
+                )
+              }
             >
               <legend.icon className="icon" />
             </div>
