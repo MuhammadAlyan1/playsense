@@ -1,0 +1,180 @@
+@use '../../abstract/index' as *;
+
+.detailed-weapon {
+  margin-inline: auto;
+  width: fit-content;
+  padding-inline: 1rem;
+
+  &__name-image-container {
+    margin-block: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin-bottom: 5rem;
+    @include sm {
+      gap: 10rem;
+      margin-bottom: 2rem;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__image-container {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 100%;
+    transform: scaleX(-1) rotate(15deg);
+  }
+
+  &__name-class-container {
+    margin-block: 4rem;
+  }
+
+  &__name {
+    font-size: $text-4xl;
+    color: $clr-accent;
+    font-weight: 600;
+  }
+
+  &__type {
+    background-color: $clr-secondary;
+    margin-bottom: 0.5em;
+    p {
+      color: #000;
+      font-size: $text-sm;
+      font-weight: 500;
+    }
+  }
+
+  &__label {
+    color: $clr-secondary;
+    font-size: $text-lg;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  &__label-badge-container {
+    margin-bottom: 3rem;
+    max-width: 400px;
+  }
+
+  &__badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  // fire modes
+
+  .single {
+    background-color: $clr-success;
+    gap: 0.25rem;
+  }
+
+  .burst {
+    background-color: $clr-info;
+  }
+
+  .auto {
+    background-color: $clr-role-esport-elite;
+  }
+
+  // attachments
+  .barrel-stabilizer {
+    background-color: $clr-role-game-developer;
+  }
+
+  .standard-stock {
+    background-color: $clr-role-user;
+  }
+
+  .laser-sight {
+    background-color: $clr-role-content-creator;
+  }
+
+  .optics {
+    background-color: $clr-role-coach;
+  }
+
+  .extended-mag {
+    background-color: $clr-role-admin;
+  }
+
+  // ammo
+  .LightRounds {
+    background-color: #eb9e52;
+    p {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .HeavyRounds {
+    background-color: #80ccab;
+    p {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .EnergyAmmo {
+    background-color: #d1e063;
+    p {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .ShotgunShells {
+    background-color: #ed4412;
+    p {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .SniperAmmo {
+    background-color: #7c84f9;
+    p {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .MythicAmmo {
+    background-color: #be2f40;
+    p {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .barrel-stabilizer {
+    background-color: red;
+  }
+
+  // damage
+
+  .body {
+    background-color: $clr-success;
+  }
+
+  .head {
+    background-color: $clr-error;
+  }
+
+  .torso {
+    background-color: $clr-role-content-creator;
+  }
+
+  .damagePerSecond {
+    background-color: $clr-role-esport-elite;
+  }
+}
