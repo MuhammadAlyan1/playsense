@@ -15,6 +15,7 @@ import { AuthProvider } from './context/authContext';
 import { Toaster } from 'react-hot-toast';
 import FeedbackWithComments from './components/feedbackHub/FeedbackWithComments';
 import Legend from './components/gameDatabase/detailedInfo/legend';
+import Weapon from './components/gameDatabase/detailedInfo/weapon';
 function App() {
   return (
     <>
@@ -45,6 +46,10 @@ function App() {
               <Route
                 path="/game-database/legends/:legendName"
                 element={<Legend />}
+              />
+              <Route
+                path="/game-database/weapons/:weaponName"
+                element={<Weapon />}
               />
               <Route path="/skillify" element={<Skillify />} />
               <Route path="/post/:postId" element={<PostComments />} />
