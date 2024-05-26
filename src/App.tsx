@@ -14,7 +14,7 @@ import PostComments from './components/shared/posts/PostWithComments';
 import { AuthProvider } from './context/authContext';
 import { Toaster } from 'react-hot-toast';
 import FeedbackWithComments from './components/feedbackHub/FeedbackWithComments';
-
+import Legend from './components/gameDatabase/detailedInfo/legend';
 function App() {
   return (
     <>
@@ -42,6 +42,10 @@ function App() {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/feedback-hub" element={<FeedbackHub />} />
               <Route path="/game-database" element={<GameDatabase />} />
+              <Route
+                path="/game-database/legends/:legendName"
+                element={<Legend />}
+              />
               <Route path="/skillify" element={<Skillify />} />
               <Route path="/post/:postId" element={<PostComments />} />
               <Route
