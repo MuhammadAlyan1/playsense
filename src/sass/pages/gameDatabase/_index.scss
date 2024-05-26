@@ -1,4 +1,5 @@
 @use '../../abstract/index' as *;
+@forward 'detailedLegend';
 
 .game-database {
   margin-inline: $default-margin-inline;

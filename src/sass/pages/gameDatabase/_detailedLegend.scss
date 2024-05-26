@@ -1,0 +1,81 @@
+@use '../../abstract/index' as *;
+
+.detailed-legend {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  @include lg {
+    max-height: 92vh;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  &__contents {
+    padding: 1rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__image-container {
+    max-width: 300px;
+    margin-inline: auto;
+    @include lg {
+      flex: 3;
+      margin-inline: 0px;
+      max-width: 100%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+  }
+
+  &__name {
+    font-size: $text-4xl;
+    color: $clr-accent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-block: 5rem;
+  }
+
+  &__ability {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__abilities {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__ability-icon {
+    width: 75px;
+    height: 75px;
+  }
+
+  &__ability-type {
+    color: $clr-secondary;
+    font-size: $text-sm;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__ability-name {
+    color: $clr-primary;
+    font-size: $text-xl;
+    letter-spacing: 1px;
+    margin-block: 0.5rem;
+  }
+
+  &__ability-description {
+    color: $clr-text-secondary;
+    max-width: 400px;
+  }
+}
