@@ -1,0 +1,23 @@
+@use '../abstract/index' as *;
+
+.badge {
+  background-color: $clr-info;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: $rounded-md;
+
+  &__icon {
+    fill: $clr-text-primary;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__label {
+    text-transform: uppercase;
+    font-size: $text-base;
+    color: $clr-text-primary;
+  }
+}
