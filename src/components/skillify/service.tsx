@@ -3,12 +3,63 @@ import { ServiceType } from '../../types/ServiceType';
 import { truncateText } from '../../utils/truncateText';
 import { IoMdStar } from 'react-icons/io';
 import ChatIcon from '../../assets/icons/misc/chat.svg?react';
+import toast from 'react-hot-toast';
+import axios from '../../api/axios';
+import {
+  PayPalButtons,
+  PayPalScriptProvider,
+  PayPalButtonsComponentProps
+} from '@paypal/react-paypal-js';
 
 type ServicePropsType = {
   service: ServiceType;
 };
 
 const Service: React.FC<ServicePropsType> = ({ service }) => {
+  const handleCreateOrder: PayPalButtonsComponentProps['createOrder'] = (
+    data,
+    actions
+  ) => {
+    return actions.order.create({
+      intent: 'CAPTURE',
+      purchase_units: [
+        {
+          amount: {
+            currency_code: 'USD',
+            value: service.price.toString()
+          }
+        }
+      ]
+    });
+  };
+
+  const handleOnApprove: PayPalButtonsComponentProps['onApprove'] = async (
+    data,
+    actions
+  ) => {
+    return actions?.order?.capture().then(async () => {
+      try {
+        await axios.post(
+          '/paypal/payment-success',
+          {
+            orderID: data.orderID,
+            serviceId: service._id,
+            sellerId: service?.profileId?._id,
+            paypalAccountId: service.paypalAccountId,
+            amount: service.price
+          },
+          {
+            withCredentials: true
+          }
+        );
+        toast.success('Payment successful.');
+      } catch (error) {
+        console.log('Payment processing failed: ', error);
+        toast.error('Payment processing failed.');
+      }
+    });
+  };
+
   return (
     <div key={service._id} className="service">
       <div className="service__image-container">
@@ -46,9 +97,17 @@ const Service: React.FC<ServicePropsType> = ({ service }) => {
           <ChatIcon className="service__chat-icon" />
         </button>
       </div>
-      <div className="service__buttons-container">
-        <button className="service__order-button">Order Now</button>
-      </div>
+
+      <PayPalScriptProvider
+        options={{ clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID }}
+      >
+        <PayPalButtons
+          fundingSource="paypal"
+          style={{ layout: 'horizontal', tagline: false }}
+          createOrder={handleCreateOrder}
+          onApprove={handleOnApprove}
+        />
+      </PayPalScriptProvider>
     </div>
   );
 };
