@@ -6,6 +6,7 @@ import Select from '../ui/Select';
 import GameSvg from '../../assets/icons/game.svg?react';
 import HeadingSvg from '../../assets/icons/misc/heading.svg?react';
 import PriceSvg from '../../assets/icons/misc/money.svg?react';
+import PaypalSvg from '../../assets/icons/misc/paypal.svg?react';
 import WordCounterTextArea from '../ui/WordCounterTextArea';
 import { ServiceType } from '../../types/ServiceType';
 import UploadImage from '../ui/UploadImage';
@@ -28,6 +29,7 @@ const AddService: React.FC<AddServiceType> = ({
 }) => {
   const [serviceTitle, setServiceTitle] = useState('');
   const [serviceDescription, setServiceDescription] = useState('');
+  const [paypalAccountId, setPaypalAccountId] = useState('');
   const [servicePrice, setServicePrice] = useState(0);
   const [serviceGame, setServiceGame] = useState('apex legends');
   const [serviceCoverImage, setServiceCoverImage] = useState<File | string>(
@@ -45,10 +47,16 @@ const AddService: React.FC<AddServiceType> = ({
     if (
       !serviceTitle.trim() ||
       !serviceDescription.trim() ||
+      !paypalAccountId.trim() ||
       servicePrice === 0 ||
       serviceGame.trim() === ''
     ) {
       toast.error('Please enter all fields');
+      return;
+    }
+
+    if (paypalAccountId.trim()?.length !== 13) {
+      toast.error('Please enter a valid PayPal account ID.');
       return;
     }
 
@@ -80,7 +88,8 @@ const AddService: React.FC<AddServiceType> = ({
           game: serviceGame,
           price: servicePrice,
           coverPicture: coverImageUrl,
-          description: serviceDescription
+          description: serviceDescription,
+          paypalAccountId
         },
         {
           withCredentials: true
@@ -101,6 +110,7 @@ const AddService: React.FC<AddServiceType> = ({
       setServiceGame('apex legends');
       setServicePrice(0);
       setServiceTitle('');
+      setPaypalAccountId('');
       setServiceCoverImage(serviceDefaultCoverImage);
     }
   };
@@ -126,6 +136,7 @@ const AddService: React.FC<AddServiceType> = ({
           isRequired={true}
           placeholder="Enter service title"
         />
+
         <p className="add-service__label">Price</p>
         <IconTextField
           Icon={PriceSvg}
@@ -138,6 +149,18 @@ const AddService: React.FC<AddServiceType> = ({
           isRequired={true}
           placeholder="Enter service price"
           type="number"
+        />
+        <p className="add-service__label">PayPal Account ID</p>
+        <IconTextField
+          Icon={PaypalSvg}
+          value={paypalAccountId}
+          setValue={
+            setPaypalAccountId as React.Dispatch<
+              React.SetStateAction<string | number>
+            >
+          }
+          isRequired={true}
+          placeholder="Enter PayPal Account ID"
         />
         <p className="add-service__label">Game</p>
         <Select
