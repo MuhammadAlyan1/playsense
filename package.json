@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.5.0",
     "@reduxjs/toolkit": "^1.9.7",
+    "@types/paypal-rest-sdk": "^1.7.9",
     "axios": "^1.6.5",
     "cloudinary": "^1.41.3",
     "react": "^18.2.0",
