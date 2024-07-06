@@ -12,6 +12,7 @@ export type ServiceType = {
   total_sales: number;
   reviews: number;
   updatedAt: string;
+  paypalAccountId: string;
   _id: string;
   profileId: ProfileType;
 };
