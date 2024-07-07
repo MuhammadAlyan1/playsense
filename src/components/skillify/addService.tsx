@@ -128,11 +128,7 @@ const AddService: React.FC<AddServiceType> = ({
         <IconTextField
           Icon={HeadingSvg}
           value={serviceTitle}
-          setValue={
-            setServiceTitle as React.Dispatch<
-              React.SetStateAction<string | number>
-            >
-          }
+          setValue={setServiceTitle}
           isRequired={true}
           placeholder="Enter service title"
         />
@@ -141,11 +137,7 @@ const AddService: React.FC<AddServiceType> = ({
         <IconTextField
           Icon={PriceSvg}
           value={servicePrice}
-          setValue={
-            setServicePrice as React.Dispatch<
-              React.SetStateAction<string | number>
-            >
-          }
+          setValue={setServicePrice}
           isRequired={true}
           placeholder="Enter service price"
           type="number"
@@ -154,11 +146,7 @@ const AddService: React.FC<AddServiceType> = ({
         <IconTextField
           Icon={PaypalSvg}
           value={paypalAccountId}
-          setValue={
-            setPaypalAccountId as React.Dispatch<
-              React.SetStateAction<string | number>
-            >
-          }
+          setValue={setPaypalAccountId}
           isRequired={true}
           placeholder="Enter PayPal Account ID"
         />
