@@ -1,29 +1,37 @@
 import React, { useRef } from 'react';
 
-type IconTextFieldProps = {
+type IconTextFieldProps<T extends string | number> = {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   isRequired: boolean;
   placeholder: string;
-  value: string | number;
-  setValue: React.Dispatch<React.SetStateAction<string | number>>;
+  value: T;
+  setValue: React.Dispatch<React.SetStateAction<T>>;
   id?: string;
   type?: string;
 };
 
-const IconTextField: React.FC<IconTextFieldProps> = ({
+const IconTextField = <T extends string | number>({
   Icon,
   id,
   isRequired,
   placeholder,
   value,
   setValue,
-  type
-}) => {
+  type = 'text'
+}: IconTextFieldProps<T>) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = () => {
     if (inputRef.current) {
       inputRef?.current?.focus();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (typeof value === 'number') {
+      setValue(e.target.value as unknown as T);
+    } else {
+      setValue(e.target.value as T);
     }
   };
 
@@ -40,7 +48,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
         type={type ? type : 'text'}
         className="icon-text-field__input-field"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
       />
     </div>
   );
