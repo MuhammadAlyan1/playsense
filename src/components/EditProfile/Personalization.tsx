@@ -39,7 +39,11 @@ const Personalization: React.FC<PersonalizationPropType> = ({
           className="personalization__upload-button"
           type="file"
           onChange={(e) =>
-            setProfilePicture(e.target.files && e.target.files[0])
+            setProfilePicture(
+              e.target.files && e.target.files[0]
+                ? e.target.files[0]
+                : profilePicture
+            )
           }
         />
       </div>
@@ -59,7 +63,11 @@ const Personalization: React.FC<PersonalizationPropType> = ({
         <input
           className="personalization__upload-button"
           type="file"
-          onChange={(e) => setBanner(e.target.files && e.target.files[0])}
+          onChange={(e) => {
+            setBanner(
+              e.target.files && e.target.files[0] ? e.target.files[0] : banner
+            );
+          }}
         />
       </div>
       <div className="personalization__platforms-container">
