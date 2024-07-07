@@ -18,8 +18,8 @@ const Skillify = () => {
         console.log(response);
         setServices(response?.data?.data || []);
       } catch (error) {
-        console.log('Failed to fetch feedback: ', error);
-        toast.error('Failed to fetch feedback.');
+        console.log('Failed to fetch services: ', error);
+        toast.error('Failed to fetch services.');
       } finally {
         setIsLoading(false);
       }
