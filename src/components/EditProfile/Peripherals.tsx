@@ -8,15 +8,15 @@ import IconTextField from '../ui/IconTextField';
 
 type PeripheralsPropType = {
   monitor: string;
-  setMonitor: React.Dispatch<React.SetStateAction<string | number>>;
+  setMonitor: React.Dispatch<React.SetStateAction<string>>;
   headphones: string;
-  setHeadphones: React.Dispatch<React.SetStateAction<string | number>>;
+  setHeadphones: React.Dispatch<React.SetStateAction<string>>;
   keyboard: string;
-  setKeyboard: React.Dispatch<React.SetStateAction<string | number>>;
+  setKeyboard: React.Dispatch<React.SetStateAction<string>>;
   mouse: string;
-  setMouse: React.Dispatch<React.SetStateAction<string | number>>;
+  setMouse: React.Dispatch<React.SetStateAction<string>>;
   mousepad: string;
-  setMousepad: React.Dispatch<React.SetStateAction<string | number>>;
+  setMousepad: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Peripherals: React.FC<PeripheralsPropType> = ({
