@@ -1,0 +1,120 @@
+@use '../abstract/index' as *;
+
+.dashboard-navigation {
+  $navigation-padding: 1rem;
+  $items-margin-block: 2rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 20;
+  width: $navigation-width;
+  padding-inline: $navigation-padding;
+  user-select: none;
+  transition: all 250ms ease-in;
+  border-top-right-radius: $rounded-md;
+  border-bottom-right-radius: $rounded-md;
+  background-color: $clr-bg-secondary;
+  @include xl {
+    top: 4rem;
+  }
+
+  &__button {
+    display: block;
+    font-size: 35px;
+    cursor: pointer;
+    transition: all 250ms ease-in;
+
+    color: $clr-accent;
+  }
+
+  &__button--close {
+    margin-block: $items-margin-block;
+
+    background-color: $clr-bg-secondary;
+  }
+
+  &__button--open {
+    position: fixed;
+    top: $items-margin-block;
+    left: $default-margin-inline;
+    z-index: 11;
+    width: 26px;
+    height: 26px;
+    background-color: $clr-bg-primary;
+
+    @include lg {
+      left: $navigation-padding;
+    }
+  }
+
+  &__element {
+    text-decoration: none;
+    cursor: pointer;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-block: $items-margin-block;
+  }
+
+  &__icon {
+    width: 35px;
+    height: 35px;
+    fill: $clr-accent;
+  }
+
+  &__text {
+    text-decoration: none;
+    position: relative;
+    text-transform: uppercase;
+    font-size: $text-lg;
+    transition: all 250ms ease-in;
+    color: $clr-text-primary;
+  }
+
+  &__text::before {
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    content: '';
+    bottom: -5px;
+    transition: width ease-in 200ms;
+
+    background-color: $clr-accent;
+  }
+
+  &__element--active &__text::before {
+    width: 100%;
+    height: 3px;
+  }
+
+  &__text:hover {
+    color: $clr-accent;
+  }
+
+  &--hidden {
+    // add extra pixels to the left because of box shadow
+    left: -1.25 * $navigation-width;
+  }
+
+  &--visible {
+    left: 0;
+  }
+
+  @include xl {
+    &__button {
+      display: none;
+    }
+
+    &--hidden {
+      left: 0 !important;
+    }
+  }
+
+  &__theme {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-block: $items-margin-block;
+  }
+}
