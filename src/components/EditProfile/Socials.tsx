@@ -7,13 +7,13 @@ import IconTextField from '../ui/IconTextField';
 
 type SocialsPropType = {
   twitchUrl: string;
-  setTwitchUrl: (twitchUrl: string) => void;
+  setTwitchUrl: React.Dispatch<React.SetStateAction<string>>;
   youtubeUrl: string;
-  setYoutubeUrl: (youtubeUrl: string) => void;
+  setYoutubeUrl: React.Dispatch<React.SetStateAction<string>>;
   twitterUrl: string;
-  setTwitterUrl: (twitterUrl: string) => void;
+  setTwitterUrl: React.Dispatch<React.SetStateAction<string>>;
   discordUsername: string;
-  setDiscordUsername: (discordUsername: string) => void;
+  setDiscordUsername: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Socials: React.FC<SocialsPropType> = ({
