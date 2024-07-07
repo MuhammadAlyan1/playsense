@@ -39,9 +39,9 @@ import MadMaggiePassive from '../../../assets/icons/characters/madMaggie/passive
 import MadMaggieTactical from '../../../assets/icons/characters/madMaggie/tactical.svg?react';
 import MadMaggieUltimate from '../../../assets/icons/characters/madMaggie/ultimate.svg?react';
 import BallisticImage from '../../../assets/characters/ballistic.png';
-import BallisticPassive from '../../../assets/icons/characters/ballistic/passive.svg?react';
-import BallisticTactical from '../../../assets/icons/characters/ballistic/tactical.svg?react';
-import BallisticUltimate from '../../../assets/icons/characters/ballistic/ultimate.svg?react';
+import BallisticPassive from '../../../assets/icons/characters/Ballistic/passive.svg?react';
+import BallisticTactical from '../../../assets/icons/characters/Ballistic/tactical.svg?react';
+import BallisticUltimate from '../../../assets/icons/characters/Ballistic/ultimate.svg?react';
 import BloodhoundImage from '../../../assets/characters/bloodhound.png';
 import BloodhoundPassive from '../../../assets/icons/characters/bloodhound/passive.svg?react';
 import BloodhoundTactical from '../../../assets/icons/characters/bloodhound/tactical.svg?react';
