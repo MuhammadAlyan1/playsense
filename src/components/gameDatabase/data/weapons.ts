@@ -22,7 +22,7 @@ import longbow from '../../../assets/weapons/images/longbow.png';
 import sentinel from '../../../assets/weapons/images/sentinel.png';
 import wingman from '../../../assets/weapons/images/wingman.png';
 import p2020 from '../../../assets/weapons/images/p2020.png';
-import re45 from '../../../assets/weapons/images/re45.png';
+import re45 from '../../../assets/weapons/images/RE45.png';
 import mastiff from '../../../assets/weapons/images/mastiff.png';
 import peacekeeper from '../../../assets/weapons/images/peacekeeper.png';
 import mozambique from '../../../assets/weapons/images/mozambique.png';
