@@ -16,6 +16,7 @@ import { Toaster } from 'react-hot-toast';
 import FeedbackWithComments from './components/feedbackHub/FeedbackWithComments';
 import Legend from './components/gameDatabase/detailedInfo/legend';
 import Weapon from './components/gameDatabase/detailedInfo/weapon';
+import DashboardSharedLayout from './components/dashboardSharedLayout';
 function App() {
   return (
     <>
@@ -57,6 +58,10 @@ function App() {
                 path="/feedback/:feedbackId"
                 element={<FeedbackWithComments />}
               />
+            </Route>
+            <Route path="/dashboard" element={<DashboardSharedLayout />}>
+              <Route index element={<h1>Hello Dashboard</h1>} />
+              <Route path="/dashboard/orders" element={<h1>ORDERS</h1>} />
             </Route>
             <Route path="*" element={<h1>404</h1>} />
           </Routes>
