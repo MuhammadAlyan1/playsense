@@ -47,9 +47,9 @@ import BloodhoundPassive from '../../../assets/icons/characters/bloodhound/passi
 import BloodhoundTactical from '../../../assets/icons/characters/bloodhound/tactical.svg?react';
 import BloodhoundUltimate from '../../../assets/icons/characters/bloodhound/ultimate.svg?react';
 import CryptoImage from '../../../assets/characters/crypto.png';
-import CryptoPassive from '../../../assets/icons/characters/crypto/passive.svg?react';
-import CryptoTactical from '../../../assets/icons/characters/crypto/tactical.svg?react';
-import CryptoUltimate from '../../../assets/icons/characters/crypto/ultimate.svg?react';
+import CryptoPassive from '../../../assets/icons/characters/Crypto/passive.svg?react';
+import CryptoTactical from '../../../assets/icons/characters/Crypto/tactical.svg?react';
+import CryptoUltimate from '../../../assets/icons/characters/Crypto/ultimate.svg?react';
 import SeerImage from '../../../assets/characters/seer.png';
 import SeerPassive from '../../../assets/icons/characters/seer/passive.svg?react';
 import SeerTactical from '../../../assets/icons/characters/seer/tactical.svg?react';
