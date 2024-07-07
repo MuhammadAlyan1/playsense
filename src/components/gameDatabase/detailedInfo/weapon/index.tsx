@@ -1,5 +1,4 @@
 import React from 'react';
-import r301 from '../../../../assets/weapons/images/r301.png';
 import BarrelIcon from '../../../../assets/weapons/misc icons/barrel-stabilizer.svg?react';
 import ExtendedMagIcon from '../../../../assets/weapons/misc icons/extended-mag.svg?react';
 import StockIcon from '../../../../assets/weapons/misc icons/standard-stock.svg?react';
@@ -143,14 +142,14 @@ const Weapon = () => {
         <div className="detailed-weapon__label-badge-container">
           <p className="detailed-weapon__label">Attachments</p>
           <div className="detailed-weapon__badges">
-            {Object.keys(weapon?.attachments)?.map((attachment) => {
-              return renderAttachments(
-                `${attachment?.replace('has', '')}` as Attachments,
+            {Object.keys(weapon?.attachments)?.map((attachment) =>
+              renderAttachments(
+                attachment.replace('has', '') as Attachments,
                 weapon.attachments[
                   attachment as keyof typeof weapon.attachments
-                ]
-              );
-            })}
+                ] ?? false
+              )
+            )}
           </div>
         </div>
         <div className="detailed-weapon__label-badge-container">
