@@ -86,7 +86,7 @@ import CausticImage from '../../../assets/characters/caustic.png';
 import CausticPassive from '../../../assets/icons/characters/caustic/passive.svg?react';
 import CausticTactical from '../../../assets/icons/characters/caustic/tactical.svg?react';
 import CausticUltimate from '../../../assets/icons/characters/caustic/ultimate.svg?react';
-import WattsonImage from '../../../assets/characters/Wattson.png';
+import WattsonImage from '../../../assets/characters/wattson.png';
 import WattsonPassive from '../../../assets/icons/characters/wattson/passive.svg?react';
 import WattsonTactical from '../../../assets/icons/characters/wattson/tactical.svg?react';
 import WattsonUltimate from '../../../assets/icons/characters/wattson/ultimate.svg?react';
