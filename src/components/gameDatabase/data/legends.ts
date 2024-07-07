@@ -77,7 +77,7 @@ import LobaUltimate from '../../../assets/icons/characters/loba/ultimate.svg?rea
 import NewcastleImage from '../../../assets/characters/newcastle.png';
 import NewcastlePassive from '../../../assets/icons/characters/newcastle/passive.svg?react';
 import NewcastleTactical from '../../../assets/icons/characters/newcastle/tactical.svg?react';
-import NewcastleUltimate from '../../../assets/icons/characters/newCastle/ultimate.svg?react';
+import NewcastleUltimate from '../../../assets/icons/characters/newcastle/ultimate.svg?react';
 import ConduitImage from '../../../assets/characters/conduit.png';
 import ConduitPassive from '../../../assets/icons/characters/conduit/passive.svg?react';
 import ConduitTactical from '../../../assets/icons/characters/conduit/tactical.svg?react';
@@ -87,9 +87,9 @@ import CausticPassive from '../../../assets/icons/characters/caustic/passive.svg
 import CausticTactical from '../../../assets/icons/characters/caustic/tactical.svg?react';
 import CausticUltimate from '../../../assets/icons/characters/caustic/ultimate.svg?react';
 import WattsonImage from '../../../assets/characters/Wattson.png';
-import WattsonPassive from '../../../assets/icons/characters/Wattson/passive.svg?react';
-import WattsonTactical from '../../../assets/icons/characters/Wattson/tactical.svg?react';
-import WattsonUltimate from '../../../assets/icons/characters/Wattson/ultimate.svg?react';
+import WattsonPassive from '../../../assets/icons/characters/wattson/passive.svg?react';
+import WattsonTactical from '../../../assets/icons/characters/wattson/tactical.svg?react';
+import WattsonUltimate from '../../../assets/icons/characters/wattson/ultimate.svg?react';
 import RampartImage from '../../../assets/characters/rampart.png';
 import RampartPassive from '../../../assets/icons/characters/rampart/passive.svg?react';
 import RampartTactical from '../../../assets/icons/characters/rampart/tactical.svg?react';
