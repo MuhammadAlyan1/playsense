@@ -17,7 +17,7 @@ type ServicePropsType = {
 
 const Service: React.FC<ServicePropsType> = ({ service }) => {
   const handleCreateOrder: PayPalButtonsComponentProps['createOrder'] = (
-    data,
+    _,
     actions
   ) => {
     return actions.order.create({
