@@ -9,12 +9,13 @@ import NotificationIcon from '../../assets/icons/misc/notifications.svg?react';
 import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 
 import { useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
-
+  const profileData = useAuth();
   const linkItems = [
     { name: 'home', href: '/' },
     { name: 'analytics', href: '/analytics' },
@@ -36,14 +37,15 @@ const Navbar = () => {
       name: 'My Profile',
       href: '/profile'
     },
-    {
-      name: 'Sign in',
-      href: '/signin'
-    },
-    {
-      name: 'Create Acount',
-      href: '/signup'
-    }
+    profileData
+      ? {
+          name: 'Dashboard',
+          href: '/dashboard'
+        }
+      : {
+          name: 'Sign in',
+          href: '/signin'
+        }
   ];
 
   useEffect(() => {
