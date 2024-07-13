@@ -1,0 +1,25 @@
+@use '../abstract/index' as *;
+
+.rating {
+  display: flex;
+  cursor: pointer;
+  gap: 0.5rem;
+  &__star {
+    width: 20px;
+    transition: all 250ms ease-in-out;
+    fill: $clr-text-secondary;
+    cursor: pointer;
+    &:hover {
+      scale: 1.15;
+      fill: $clr-secondary;
+    }
+  }
+  &--active {
+    fill: $clr-secondary;
+  }
+
+  &--read-only {
+    pointer-events: none;
+    cursor: default;
+  }
+}
