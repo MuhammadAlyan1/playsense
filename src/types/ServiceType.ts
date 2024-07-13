@@ -9,7 +9,7 @@ export type ServiceType = {
   rating: number;
   status: string;
   title: string;
-  total_sales: number;
+  totalSales: number;
   reviews: number;
   updatedAt: string;
   paypalAccountId: string;
