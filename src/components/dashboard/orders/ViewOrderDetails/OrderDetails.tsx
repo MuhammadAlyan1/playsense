@@ -47,6 +47,33 @@ const OrderDetails: React.FC<OrderDetailsType> = ({ order }) => {
       <p className="view-order__value view-order__badge view-order__badge--blue">
         {getTimeDifference(order?.updatedAt) || 'Just now'}
       </p>
+      {order?.orderStatus != 'pending' && (
+        <>
+          <p className="view-order__label">Session Link</p>
+          <p className="view-order__value view-order__badge view-order__badge--rating">
+            <a
+              className="view-order__link"
+              target="_blank"
+              href={order.sessionUrl}
+            >
+              Open Meeting
+            </a>
+          </p>
+          <p className="view-order__label">Session Time</p>
+          <p className="view-order__value view-order__badge view-order__badge--blue">
+            {moment(order?.sessionTime).format('dddd, MMMM Do YYYY, hh:ss a') ||
+              'Just now'}
+          </p>
+          {order?.sessionAdditionalInformation && (
+            <>
+              <p className="view-order__label">Session Notes</p>
+              <p className="view-order__value view-order__badge view-order__badge--blue">
+                {order?.sessionAdditionalInformation}
+              </p>
+            </>
+          )}
+        </>
+      )}
     </>
   );
 };
