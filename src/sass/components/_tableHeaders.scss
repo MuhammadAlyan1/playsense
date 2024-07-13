@@ -1,0 +1,19 @@
+@use './buttons' as *;
+@use '../abstract/variables' as *;
+.table-headers {
+}
+
+.table-headers-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  &--view-button {
+    @include button--contained(#000, $clr-secondary);
+    font-size: $text-sm;
+  }
+
+  &--action-button {
+    @include button--contained($clr-white, $clr-accent);
+    font-size: $text-sm;
+  }
+}
