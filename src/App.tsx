@@ -17,6 +17,9 @@ import FeedbackWithComments from './components/feedbackHub/FeedbackWithComments'
 import Legend from './components/gameDatabase/detailedInfo/legend';
 import Weapon from './components/gameDatabase/detailedInfo/weapon';
 import DashboardSharedLayout from './components/dashboardSharedLayout';
+import Orders from './components/dashboard/orders';
+import 'react-datepicker/dist/react-datepicker.css';
+
 function App() {
   return (
     <>
@@ -61,7 +64,7 @@ function App() {
             </Route>
             <Route path="/dashboard" element={<DashboardSharedLayout />}>
               <Route index element={<h1>Hello Dashboard</h1>} />
-              <Route path="/dashboard/orders" element={<h1>ORDERS</h1>} />
+              <Route path="/dashboard/orders" element={<Orders />} />
             </Route>
             <Route path="*" element={<h1>404</h1>} />
           </Routes>
