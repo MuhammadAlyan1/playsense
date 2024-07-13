@@ -15,6 +15,6 @@ export type OrderType = {
   updatedAt: string;
   orderStatus: 'pending' | 'session scheduled' | 'completed';
   sessionUrl: string;
-  sessionTime: null | Date;
+  sessionTime: null | string;
   sessionAdditionalInformation: string;
 };
