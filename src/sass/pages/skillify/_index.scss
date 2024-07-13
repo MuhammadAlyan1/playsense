@@ -1,6 +1,9 @@
 @use '../../abstract/index' as *;
 @use '../../components/buttons' as *;
 @forward './addService';
+@forward './scheduleSession';
+@forward './orders';
+@forward './viewOrder';
 
 .skillify {
   margin-inline: $default-margin-inline;
