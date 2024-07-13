@@ -1,0 +1,73 @@
+@use '../../abstract/index' as *;
+@use '../../components/index' as *;
+
+.view-order {
+  margin-top: 1rem;
+  padding-inline: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 1rem;
+
+  &__rating {
+    display: flex;
+    gap: 0.25em;
+    margin-left: auto;
+    align-items: center;
+    color: $clr-white;
+  }
+  &__rating-icon {
+    fill: $clr-white;
+  }
+
+  &__value {
+    margin-left: auto;
+  }
+
+  &__badge {
+    text-transform: uppercase;
+    background-color: $clr-info;
+    padding: 0.25rem 0.5rem;
+    border-radius: $rounded-md;
+    font-size: $text-sm;
+    width: fit-content;
+    margin-left: auto;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--green {
+      background-color: $clr-success;
+    }
+
+    &--blue {
+      background-color: $clr-info;
+    }
+
+    &--yellow {
+      background-color: $clr-warning;
+    }
+    &--rating {
+      background-color: $clr-accent;
+    }
+  }
+
+  &__review {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  &__review-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: $clr-primary;
+    letter-spacing: 1px;
+  }
+
+  &__submit-button {
+    @include button--contained($clr-white, $clr-accent);
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
