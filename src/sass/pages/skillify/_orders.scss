@@ -1,0 +1,24 @@
+@use '../../abstract/index' as *;
+@use '../../components/index' as *;
+.orders {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: $text-lg;
+    text-transform: uppercase;
+    color: $clr-accent;
+    font-weight: 500;
+  }
+
+  &__orders-swap-button {
+    @include button--contained($clr-white, $clr-accent);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
