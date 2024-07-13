@@ -76,7 +76,7 @@ const ReviewOrder: React.FC<ReviewOrderType> = ({ order, setOrders }) => {
     <>
       <p className="view-order__review-title">Rating</p>
       <p className="view-order__value">
-        <Rating value={rating} setValue={setRating} />
+        <Rating value={rating} setValue={setRating} readOnly={hasReviewed} />
       </p>
       <div className="view-order__review">
         <p className="view-order__review-title">Review</p>
@@ -85,10 +85,12 @@ const ReviewOrder: React.FC<ReviewOrderType> = ({ order, setOrders }) => {
           setState={setReview}
           MAX_WORD_COUNT={200}
           placeholder="Share your experience."
+          isDisabled={hasReviewed}
         />
         <button
           className="view-order__submit-button"
           onClick={() => handleReview()}
+          disabled={hasReviewed}
         >
           Submit
         </button>
