@@ -30,7 +30,7 @@ const ServiceDetails: React.FC<ServiceDetailsType> = ({ order }) => {
       <p
         className={`view-order__value view-order__badge view-order__badge--rating view-order__rating `}
       >
-        {order.serviceId?.rating || 0}{' '}
+        {order.serviceId?.rating?.toFixed(1) || 0}{' '}
         <FaStar className="view-order__rating-icon" />
       </p>
       <p className="view-order__label">Total Sales</p>
