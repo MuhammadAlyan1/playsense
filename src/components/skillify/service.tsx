@@ -84,8 +84,8 @@ const Service: React.FC<ServicePropsType> = ({ service }) => {
         </div>
         <div className="coach__rating-reviews-container">
           <p className="coach__rating">
+            {service.rating?.toFixed(1)}
             <IoMdStar className="coach__rating-icon" />
-            {service.rating}
           </p>
           <p className="coach__reviews">({service.reviews})</p>
         </div>
