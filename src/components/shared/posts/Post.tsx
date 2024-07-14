@@ -96,7 +96,10 @@ const Post: React.FC<PostType> = ({
 
   return (
     <div key={_id} className="post">
-      <div className="post__header">
+      <div
+        className="post__header"
+        onClick={() => navigate(`/profile/${profileId._id}`)}
+      >
         <div className="avatar-container post__avatar-container">
           <img
             src={profileId?.profilePicture}
