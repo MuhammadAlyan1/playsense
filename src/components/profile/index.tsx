@@ -39,11 +39,11 @@ const Profile = () => {
     mousepad: '',
     createdAt: '',
     updatedAt: '',
-    __v: 0
+    __v: 0,
+    friends: []
   });
 
   const params = useParams();
-
   useEffect(() => {
     const fetchProfile = async (profileId: string) => {
       const response = await axios.get(`/profile/${profileId}`);
