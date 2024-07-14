@@ -5,13 +5,12 @@ import About from './About';
 import Posts from '../shared/posts';
 import Friends from './Friends';
 import Peripherals from './Peripherals';
-import useAuth from '../../hooks/useAuth';
 import { ProfileType } from '../../types/ProfileType';
 import { PostType } from '../../types/PostType';
 import axios from '../../api/axios';
 import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
 import MatchAnalyticsTable from '../analytics/MatchAnalyticsTable';
-
+import { useParams } from 'react-router-dom';
 const Profile = () => {
   const [currentNavigationItem, setCurrentNavigationItem] = useState('about');
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -43,11 +42,15 @@ const Profile = () => {
     __v: 0
   });
 
-  const auth = useAuth();
+  const params = useParams();
 
   useEffect(() => {
-    auth?.auth && setProfileData(auth?.auth);
-
+    const fetchProfile = async (profileId: string) => {
+      const response = await axios.get(`/profile/${profileId}`);
+      if (response.data.success) {
+        setProfileData(response.data.data);
+      }
+    };
     const fetchPosts = async (profileId: string) => {
       const response = await axios.get(`/posts?profileId=${profileId}`);
       if (response.data.success) {
@@ -90,9 +93,10 @@ const Profile = () => {
       }
     };
 
-    auth?.auth?._id && fetchPosts(auth?.auth?._id);
-    auth?.auth?._id && fetchMatchAnalytics(auth?.auth?._id);
-  }, [auth?.auth?._id]);
+    params?.profileId && fetchPosts(params?.profileId);
+    params?.profileId && fetchMatchAnalytics(params?.profileId);
+    params?.profileId && fetchProfile(params?.profileId);
+  }, [params?.profileId]);
 
   return (
     <div className="profile">
