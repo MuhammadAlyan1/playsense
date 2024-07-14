@@ -19,6 +19,7 @@ import Weapon from './components/gameDatabase/detailedInfo/weapon';
 import DashboardSharedLayout from './components/dashboardSharedLayout';
 import Orders from './components/dashboard/orders';
 import 'react-datepicker/dist/react-datepicker.css';
+import Notifications from './components/dashboard/notifications';
 
 function App() {
   return (
@@ -65,6 +66,10 @@ function App() {
             <Route path="/dashboard" element={<DashboardSharedLayout />}>
               <Route index element={<h1>Hello Dashboard</h1>} />
               <Route path="/dashboard/orders" element={<Orders />} />
+              <Route
+                path="/dashboard/notifications"
+                element={<Notifications />}
+              />
             </Route>
             <Route path="*" element={<h1>404</h1>} />
           </Routes>
