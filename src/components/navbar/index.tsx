@@ -10,11 +10,16 @@ import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 
 import { useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
+import axios from '../../api/axios';
+import { NotificationType } from '../../types/NotificationType';
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
+  const [notifications, setNotifications] = useState<NotificationType[] | []>(
+    []
+  );
   const profileData = useAuth();
   const linkItems = [
     { name: 'home', href: '/' },
@@ -64,6 +69,28 @@ const Navbar = () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get('/notification', {
+          withCredentials: true
+        });
+        console.log('PROFILE ID: ', profileData?.auth?._id);
+        console.log('RESPONSE: ', response);
+        setNotifications(response?.data?.data);
+      } catch (error) {
+        console.log('Failed to fetch notifications', error);
+      }
+    };
+
+    fetchNotifications();
+    const interval = setInterval(() => {
+      fetchNotifications();
+    }, 1000 * 60 * 5);
+
+    return () => clearInterval(interval);
+  }, [profileData?.auth?._id]);
 
   return (
     <>
@@ -118,9 +145,9 @@ const Navbar = () => {
           <button className="navbar__user-panel-icon-button">
             <NotificationIcon className="navbar__user-panel-icon" />
 
-            {getFormatedBadgeValue(9) && (
+            {getFormatedBadgeValue(notifications?.length || 0) && (
               <p className="navbar__user-panel-icon-badge">
-                {getFormatedBadgeValue(9)}
+                {getFormatedBadgeValue(notifications?.length || 0)}
               </p>
             )}
           </button>
