@@ -10,37 +10,9 @@ import DiscordIcon from '../../assets/icons/socials/discord.svg?react';
 import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-
-// const profileData = {
-//   id: 'xyz123',
-//   username: 'LethalFlakes',
-//   email: 'alyan0332@gmail.com',
-//   avatar:
-//     'https://wallpapers.com/images/hd/gaming-profile-pictures-tmjjc9v0w80azoeh.jpg',
-//   banner:
-//     'https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-//   platform: 'pc',
-//   country: 'pakistan',
-//   isInFriendList: true,
-//   region: 'asia',
-//   bio: 'With honed reflexes and unwavering determination, I turn every game into a tactical masterpiece. My mission: to rise to the top of the FPS elite. Victory is the only option. In the high-stakes arena of FPS gaming, my name will be etched among the legends, my skills renowned, and my victories celebrated.',
-//   createdAt: new Date(),
-//   roles: [
-//     'user',
-//     'moderator',
-//     'admin',
-//     'game developer',
-//     'content creator',
-//     'coach',
-//     'esport elite'
-//   ],
-//   socials: {
-//     twitch: 'https://twitch.com',
-//     youtube: 'https://youtube.com',
-//     twitter: 'https://twitter.com',
-//     discord: 'LethalFlakes#2777'
-//   }
-// };
+import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
+import axios from '../../api/axios';
 
 const getPlatformIcon = (platform: string) => {
   if (platform === 'playstation') {
@@ -51,21 +23,6 @@ const getPlatformIcon = (platform: string) => {
     return pcIcon;
   }
 };
-
-const actionMenuItems = [
-  {
-    name: 'Edit Profile',
-    href: '/edit-profile'
-  },
-  {
-    name: 'Block',
-    href: '#'
-  },
-  {
-    name: 'Report',
-    href: '#'
-  }
-];
 
 type HeaderPropsType = {
   _id: string;
@@ -92,7 +49,13 @@ const Header: React.FC<HeaderPropsType> = ({
 }) => {
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
-  const [isAFriend, setIsAFriend] = useState(false);
+  const auth = useAuth();
+  const setAuth = auth?.setAuth && auth?.setAuth;
+  const currentUser = auth?.auth && auth?.auth;
+  const [isAFriend, setIsAFriend] = useState<boolean>(
+    currentUser?.friends?.includes(_id) ? true : false
+  );
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -110,9 +73,49 @@ const Header: React.FC<HeaderPropsType> = ({
     };
   }, []);
 
-  const handleFriendStatusChange = () => {
-    console.log('_ID: ', _id);
-    setIsAFriend((prev) => !prev);
+  useEffect(() => {
+    setIsAFriend(currentUser?.friends?.includes(_id) ? true : false);
+  }, [currentUser?._id, _id]);
+
+  if (!currentUser?._id) {
+    return;
+  }
+
+  const actionMenuItems = [
+    currentUser?._id === _id && {
+      name: 'Edit Profile',
+      href: '/edit-profile'
+    },
+    currentUser?._id !== _id && {
+      name: 'Block',
+      href: '#'
+    },
+    currentUser?._id !== _id && {
+      name: 'Report',
+      href: '#'
+    }
+  ].filter((item) => item !== false);
+
+  const handleFriendStatusChange = async () => {
+    try {
+      const response = await axios.post(
+        '/profile/friend',
+        { friendProfileId: _id },
+        { withCredentials: true }
+      );
+
+      console.log('response: ', response);
+      toast.success(
+        isAFriend
+          ? 'Successfully removed friend!'
+          : 'Successfully added friend!'
+      );
+      setIsAFriend((prev) => !prev);
+      response.data.data && setAuth && setAuth(response.data.data);
+    } catch (error) {
+      console.log('Failed to change friend status: ', error);
+      toast.error('Failed to change friend status');
+    }
   };
 
   return (
@@ -171,19 +174,23 @@ const Header: React.FC<HeaderPropsType> = ({
         </div>
       </div>
       <div className="header__user-actions">
-        <button className="header__user-action-button header__user-action-button--chat">
-          <ChatIcon className="header__chat-icon" />
-        </button>
-        <button
-          className={`header__user-action-button ${
-            isAFriend
-              ? 'header__user-action-button--remove-friend'
-              : 'header__user-action-button--add-friend'
-          }`}
-          onClick={handleFriendStatusChange}
-        >
-          {isAFriend ? 'Remove friend' : 'Add friend'}
-        </button>
+        {currentUser?._id !== _id && (
+          <>
+            <button className="header__user-action-button header__user-action-button--chat">
+              <ChatIcon className="header__chat-icon" />
+            </button>
+            <button
+              className={`header__user-action-button ${
+                isAFriend
+                  ? 'header__user-action-button--remove-friend'
+                  : 'header__user-action-button--add-friend'
+              }`}
+              onClick={handleFriendStatusChange}
+            >
+              {isAFriend ? 'Remove friend' : 'Add friend'}
+            </button>
+          </>
+        )}
       </div>
       <div className="header__action-menu" ref={actionMenuRef}>
         <BiDotsHorizontalRounded
