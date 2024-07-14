@@ -8,6 +8,8 @@
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   gap: 1rem;
+  width: 550px;
+  padding-bottom: 2rem;
 
   &__rating {
     display: flex;
