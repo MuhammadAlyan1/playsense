@@ -48,6 +48,7 @@
 
   &:disabled {
     background-color: $clr-text-secondary;
+    border-color: $clr-text-secondary;
     color: $clr-white;
     cursor: default;
   }
