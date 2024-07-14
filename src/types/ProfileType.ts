@@ -21,4 +21,5 @@ export type ProfileType = {
   updatedAt: string;
   __v: number;
   accessToken?: string;
+  friends: string[];
 };
