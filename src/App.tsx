@@ -42,7 +42,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="signin" element={<Signin />} />
               <Route path="signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:profileId" element={<Profile />} />
               <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="/match-analytics" element={<MatchAnalytics />} />
               <Route path="/analytics" element={<Analytics />} />
