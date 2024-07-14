@@ -20,6 +20,7 @@ import DashboardSharedLayout from './components/dashboardSharedLayout';
 import Orders from './components/dashboard/orders';
 import 'react-datepicker/dist/react-datepicker.css';
 import Notifications from './components/dashboard/notifications';
+import Users from './components/dashboard/users';
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardSharedLayout />}>
               <Route index element={<h1>Hello Dashboard</h1>} />
               <Route path="/dashboard/orders" element={<Orders />} />
+              <Route path="/dashboard/users" element={<Users />} />
               <Route
                 path="/dashboard/notifications"
                 element={<Notifications />}
