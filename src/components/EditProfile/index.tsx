@@ -125,7 +125,7 @@ const EditProfile = () => {
       console.log(response);
       if (response?.data?.success) {
         auth?.setAuth && auth?.setAuth({ ...response?.data?.data });
-        navigate('/profile');
+        navigate(`/profile/${auth?.auth?._id}`);
       }
     } catch (error) {
       console.log('Failed to save profile changes: ', error);
