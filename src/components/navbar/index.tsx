@@ -40,7 +40,7 @@ const Navbar = () => {
   const profileMenuItems = [
     {
       name: 'My Profile',
-      href: '/profile'
+      href: `/profile/${profileData?.auth?._id}`
     },
     profileData
       ? {
