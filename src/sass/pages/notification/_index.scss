@@ -1,0 +1,27 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+.notifications {
+  &__change-notification-status {
+    @include button--contained(#000, $clr-secondary);
+  }
+
+  margin-top: 2rem;
+
+  &__header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__heading {
+    @include heading;
+    margin-top: 0px;
+  }
+
+  &__mark-all-as-read-button {
+    @include button--outlined($clr-secondary, $clr-secondary);
+  }
+}
