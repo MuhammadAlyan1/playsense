@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
@@ -12,7 +12,8 @@ import { useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
 import { NotificationType } from '../../types/NotificationType';
-
+import toast from 'react-hot-toast';
+import { axiosPrivate } from '../../api/axios';
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -20,6 +21,7 @@ const Navbar = () => {
   const [notifications, setNotifications] = useState<NotificationType[] | []>(
     []
   );
+  const navigate = useNavigate();
   const profileData = useAuth();
   const linkItems = [
     { name: 'home', href: '/' },
@@ -28,8 +30,9 @@ const Navbar = () => {
     { name: 'game database', href: '/game-database' },
     { name: 'skillify', href: '/skillify' }
   ];
-
-  const getFormatedBadgeValue = (value: number) => {
+  const auth = useAuth();
+  const signOut = auth?.signOut;
+  const getFormattedBadgeValue = (value: number) => {
     if (value <= 0) {
       return '';
     } else if (value > 99) {
@@ -37,21 +40,35 @@ const Navbar = () => {
     } else return value.toString();
   };
 
-  const profileMenuItems = [
-    {
-      name: 'My Profile',
-      href: `/profile/${profileData?.auth?._id}`
-    },
-    profileData
-      ? {
+  const profileMenuItems = [];
+  console.log('PROFILE DATA: ', profileData);
+  if (profileData?.auth?._id) {
+    profileMenuItems.push(
+      ...[
+        {
+          name: 'My Profile',
+          href: `/profile/${profileData?.auth?._id}`
+        },
+        {
           name: 'Dashboard',
           href: '/dashboard'
+        },
+        {
+          name: 'Sign out',
+          href: '/signin'
         }
-      : {
+      ]
+    );
+  } else {
+    profileMenuItems.push(
+      ...[
+        {
           name: 'Sign in',
           href: '/signin'
         }
-  ];
+      ]
+    );
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -91,6 +108,18 @@ const Navbar = () => {
 
     return () => clearInterval(interval);
   }, [profileData?.auth?._id]);
+
+  const handleSignOut = async () => {
+    try {
+      const response = await axiosPrivate.post('/users/signout');
+      console.log('Sign out response: ', response);
+      signOut && signOut();
+      toast.success('Successfully signed out.');
+    } catch (error) {
+      console.log('Failed to sign out', error);
+      toast.error('Failed to sign out.');
+    }
+  };
 
   return (
     <>
@@ -136,18 +165,21 @@ const Navbar = () => {
           <button className="navbar__user-panel-icon-button">
             <ChatIcon className="navbar__user-panel-icon" />
 
-            {getFormatedBadgeValue(2) && (
+            {getFormattedBadgeValue(2) && (
               <p className="navbar__user-panel-icon-badge">
-                {getFormatedBadgeValue(2)}
+                {getFormattedBadgeValue(2)}
               </p>
             )}
           </button>
-          <button className="navbar__user-panel-icon-button">
+          <button
+            className="navbar__user-panel-icon-button"
+            onClick={() => navigate('/dashboard/notifications')}
+          >
             <NotificationIcon className="navbar__user-panel-icon" />
 
-            {getFormatedBadgeValue(notifications?.length || 0) && (
+            {getFormattedBadgeValue(notifications?.length || 0) && (
               <p className="navbar__user-panel-icon-badge">
-                {getFormatedBadgeValue(notifications?.length || 0)}
+                {getFormattedBadgeValue(notifications?.length || 0)}
               </p>
             )}
           </button>
@@ -177,6 +209,9 @@ const Navbar = () => {
                     tabIndex={0}
                     onClick={() => {
                       setIsProfileMenuOpen(false);
+                      if (item.name === 'Sign out') {
+                        handleSignOut();
+                      }
                     }}
                   >
                     <Link to={item.href} className="navbar__profile-menu-link">
