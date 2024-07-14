@@ -79,9 +79,9 @@ import NewcastlePassive from '../../../assets/icons/characters/newcastle/passive
 import NewcastleTactical from '../../../assets/icons/characters/newcastle/tactical.svg?react';
 import NewcastleUltimate from '../../../assets/icons/characters/newcastle/ultimate.svg?react';
 import ConduitImage from '../../../assets/characters/conduit.png';
-import ConduitPassive from '../../../assets/icons/characters/conduit/passive.svg?react';
-import ConduitTactical from '../../../assets/icons/characters/conduit/tactical.svg?react';
-import ConduitUltimate from '../../../assets/icons/characters/conduit/ultimate.svg?react';
+// import ConduitPassive from '../../../assets/icons/characters/conduit/passive.svg?react';
+// import ConduitTactical from '../../../assets/icons/characters/conduit/tactical.svg?react';
+// import ConduitUltimate from '../../../assets/icons/characters/conduit/ultimate.svg?react';
 import CausticImage from '../../../assets/characters/caustic.png';
 import CausticPassive from '../../../assets/icons/characters/caustic/passive.svg?react';
 import CausticTactical from '../../../assets/icons/characters/caustic/tactical.svg?react';
@@ -937,7 +937,7 @@ export const legendsInfo: legendInfoType[] = [
     image: ConduitImage,
     abilities: {
       passive: {
-        name: 'Savior’s Speed',
+        name: "Savior's Speed",
         description:
           'Conduit gains a speed boost when sprinting toward allies out of Tactical range.',
         cooldown: '',
@@ -945,7 +945,7 @@ export const legendsInfo: legendInfoType[] = [
           'The speed boost is 30%.',
           'The effect ends when any of the conditions aren’t met for more than 3 seconds.'
         ],
-        icon: ConduitPassive
+        icon: CausticPassive
       },
       tactical: {
         name: 'Radiant Transfer',
@@ -957,7 +957,7 @@ export const legendsInfo: legendInfoType[] = [
           'Temporary shields are granted at a rate equivalent to 7.5 hit points per second, up to a maximum of 60 hit points.',
           'Temporary shields last for up to 30 seconds before decaying.'
         ],
-        icon: ConduitTactical
+        icon: CausticTactical
       },
       ultimate: {
         name: 'Energy Barricade',
@@ -969,7 +969,7 @@ export const legendsInfo: legendInfoType[] = [
           'Enemies within range take 10 damage per second and are slowed by 15%.',
           'Each jammer has 250 hit points and lasts for 60 seconds or until destroyed.'
         ],
-        icon: ConduitUltimate
+        icon: CausticUltimate
       }
     }
   },
