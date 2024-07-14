@@ -5,25 +5,35 @@
   margin-top: 1rem;
   padding-inline: 1rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   align-items: center;
   gap: 1rem;
-  width: 550px;
   padding-bottom: 2rem;
+
+  @include sm {
+    width: 550px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
 
   &__rating {
     display: flex;
     gap: 0.25em;
-    margin-left: auto;
     align-items: center;
     color: $clr-white;
+
+    @include sm {
+      margin-left: auto;
+    }
   }
   &__rating-icon {
     fill: $clr-white;
   }
 
   &__value {
-    margin-left: auto;
+    @include sm {
+      margin-left: auto;
+    }
   }
 
   &__badge {
@@ -33,11 +43,15 @@
     border-radius: $rounded-md;
     font-size: $text-sm;
     width: fit-content;
-    margin-left: auto;
+    // margin-left: auto;
     min-width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include sm {
+      margin-left: auto;
+    }
 
     &--green {
       background-color: $clr-success;
