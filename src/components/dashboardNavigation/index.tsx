@@ -59,10 +59,10 @@ const DashboardNavigation = () => {
               : 'dashboard-navigation__element'
           }
           onClick={() => window.scrollTo(0, 0)}
-          to="/projects"
+          to="/dashboard/notifications"
         >
           <MoneyIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Projects</span>
+          <span className="dashboard-navigation__text">Notifications</span>
         </NavLink>
         <NavLink
           className={({ isActive }) =>
