@@ -1,7 +1,11 @@
 @use '../abstract/index' as *;
 
 .dashboard-shared-layout {
+  padding: 1rem;
+  margin-top: 5rem;
   @include xl {
+    padding: 0px;
+    margin-top: 0px;
     &__pages {
       margin-left: $navigation-width;
       padding-inline: 2rem;
