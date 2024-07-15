@@ -7,6 +7,7 @@ import Comment from '../shared/comment';
 import AddComment from '../shared/comment/AddComment';
 import { CommentType } from '../../types/CommentType';
 import toast from 'react-hot-toast';
+import Report from '../report';
 
 const FeedbackWithComments = () => {
   const { feedbackId } = useParams();
@@ -14,6 +15,13 @@ const FeedbackWithComments = () => {
     useState<FeedbackWithCommentsType | null>(null);
   const [comments, setComments] = useState<CommentType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [reportedProfileId, setReportedProfileId] = useState('');
+  const [reportedFeedbackItemId, setReportedFeedbackItemId] = useState('');
+  const [isCommentReportModalOpen, setIsCommentReportModalOpen] =
+    useState(false);
+  const [reportedCommentProfileId, setReportedCommentProfileId] = useState('');
+  const [reportedCommentItemId, setReportedCommentItemId] = useState('');
 
   console.log('COMMENTS: ', comments);
   useEffect(() => {
@@ -54,6 +62,9 @@ const FeedbackWithComments = () => {
         game={feedbackData.game}
         type={feedbackData.type}
         status={feedbackData.status}
+        setIsReportModalOpen={setIsReportModalOpen}
+        setReportedProfileId={setReportedProfileId}
+        setReportedFeedbackItemId={setReportedFeedbackItemId}
       />
       <AddComment
         comments={comments}
@@ -69,12 +80,27 @@ const FeedbackWithComments = () => {
               content={comment.content}
               profileId={comment.profileId}
               createdAt={comment.createdAt}
-              updatedAt={comment.updatedAt}
-              __v={comment.__v}
+              setIsCommentReportModalOpen={setIsCommentReportModalOpen}
+              setReportedCommentProfileId={setReportedCommentProfileId}
+              setReportedCommentItemId={setReportedCommentItemId}
             />
           );
         })}
       </div>
+      <Report
+        isReportModalOpen={isReportModalOpen}
+        setIsReportModalOpen={setIsReportModalOpen}
+        itemId={reportedFeedbackItemId}
+        itemType="feedback"
+        reportedProfileId={reportedProfileId}
+      />
+      <Report
+        isReportModalOpen={isCommentReportModalOpen}
+        setIsReportModalOpen={setIsCommentReportModalOpen}
+        itemId={reportedCommentItemId}
+        itemType="comment"
+        reportedProfileId={reportedCommentProfileId}
+      />
     </div>
   );
 };
