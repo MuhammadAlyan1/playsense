@@ -1,14 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CommentType } from '../../../types/CommentType';
 import ActionMenu from '../../ui/ActionMenu';
 import { getTimeDifference } from '../../../utils/getTimeDifference';
 import { Link } from 'react-router-dom';
+import { ProfileType } from '../../../types/ProfileType';
 
-const Comment: React.FC<CommentType> = ({
+type CommentProps = {
+  _id: string;
+  content: string;
+  profileId: ProfileType;
+  createdAt: string;
+  setIsCommentReportModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setReportedCommentProfileId: React.Dispatch<React.SetStateAction<string>>;
+  setReportedCommentItemId: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Comment: React.FC<CommentProps> = ({
   _id,
   content,
   profileId,
-  createdAt
+  createdAt,
+  setIsCommentReportModalOpen,
+  setReportedCommentProfileId,
+  setReportedCommentItemId
 }) => {
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
@@ -63,6 +76,9 @@ const Comment: React.FC<CommentType> = ({
               className="action-menu__item"
               onClick={() => {
                 setIsActionMenuOpen(false);
+                setIsCommentReportModalOpen(true);
+                setReportedCommentProfileId(profileId._id);
+                setReportedCommentItemId(_id);
               }}
             >
               <Link to={item.href} className="action-menu__link">
