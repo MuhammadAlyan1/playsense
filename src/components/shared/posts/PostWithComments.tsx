@@ -6,13 +6,20 @@ import { PostWithCommentsType } from '../../../types/PostWithCommentsType';
 import Comment from '../comment';
 import AddComment from '../comment/AddComment';
 import { CommentType } from '../../../types/CommentType';
+import Report from '../../report';
 
 const PostWithComments = () => {
   const { postId } = useParams();
   const [postData, setPostData] = useState<PostWithCommentsType | null>(null);
   const [comments, setComments] = useState<CommentType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [reportedProfileId, setReportedProfileId] = useState('');
+  const [reportedPostItemId, setReportedPostItemId] = useState('');
+  const [isCommentReportModalOpen, setIsCommentReportModalOpen] =
+    useState(false);
+  const [reportedCommentProfileId, setReportedCommentProfileId] = useState('');
+  const [reportedCommentItemId, setReportedCommentItemId] = useState('');
   console.log('COMMENTS: ', comments);
   useEffect(() => {
     const fetchPost = async () => {
@@ -42,14 +49,16 @@ const PostWithComments = () => {
     <div className="post-with-comments">
       <Post
         _id={postData._id}
-        __v={postData.__v}
         likedBy={postData.likedBy}
         dislikedBy={postData.dislikedBy}
         profileId={postData.profileId}
         createdAt={postData.createdAt}
         comments={postData.comments.map((comment) => comment._id)}
         contents={postData.contents}
-        updatedAt={postData.updatedAt}
+        areCommentsDisabled={true}
+        setIsReportModalOpen={setIsReportModalOpen}
+        setReportedProfileId={setReportedProfileId}
+        setReportedPostItemId={setReportedPostItemId}
       />
       <AddComment
         comments={comments}
@@ -65,12 +74,27 @@ const PostWithComments = () => {
               content={comment.content}
               profileId={comment.profileId}
               createdAt={comment.createdAt}
-              updatedAt={comment.updatedAt}
-              __v={comment.__v}
+              setIsCommentReportModalOpen={setIsCommentReportModalOpen}
+              setReportedCommentProfileId={setReportedCommentProfileId}
+              setReportedCommentItemId={setReportedCommentItemId}
             />
           );
         })}
       </div>
+      <Report
+        isReportModalOpen={isReportModalOpen}
+        setIsReportModalOpen={setIsReportModalOpen}
+        itemId={reportedPostItemId}
+        itemType="post"
+        reportedProfileId={reportedProfileId}
+      />
+      <Report
+        isReportModalOpen={isCommentReportModalOpen}
+        setIsReportModalOpen={setIsCommentReportModalOpen}
+        itemId={reportedCommentItemId}
+        itemType="comment"
+        reportedProfileId={reportedCommentProfileId}
+      />
     </div>
   );
 };
