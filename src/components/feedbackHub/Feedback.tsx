@@ -10,11 +10,27 @@ import ApexLegendsIcon from '../../assets/icons/modes/battle-royale.svg?react';
 import WarzoneIcon from '../../assets/icons/games/warzone.svg?react';
 import TypeIcon from '../../assets/icons/tag.svg?react';
 import CsgoIcon from '../../assets/icons/games/csgo.svg?react';
-import { FeedbackType } from '../../types/FeedbacKType';
 import axios from '../../api/axios';
 import toast from 'react-hot-toast';
+import { ProfileType } from '../../types/ProfileType';
 
-const Feedback: React.FC<FeedbackType> = ({
+type FeedbackProps = {
+  _id: string;
+  contents: string;
+  likedBy: string[];
+  dislikedBy: string[];
+  profileId: ProfileType;
+  createdAt: string;
+  comments: string[];
+  game: string;
+  type: string;
+  status: string;
+  setIsReportModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setReportedProfileId: React.Dispatch<React.SetStateAction<string>>;
+  setReportedFeedbackItemId: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Feedback: React.FC<FeedbackProps> = ({
   _id,
   contents,
   likedBy,
@@ -24,7 +40,10 @@ const Feedback: React.FC<FeedbackType> = ({
   comments,
   game,
   type,
-  status
+  status,
+  setIsReportModalOpen,
+  setReportedProfileId,
+  setReportedFeedbackItemId
 }) => {
   const [hasLiked, setHasLiked] = useState(likedBy.includes(profileId._id));
   const [hasDisliked, setHasDisliked] = useState(
@@ -196,6 +215,9 @@ const Feedback: React.FC<FeedbackType> = ({
               className="action-menu__item"
               onClick={() => {
                 setIsActionMenuOpen(false);
+                setIsReportModalOpen(true);
+                setReportedProfileId(profileId._id);
+                setReportedFeedbackItemId(_id);
               }}
             >
               <Link to={item.href} className="action-menu__link">
