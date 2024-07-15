@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NotificationType } from '../../../types/NotificationType';
 import useAuth from '../../../hooks/useAuth';
 import axios from '../../../api/axios';
@@ -94,11 +94,12 @@ const Notifications = () => {
                 if (notification.isRead === false) {
                   return notification._id;
                 } else {
-                  return null;
+                  return undefined;
                 }
               })
-              .filter((item) => item !== null);
-            handleMarkAsRead(unreadNotifications);
+              .filter((item): item is string => item !== undefined);
+            if (unreadNotifications.length === 0) return;
+            handleMarkAsRead(unreadNotifications ? unreadNotifications : []);
           }}
         >
           Mark All As Read

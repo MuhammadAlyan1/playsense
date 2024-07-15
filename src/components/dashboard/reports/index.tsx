@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReportType } from '../../../types/ReportType';
 import useAuth from '../../../hooks/useAuth';
 import axios from '../../../api/axios';

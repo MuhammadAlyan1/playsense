@@ -94,7 +94,10 @@ const Header: React.FC<HeaderPropsType> = ({
       name: 'Report',
       href: '#'
     }
-  ].filter((item) => item !== false);
+  ].filter(
+    (item): item is { name: string; href: string } =>
+      item !== false && item !== undefined
+  );
 
   const handleFriendStatusChange = async () => {
     try {

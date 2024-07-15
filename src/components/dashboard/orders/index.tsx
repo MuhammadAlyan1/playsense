@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OrderType } from '../../../types/OrderType';
 import useAuth from '../../../hooks/useAuth';
 import axios from '../../../api/axios';

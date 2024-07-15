@@ -22,7 +22,7 @@ const ViewOrderDetails: React.FC<ViewOrderDetailsType> = ({
 }) => {
   const [currentItem, setCurrentItem] = useState('order-details');
 
-  const tabItems = [
+  const tabItems: { id: number; name: string; value: string }[] = [
     {
       id: 1,
       name: 'Order Details',
@@ -33,15 +33,19 @@ const ViewOrderDetails: React.FC<ViewOrderDetailsType> = ({
       name: 'Service Details',
       value: 'service-details'
     },
-    order?.orderStatus === 'completed' &&
-      profileId === order.customerId._id && {
-        id: 3,
-        name: 'Review',
-        value: 'review'
-      }
-  ].filter((tab) => tab !== false);
+    ...(order?.orderStatus === 'completed' && profileId === order.customerId._id
+      ? [
+          {
+            id: 3,
+            name: 'Review',
+            value: 'review'
+          }
+        ]
+      : [])
+  ];
 
   if (!order) return;
+  if (!tabItems) return;
 
   return (
     <Modal isOpen={isModalOpen} onClose={setIsModalOpen} title={''}>
