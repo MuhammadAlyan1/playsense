@@ -4,12 +4,26 @@ import DownvoteIcon from '../../../assets/icons/misc/downvote.svg?react';
 import CommentIcon from '../../../assets/icons/misc/comment.svg?react';
 import { Link } from 'react-router-dom';
 import ActionMenu from '../../ui/ActionMenu';
-import { PostType } from '../../../types/PostType';
 import axios from '../../../api/axios';
 import { getTimeDifference } from '../../../utils/getTimeDifference';
 import { getFormattedAmount } from '../../../utils/getFormattedAmount';
 import { useNavigate } from 'react-router-dom';
-const Post: React.FC<PostType> = ({
+import useAuth from '../../../hooks/useAuth';
+import { ProfileType } from '../../../types/ProfileType';
+type PostProps = {
+  _id: string;
+  contents: string;
+  likedBy: string[];
+  dislikedBy: string[];
+  profileId: ProfileType;
+  createdAt: string;
+  comments: string[];
+  areCommentsDisabled: boolean;
+  setIsReportModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setReportedProfileId: React.Dispatch<React.SetStateAction<string>>;
+  setReportedPostItemId: React.Dispatch<React.SetStateAction<string>>;
+};
+const Post: React.FC<PostProps> = ({
   _id,
   contents,
   likedBy,
@@ -17,16 +31,22 @@ const Post: React.FC<PostType> = ({
   profileId,
   createdAt,
   comments,
-  areCommentsDisabled = false
+  areCommentsDisabled = false,
+  setIsReportModalOpen,
+  setReportedProfileId,
+  setReportedPostItemId
 }) => {
+  const auth = useAuth();
+  const authenticatedProfileId = auth?.auth._id || '';
   const navigate = useNavigate();
-  const [hasLiked, setHasLiked] = useState(likedBy.includes(profileId._id));
+  const [hasLiked, setHasLiked] = useState(
+    likedBy.includes(authenticatedProfileId)
+  );
   const [hasDisliked, setHasDisliked] = useState(
-    dislikedBy.includes(profileId._id)
+    dislikedBy.includes(authenticatedProfileId)
   );
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
-
   console.log('isActionMenuOpen: ', isActionMenuOpen);
   const handleLike = async () => {
     setHasLiked((prev) => !prev);
@@ -136,13 +156,13 @@ const Post: React.FC<PostType> = ({
               ? getFormattedAmount(
                   likedBy?.length -
                     dislikedBy?.length +
-                    (likedBy.includes(profileId._id) ? 0 : 1)
+                    (likedBy.includes(authenticatedProfileId) ? 0 : 1)
                 )
               : hasDisliked
               ? getFormattedAmount(
                   likedBy?.length -
                     dislikedBy?.length -
-                    (dislikedBy.includes(profileId._id) ? 0 : 1)
+                    (dislikedBy.includes(authenticatedProfileId) ? 0 : 1)
                 )
               : getFormattedAmount(likedBy?.length - dislikedBy?.length)}
           </p>
@@ -173,6 +193,9 @@ const Post: React.FC<PostType> = ({
               className="action-menu__item"
               onClick={() => {
                 setIsActionMenuOpen(false);
+                setIsReportModalOpen(true);
+                setReportedProfileId(profileId._id);
+                setReportedPostItemId(_id);
               }}
             >
               <Link to={item.href} className="action-menu__link">
