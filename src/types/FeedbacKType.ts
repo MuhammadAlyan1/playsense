@@ -11,4 +11,5 @@ export type FeedbackType = {
   game: string;
   type: string;
   status: string;
+  sNo?: number;
 };
