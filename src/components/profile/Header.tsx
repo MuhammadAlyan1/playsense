@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import axios from '../../api/axios';
+import Report from '../report';
 
 const getPlatformIcon = (platform: string) => {
   if (platform === 'playstation') {
@@ -55,6 +56,9 @@ const Header: React.FC<HeaderPropsType> = ({
   const [isAFriend, setIsAFriend] = useState<boolean>(
     currentUser?.friends?.includes(_id) ? true : false
   );
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [reportedProfileId, setReportedProfileId] = useState('');
+  const [reportedItemId, setReportedItemId] = useState('');
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -85,10 +89,6 @@ const Header: React.FC<HeaderPropsType> = ({
     currentUser?._id === _id && {
       name: 'Edit Profile',
       href: '/edit-profile'
-    },
-    currentUser?._id !== _id && {
-      name: 'Block',
-      href: '#'
     },
     currentUser?._id !== _id && {
       name: 'Report',
@@ -211,6 +211,9 @@ const Header: React.FC<HeaderPropsType> = ({
                 className="header__action-menu-item"
                 onClick={() => {
                   setIsActionMenuOpen(false);
+                  setIsReportModalOpen(true);
+                  setReportedProfileId(_id);
+                  setReportedItemId(_id);
                 }}
               >
                 <Link to={item.href} className="header__action-menu-link">
@@ -221,6 +224,13 @@ const Header: React.FC<HeaderPropsType> = ({
           })}
         </ul>
       </div>
+      <Report
+        isReportModalOpen={isReportModalOpen}
+        setIsReportModalOpen={setIsReportModalOpen}
+        itemId={reportedItemId}
+        itemType="profile"
+        reportedProfileId={reportedProfileId}
+      />
     </section>
   );
 };
