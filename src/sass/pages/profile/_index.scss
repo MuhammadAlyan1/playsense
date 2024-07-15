@@ -3,6 +3,8 @@
 @forward './header';
 @forward './navigation';
 @forward './about';
+@forward './users';
+@forward './assignRoles';
 @use '../../abstract/index' as *;
 
 .profile {
