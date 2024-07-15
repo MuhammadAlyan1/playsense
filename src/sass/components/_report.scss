@@ -1,0 +1,36 @@
+@use '../abstract/index' as *;
+@use '../components/buttons' as *;
+
+.report {
+  width: 300px;
+  height: fit-content;
+
+  &__title {
+    font-size: $text-xl;
+    color: $clr-secondary;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    font-size: $text-base;
+    color: $clr-primary;
+    margin-block: 1rem;
+    text-transform: uppercase;
+  }
+
+  &__message {
+    margin-block: 2rem;
+    color: $clr-text-secondary;
+    font-size: $text-sm;
+    text-align: center;
+  }
+
+  &__submit-button {
+    margin-bottom: 1rem;
+    width: 100%;
+    @include button--contained(#000, $clr-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
