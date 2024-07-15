@@ -46,9 +46,6 @@ const Reports = () => {
     <div className="reports">
       <div className="notifications__header">
         <h1 className="notifications__heading">Reports</h1>
-        <button className="notifications__mark-all-as-read-button">
-          Mark All As Read
-        </button>
       </div>
       <DataGrid columns={ReportsTableHeaders()} data={reports} />
     </div>

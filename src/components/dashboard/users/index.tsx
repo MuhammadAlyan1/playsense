@@ -65,9 +65,6 @@ const Users = () => {
       <div className="users">
         <div className="users__header">
           <h1 className="users__heading">Users</h1>
-          <button className="users__mark-all-as-read-button">
-            Do something.
-          </button>
         </div>
         <DataGrid
           columns={UsersTableHeaders({
