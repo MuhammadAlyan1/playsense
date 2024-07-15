@@ -14,6 +14,7 @@
   border-top-right-radius: $rounded-md;
   border-bottom-right-radius: $rounded-md;
   background-color: $clr-bg-secondary;
+  @include glassEffect;
   @include xl {
     top: 4rem;
   }
@@ -23,7 +24,6 @@
     font-size: 35px;
     cursor: pointer;
     transition: all 250ms ease-in;
-
     color: $clr-accent;
   }
 
@@ -31,16 +31,19 @@
     margin-block: $items-margin-block;
 
     background-color: $clr-bg-secondary;
+    @include glassEffect;
   }
 
   &__button--open {
     position: fixed;
     top: $items-margin-block;
-    left: $default-margin-inline;
     z-index: 11;
-    width: 26px;
-    height: 26px;
-    background-color: $clr-bg-primary;
+    width: 40px;
+    height: 40px;
+    fill: $clr-accent;
+    border-radius: $rounded-md;
+    padding: 0.4rem;
+    @include glassEffect;
 
     @include lg {
       left: $navigation-padding;
