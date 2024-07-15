@@ -21,6 +21,7 @@ import Orders from './components/dashboard/orders';
 import 'react-datepicker/dist/react-datepicker.css';
 import Notifications from './components/dashboard/notifications';
 import Users from './components/dashboard/users';
+import Reports from './components/dashboard/reports';
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
                 path="/dashboard/notifications"
                 element={<Notifications />}
               />
+              <Route path="/dashboard/reports" element={<Reports />} />
             </Route>
             <Route path="*" element={<h1>404</h1>} />
           </Routes>
