@@ -1,0 +1,35 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+.assign-roles {
+  min-width: 300px;
+
+  &__title {
+    font-size: $text-xl;
+    color: $clr-primary;
+    text-align: center;
+  }
+
+  &__label {
+    font-size: $text-base;
+    color: $clr-secondary;
+    font-weight: 500;
+    margin-top: 2rem;
+  }
+
+  &__button {
+    @include button--contained(#000, $clr-secondary);
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+
+  .users__roles-container {
+    margin-bottom: 1rem;
+  }
+
+  .users__role {
+    cursor: pointer;
+  }
+}
