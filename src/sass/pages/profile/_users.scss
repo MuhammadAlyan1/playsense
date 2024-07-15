@@ -1,0 +1,72 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+.users {
+  &__change-notification-status {
+    @include button--contained(#000, $clr-secondary);
+  }
+
+  margin-top: 2rem;
+
+  &__header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__heading {
+    @include heading;
+    margin-top: 0px;
+  }
+
+  &__mark-all-as-read-button {
+    @include button--outlined($clr-secondary, $clr-secondary);
+  }
+
+  &__assign-role-button {
+    @include button--contained(#000, $clr-secondary);
+  }
+
+  &__roles-container {
+    margin-top: 1rem;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 350px;
+  }
+
+  &__role--user {
+    @include role($clr-role-user);
+  }
+
+  &__role--moderator {
+    @include role($clr-role-moderator);
+  }
+
+  &__role--admin {
+    @include role($clr-role-admin);
+  }
+
+  &__role--game-developer {
+    @include role($clr-role-game-developer);
+  }
+
+  &__role--content-creator {
+    @include role($clr-role-content-creator);
+  }
+
+  &__role--coach {
+    @include role($clr-role-coach);
+  }
+
+  &__role--esport-elite {
+    @include role($clr-role-esport-elite);
+  }
+
+  &__role {
+    font-size: $text-xs;
+  }
+}
