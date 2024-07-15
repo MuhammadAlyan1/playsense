@@ -7,6 +7,7 @@ import UsersIcon from '../../assets/icons/misc/person.svg?react';
 import OrdersIcon from '../../assets/icons/misc/dollar.svg?react';
 import AnalyticsIcon from '../../assets/icons/misc/analytics.svg?react';
 import DashboardIcon from '../../assets/icons/misc/dashboard.svg?react';
+import FeedbackIcon from '../../assets/icons/misc/feedback.svg?react';
 import { IoMdClose } from 'react-icons/io';
 import { useLocation } from 'react-router-dom';
 
@@ -92,6 +93,18 @@ const DashboardNavigation = () => {
         >
           <ReportIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Reports</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? 'dashboard-navigation__element dashboard-navigation__element--active'
+              : 'dashboard-navigation__element'
+          }
+          onClick={() => window.scrollTo(0, 0)}
+          to="/dashboard/feedback"
+        >
+          <FeedbackIcon className="dashboard-navigation__icon" />
+          <span className="dashboard-navigation__text">Feedback</span>
         </NavLink>
       </nav>
     </>
