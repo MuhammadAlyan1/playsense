@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import MoneyIcon from '../../assets/icons/misc/money.svg?react';
 import ReportIcon from '../../assets/icons/misc/report.svg?react';
+import NotificationIcon from '../../assets/icons/misc/notifications.svg?react';
+import UsersIcon from '../../assets/icons/misc/person.svg?react';
+import OrdersIcon from '../../assets/icons/misc/dollar.svg?react';
+import AnalyticsIcon from '../../assets/icons/misc/analytics.svg?react';
 import DashboardIcon from '../../assets/icons/misc/dashboard.svg?react';
 import { IoMdClose } from 'react-icons/io';
 import { useLocation } from 'react-router-dom';
@@ -39,8 +42,8 @@ const DashboardNavigation = () => {
               : 'dashboard-navigation__element'
           }
         >
-          <MoneyIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Dashboard</span>
+          <AnalyticsIcon className="dashboard-navigation__icon" />
+          <span className="dashboard-navigation__text">Analytics</span>
         </NavLink>
         <NavLink
           className={({ isActive }) =>
@@ -51,7 +54,7 @@ const DashboardNavigation = () => {
           onClick={() => window.scrollTo(0, 0)}
           to="/dashboard/orders"
         >
-          <MoneyIcon className="dashboard-navigation__icon" />
+          <OrdersIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Orders</span>
         </NavLink>
         <NavLink
@@ -63,7 +66,7 @@ const DashboardNavigation = () => {
           onClick={() => window.scrollTo(0, 0)}
           to="/dashboard/notifications"
         >
-          <MoneyIcon className="dashboard-navigation__icon" />
+          <NotificationIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Notifications</span>
         </NavLink>
         <NavLink
@@ -75,7 +78,7 @@ const DashboardNavigation = () => {
           onClick={() => window.scrollTo(0, 0)}
           to="/dashboard/users"
         >
-          <MoneyIcon className="dashboard-navigation__icon" />
+          <UsersIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Users</span>
         </NavLink>
         <NavLink
@@ -90,36 +93,6 @@ const DashboardNavigation = () => {
           <ReportIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Reports</span>
         </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? 'dashboard-navigation__element dashboard-navigation__element--active'
-              : 'dashboard-navigation__element'
-          }
-          onClick={() => window.scrollTo(0, 0)}
-          to="/users"
-        >
-          <MoneyIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Users</span>
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? 'dashboard-navigation__element dashboard-navigation__element--active'
-              : 'dashboard-navigation__element'
-          }
-          onClick={() => window.scrollTo(0, 0)}
-          to="/emails"
-        >
-          <MoneyIcon className="dashboard-navigation__icon" />
-
-          <span className="dashboard-navigation__text">Emails</span>
-        </NavLink>
-
-        <div className="dashboard-navigation__theme">
-          <MoneyIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Theme</span>
-        </div>
       </nav>
     </>
   );
