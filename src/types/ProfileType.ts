@@ -22,4 +22,5 @@ export type ProfileType = {
   __v: number;
   accessToken?: string;
   friends: string[];
+  sNo?: number;
 };
