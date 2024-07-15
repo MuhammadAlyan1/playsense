@@ -4,12 +4,15 @@ import axios from '../../api/axios';
 import { FeedbackType } from '../../types/FeedbacKType';
 import toast from 'react-hot-toast';
 import AddFeedback from './AddFeedback';
+import Report from '../report';
 
 const FeedbackHub = () => {
   const [feedbacks, setFeedbacks] = useState<FeedbackType[] | []>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFeedbackModalOpened, setIsFeedbackModelOpened] = useState(false);
-
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [reportedProfileId, setReportedProfileId] = useState('');
+  const [reportedFeedbackItemId, setReportedFeedbackItemId] = useState('');
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -53,9 +56,33 @@ const FeedbackHub = () => {
       />
       <div className="feedbacks">
         {feedbacks?.map((feedback) => {
-          return <Feedback key={feedback?._id} {...feedback} />;
+          return (
+            <Feedback
+              key={feedback?._id}
+              _id={feedback._id}
+              likedBy={feedback.likedBy}
+              dislikedBy={feedback.dislikedBy}
+              profileId={feedback.profileId}
+              createdAt={feedback.createdAt}
+              comments={feedback.comments}
+              contents={feedback.contents}
+              game={feedback.game}
+              type={feedback.type}
+              status={feedback.status}
+              setIsReportModalOpen={setIsReportModalOpen}
+              setReportedProfileId={setReportedProfileId}
+              setReportedFeedbackItemId={setReportedFeedbackItemId}
+            />
+          );
         })}
       </div>
+      <Report
+        isReportModalOpen={isReportModalOpen}
+        setIsReportModalOpen={setIsReportModalOpen}
+        itemId={reportedFeedbackItemId}
+        itemType="feedback"
+        reportedProfileId={reportedProfileId}
+      />
     </div>
   );
 };
