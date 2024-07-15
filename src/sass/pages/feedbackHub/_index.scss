@@ -2,6 +2,7 @@
 @use '../../components/buttons' as *;
 @forward './feedback';
 @forward './addFeedback';
+@forward './dashboardFeedback';
 
 .feedback-hub {
   margin-inline: $default-margin-inline;
