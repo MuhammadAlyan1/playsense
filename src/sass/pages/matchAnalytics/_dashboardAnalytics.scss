@@ -1,0 +1,96 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+
+.dashboard-analytics {
+  &__change-notification-status {
+    @include button--contained(#000, $clr-secondary);
+  }
+
+  margin-top: 2rem;
+
+  &__header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__heading {
+    @include heading;
+    margin-top: 0px;
+    margin-bottom: 2rem;
+  }
+
+  &__label {
+    margin-block: 1rem;
+    font-size: $text-lg;
+    text-transform: uppercase;
+    color: $clr-primary;
+  }
+
+  &__statistics {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+    @include sm {
+      justify-content: flex-start;
+    }
+  }
+
+  &__statistic {
+    @include glassEffect;
+    padding: 1rem;
+    width: fit-content;
+    height: 100px;
+    width: 150px;
+    border-radius: $rounded-md;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &--wide {
+      width: 200px;
+    }
+  }
+
+  &__value {
+    color: $clr-secondary;
+    font-size: $text-xl;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__key {
+    color: $clr-text-secondary;
+    font-size: $text-xs;
+    text-align: center;
+  }
+
+  &__radar-charts {
+    display: flex;
+    margin-block: 4rem;
+  }
+
+  &__radar-chart {
+    max-width: 450px;
+    height: 300px;
+    flex: 1;
+  }
+
+  &__caption {
+    color: $clr-secondary;
+    font-size: $text-lg;
+    text-align: center;
+    margin-top: 1rem;
+    @include glassEffect;
+    width: fit-content;
+    margin-inline: auto;
+    padding: 0.3em 0.5em;
+    border-radius: $rounded-md;
+  }
+}
