@@ -23,6 +23,7 @@ import Notifications from './components/dashboard/notifications';
 import Users from './components/dashboard/users';
 import Reports from './components/dashboard/reports';
 import Feedbacks from './components/dashboard/feedback';
+import DashboardAnalytics from './components/dashboard/dashboardAnalytics';
 
 function App() {
   return (
@@ -67,7 +68,7 @@ function App() {
               />
             </Route>
             <Route path="/dashboard" element={<DashboardSharedLayout />}>
-              <Route index element={<h1>Hello Dashboard</h1>} />
+              <Route index element={<DashboardAnalytics />} />
               <Route path="/dashboard/orders" element={<Orders />} />
               <Route path="/dashboard/users" element={<Users />} />
               <Route
