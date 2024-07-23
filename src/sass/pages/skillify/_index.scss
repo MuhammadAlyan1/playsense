@@ -92,6 +92,10 @@
 
     &__chat-icon {
       fill: $clr-primary;
+
+      &--disabled {
+        fill: $clr-text-secondary;
+      }
     }
 
     &__buttons-container {
