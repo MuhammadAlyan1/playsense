@@ -69,6 +69,11 @@
       padding: 0.25rem 0.5rem;
       margin-bottom: 0.5rem;
       border-radius: $rounded-md;
+      text-align: center;
+
+      @include md {
+        text-align: left;
+      }
     }
 
     &__socials-container {
@@ -116,7 +121,12 @@
     &__user-actions {
       display: flex;
       gap: 0.5rem;
-      align-self: flex-end;
+      align-self: center;
+
+      @include md {
+        align-self: flex-end;
+        margin-left: auto;
+      }
     }
 
     &__user-action-button {
