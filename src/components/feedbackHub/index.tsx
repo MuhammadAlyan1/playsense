@@ -5,6 +5,9 @@ import { FeedbackType } from '../../types/FeedbacKType';
 import toast from 'react-hot-toast';
 import AddFeedback from './AddFeedback';
 import Report from '../report';
+import RedditIcon from '../../assets/icons/socials/reddit.svg?react';
+import DiscordIcon from '../../assets/icons/socials/discord.svg?react';
+import TwitterIcon from '../../assets/icons/socials/twitter.svg?react';
 
 const FeedbackHub = () => {
   const [feedbacks, setFeedbacks] = useState<FeedbackType[] | []>([]);
@@ -47,6 +50,34 @@ const FeedbackHub = () => {
         >
           Submit feedback
         </button>
+      </div>
+      <div className="feedback-hub__communities">
+        <p className="feedback-hub__communities-call-to-action">
+          Join communities
+        </p>
+        <div className="feedback-hub__socials">
+          <a
+            href="https://www.reddit.com/r/apexlegends/"
+            target="blank"
+            className="feedback-hub__social"
+          >
+            <RedditIcon className="feedback-hub__social-icon" />
+          </a>
+          <a
+            href="https://discord.com/invite/ApexLegends"
+            target="blank"
+            className="feedback-hub__social"
+          >
+            <DiscordIcon className="feedback-hub__social-icon" />
+          </a>
+          <a
+            href="https://x.com/PlayApex"
+            target="blank"
+            className="feedback-hub__social"
+          >
+            <TwitterIcon className="feedback-hub__social-icon" />
+          </a>
+        </div>
       </div>
       <AddFeedback
         isModalOpen={isFeedbackModalOpened}
