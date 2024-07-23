@@ -9,11 +9,12 @@ import TwitterIcon from '../../assets/icons/socials/twitter.svg?react';
 import DiscordIcon from '../../assets/icons/socials/discord.svg?react';
 import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import axios from '../../api/axios';
 import Report from '../report';
+import useChat from '../../hooks/useChat';
 
 const getPlatformIcon = (platform: string) => {
   if (platform === 'playstation') {
@@ -50,6 +51,7 @@ const Header: React.FC<HeaderPropsType> = ({
 }) => {
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
+  const { setReceiver, setSelectedConversation } = useChat();
   const auth = useAuth();
   const setAuth = auth?.setAuth && auth?.setAuth;
   const currentUser = auth?.auth && auth?.auth;
@@ -59,7 +61,7 @@ const Header: React.FC<HeaderPropsType> = ({
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [reportedProfileId, setReportedProfileId] = useState('');
   const [reportedItemId, setReportedItemId] = useState('');
-
+  const navigate = useNavigate();
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -179,7 +181,18 @@ const Header: React.FC<HeaderPropsType> = ({
       <div className="header__user-actions">
         {currentUser?._id !== _id && (
           <>
-            <button className="header__user-action-button header__user-action-button--chat">
+            <button
+              className="header__user-action-button header__user-action-button--chat"
+              onClick={() => {
+                setReceiver({
+                  _id: _id,
+                  profilePicture: profilePicture,
+                  username: username
+                });
+                setSelectedConversation(null);
+                navigate('/dashboard/chat');
+              }}
+            >
               <ChatIcon className="header__chat-icon" />
             </button>
             <button
