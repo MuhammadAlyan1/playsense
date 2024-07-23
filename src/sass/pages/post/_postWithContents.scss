@@ -7,4 +7,14 @@
     margin-top: 2rem;
     margin-left: 2rem;
   }
+
+  &__share-call-to-action {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__socials {
+    display: flex;
+    gap: 0.5rem;
+  }
 }
