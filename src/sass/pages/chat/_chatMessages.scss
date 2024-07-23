@@ -1,0 +1,86 @@
+@use '../../abstract/index' as *;
+@use '../../components/buttons' as *;
+.chat-messages {
+  &__header {
+    padding: 0.5rem;
+    border-radius: $rounded-md;
+    background-color: $clr-accent;
+    margin-block: 1rem;
+  }
+
+  &__selected-user {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    align-items: center;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    overflow-y: auto;
+  }
+
+  &__message {
+    margin-block: 1rem;
+    width: fit-content;
+    max-width: 90%;
+    &--sender {
+      margin-left: auto;
+
+      .chat-messages__message-time {
+        text-align: right;
+        margin-left: auto;
+      }
+    }
+
+    &--receiver {
+      .chat-messages__message-contents {
+        background-color: $clr-primary;
+      }
+    }
+
+    @include md {
+      max-width: 60%;
+    }
+  }
+
+  &__message-contents {
+    padding: 1rem;
+    border-radius: $rounded-full;
+    background-color: $clr-secondary;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &__message-time {
+    padding: 0.5rem;
+    border-radius: $rounded-md;
+    text-transform: uppercase;
+    font-size: $text-xs;
+    color: $clr-text-secondary;
+    @include glassEffect();
+    width: fit-content;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__send-button {
+    @include button--contained(#000, $clr-accent);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__send-icon {
+    font-size: 1rem;
+    width: 32px;
+    height: 32px;
+  }
+}
