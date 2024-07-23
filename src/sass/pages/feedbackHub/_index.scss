@@ -27,4 +27,37 @@
     color: inherit;
     text-decoration: none;
   }
+
+  &__communities {
+    margin-block: 1rem;
+  }
+
+  &__socials {
+    display: flex;
+    gap: 0.5rem;
+    margin-block: 1rem;
+  }
+
+  &__communities-call-to-action {
+    color: $clr-secondary;
+  }
+
+  &__social {
+    padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-radius: $rounded-md;
+    @include glassEffect;
+  }
+
+  &__social-icon {
+    width: 32px;
+    height: 32px;
+    transition: all 250ms ease-in;
+    &:hover {
+      fill: $clr-accent;
+    }
+  }
 }
