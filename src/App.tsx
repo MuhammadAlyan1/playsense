@@ -24,7 +24,8 @@ import Users from './components/dashboard/users';
 import Reports from './components/dashboard/reports';
 import Feedbacks from './components/dashboard/feedback';
 import DashboardAnalytics from './components/dashboard/dashboardAnalytics';
-
+import Chat from './components/dashboard/chat';
+import { ChatProvider } from './context/chatContext';
 function App() {
   return (
     <>
@@ -41,45 +42,48 @@ function App() {
       />
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<SharedLayout />}>
-              <Route index element={<Home />} />
-              <Route path="signin" element={<Signin />} />
-              <Route path="signup" element={<Signup />} />
-              <Route path="/profile/:profileId" element={<Profile />} />
-              <Route path="/edit-profile" element={<EditProfile />} />
-              <Route path="/match-analytics" element={<MatchAnalytics />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/feedback-hub" element={<FeedbackHub />} />
-              <Route path="/game-database" element={<GameDatabase />} />
-              <Route
-                path="/game-database/legends/:legendName"
-                element={<Legend />}
-              />
-              <Route
-                path="/game-database/weapons/:weaponName"
-                element={<Weapon />}
-              />
-              <Route path="/skillify" element={<Skillify />} />
-              <Route path="/post/:postId" element={<PostComments />} />
-              <Route
-                path="/feedback/:feedbackId"
-                element={<FeedbackWithComments />}
-              />
-            </Route>
-            <Route path="/dashboard" element={<DashboardSharedLayout />}>
-              <Route index element={<DashboardAnalytics />} />
-              <Route path="/dashboard/orders" element={<Orders />} />
-              <Route path="/dashboard/users" element={<Users />} />
-              <Route
-                path="/dashboard/notifications"
-                element={<Notifications />}
-              />
-              <Route path="/dashboard/reports" element={<Reports />} />
-              <Route path="/dashboard/feedback" element={<Feedbacks />} />
-            </Route>
-            <Route path="*" element={<h1>404</h1>} />
-          </Routes>
+          <ChatProvider>
+            <Routes>
+              <Route path="/" element={<SharedLayout />}>
+                <Route index element={<Home />} />
+                <Route path="signin" element={<Signin />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="/profile/:profileId" element={<Profile />} />
+                <Route path="/edit-profile" element={<EditProfile />} />
+                <Route path="/match-analytics" element={<MatchAnalytics />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/feedback-hub" element={<FeedbackHub />} />
+                <Route path="/game-database" element={<GameDatabase />} />
+                <Route
+                  path="/game-database/legends/:legendName"
+                  element={<Legend />}
+                />
+                <Route
+                  path="/game-database/weapons/:weaponName"
+                  element={<Weapon />}
+                />
+                <Route path="/skillify" element={<Skillify />} />
+                <Route path="/post/:postId" element={<PostComments />} />
+                <Route
+                  path="/feedback/:feedbackId"
+                  element={<FeedbackWithComments />}
+                />
+              </Route>
+              <Route path="/dashboard" element={<DashboardSharedLayout />}>
+                <Route index element={<DashboardAnalytics />} />
+                <Route path="/dashboard/orders" element={<Orders />} />
+                <Route path="/dashboard/chat" element={<Chat />} />
+                <Route path="/dashboard/users" element={<Users />} />
+                <Route
+                  path="/dashboard/notifications"
+                  element={<Notifications />}
+                />
+                <Route path="/dashboard/reports" element={<Reports />} />
+                <Route path="/dashboard/feedback" element={<Feedbacks />} />
+              </Route>
+              <Route path="*" element={<h1>404</h1>} />
+            </Routes>
+          </ChatProvider>
         </AuthProvider>
       </BrowserRouter>
     </>
