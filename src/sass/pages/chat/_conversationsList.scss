@@ -1,0 +1,25 @@
+@use '../../abstract/index' as *;
+
+.conversations-list {
+  &__title {
+    font-size: $text-lg;
+    color: $clr-accent;
+  }
+  &__no-conversations {
+    text-align: center;
+  }
+  &__conversations {
+    padding: 1rem;
+    height: 16vh;
+    overflow-y: auto;
+    border-radius: $rounded-md;
+    @include glassEffect;
+  }
+  &__conversation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 1rem;
+    cursor: pointer;
+  }
+}
