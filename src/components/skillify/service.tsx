@@ -10,12 +10,16 @@ import {
   PayPalScriptProvider,
   PayPalButtonsComponentProps
 } from '@paypal/react-paypal-js';
-
+import { useNavigate } from 'react-router-dom';
+import useChat from '../../hooks/useChat';
 type ServicePropsType = {
   service: ServiceType;
 };
 
 const Service: React.FC<ServicePropsType> = ({ service }) => {
+  const navigate = useNavigate();
+  const { sender, setReceiver, setSelectedConversation } = useChat();
+
   const handleCreateOrder: PayPalButtonsComponentProps['createOrder'] = (
     _,
     actions
@@ -93,8 +97,26 @@ const Service: React.FC<ServicePropsType> = ({ service }) => {
       <p className="service__title">{truncateText(service.title)}</p>
       <div className="service__interactions">
         <p className="service__price">${service.price}</p>
-        <button className="service__chat-button">
-          <ChatIcon className="service__chat-icon" />
+        <button
+          className="service__chat-button"
+          disabled={sender?._id === service.profileId._id}
+          onClick={() => {
+            setReceiver({
+              _id: service.profileId._id,
+              profilePicture: service.profileId.profilePicture,
+              username: service.profileId.username
+            });
+            setSelectedConversation(null);
+            navigate('/dashboard/chat');
+          }}
+        >
+          <ChatIcon
+            className={`service__chat-icon ${
+              sender?._id === service.profileId._id
+                ? 'service__chat-icon--disabled'
+                : ''
+            }`}
+          />
         </button>
       </div>
 
