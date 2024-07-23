@@ -162,14 +162,13 @@ const Navbar = () => {
           })}
         </ul>
         <div className="navbar__user-panel">
-          <button className="navbar__user-panel-icon-button">
+          <button
+            className="navbar__user-panel-icon-button"
+            onClick={() => {
+              navigate('/dashboard/chat');
+            }}
+          >
             <ChatIcon className="navbar__user-panel-icon" />
-
-            {getFormattedBadgeValue(2) && (
-              <p className="navbar__user-panel-icon-badge">
-                {getFormattedBadgeValue(2)}
-              </p>
-            )}
           </button>
           <button
             className="navbar__user-panel-icon-button"
