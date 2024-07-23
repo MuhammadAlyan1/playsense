@@ -8,6 +8,8 @@ import AddComment from '../shared/comment/AddComment';
 import { CommentType } from '../../types/CommentType';
 import toast from 'react-hot-toast';
 import Report from '../report';
+import { RedditShareButton, TwitterShareButton } from 'react-share';
+import { TwitterIcon, RedditIcon } from 'react-share';
 
 const FeedbackWithComments = () => {
   const { feedbackId } = useParams();
@@ -66,6 +68,26 @@ const FeedbackWithComments = () => {
         setReportedProfileId={setReportedProfileId}
         setReportedFeedbackItemId={setReportedFeedbackItemId}
       />
+      <div className="post-with-comments__share">
+        <p className="post-with-comments__share-call-to-action">Share on</p>
+        <div className="post-with-comments__socials">
+          <TwitterShareButton
+            className="share__button"
+            url={window.location.href}
+            title={`${feedbackData.contents} @PlayApex`}
+            hashtags={['PlayApex', 'Feedback', 'ApexLegends', 'Apex']}
+          >
+            <TwitterIcon size={40} round={true} />
+          </TwitterShareButton>
+          <RedditShareButton
+            className="share__button"
+            url={window.location.href}
+            title={`${feedbackData.contents}`}
+          >
+            <RedditIcon size={40} round={true} />
+          </RedditShareButton>
+        </div>
+      </div>
       <AddComment
         comments={comments}
         setComments={setComments}
