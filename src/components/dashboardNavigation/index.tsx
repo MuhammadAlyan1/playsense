@@ -8,6 +8,7 @@ import OrdersIcon from '../../assets/icons/misc/dollar.svg?react';
 import AnalyticsIcon from '../../assets/icons/misc/analytics.svg?react';
 import DashboardIcon from '../../assets/icons/misc/dashboard.svg?react';
 import FeedbackIcon from '../../assets/icons/misc/feedback.svg?react';
+import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 import { IoMdClose } from 'react-icons/io';
 import { useLocation } from 'react-router-dom';
 
@@ -45,6 +46,18 @@ const DashboardNavigation = () => {
         >
           <AnalyticsIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Analytics</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? 'dashboard-navigation__element dashboard-navigation__element--active'
+              : 'dashboard-navigation__element'
+          }
+          onClick={() => window.scrollTo(0, 0)}
+          to="/dashboard/chat"
+        >
+          <ChatIcon className="dashboard-navigation__icon" />
+          <span className="dashboard-navigation__text">Chat</span>
         </NavLink>
         <NavLink
           className={({ isActive }) =>
