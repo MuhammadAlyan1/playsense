@@ -11,8 +11,11 @@ import FeedbackIcon from '../../assets/icons/misc/feedback.svg?react';
 import ChatIcon from '../../assets/icons/misc/chat.svg?react';
 import { IoMdClose } from 'react-icons/io';
 import { useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const DashboardNavigation = () => {
+  const auth = useAuth();
+  const currentUser = auth?.auth;
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const { pathname } = useLocation();
   console.log('PATH NAME: ', pathname);
@@ -83,42 +86,53 @@ const DashboardNavigation = () => {
           <NotificationIcon className="dashboard-navigation__icon" />
           <span className="dashboard-navigation__text">Notifications</span>
         </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? 'dashboard-navigation__element dashboard-navigation__element--active'
-              : 'dashboard-navigation__element'
-          }
-          onClick={() => window.scrollTo(0, 0)}
-          to="/dashboard/users"
-        >
-          <UsersIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Users</span>
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? 'dashboard-navigation__element dashboard-navigation__element--active'
-              : 'dashboard-navigation__element'
-          }
-          onClick={() => window.scrollTo(0, 0)}
-          to="/dashboard/reports"
-        >
-          <ReportIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Reports</span>
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? 'dashboard-navigation__element dashboard-navigation__element--active'
-              : 'dashboard-navigation__element'
-          }
-          onClick={() => window.scrollTo(0, 0)}
-          to="/dashboard/feedback"
-        >
-          <FeedbackIcon className="dashboard-navigation__icon" />
-          <span className="dashboard-navigation__text">Feedback</span>
-        </NavLink>
+        {(currentUser?.roles.includes('admin') ||
+          currentUser?.roles.includes('moderator')) && (
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? 'dashboard-navigation__element dashboard-navigation__element--active'
+                : 'dashboard-navigation__element'
+            }
+            onClick={() => window.scrollTo(0, 0)}
+            to="/dashboard/users"
+          >
+            <UsersIcon className="dashboard-navigation__icon" />
+            <span className="dashboard-navigation__text">Users</span>
+          </NavLink>
+        )}
+        {(currentUser?.roles.includes('admin') ||
+          currentUser?.roles.includes('moderator')) && (
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? 'dashboard-navigation__element dashboard-navigation__element--active'
+                : 'dashboard-navigation__element'
+            }
+            onClick={() => window.scrollTo(0, 0)}
+            to="/dashboard/reports"
+          >
+            <ReportIcon className="dashboard-navigation__icon" />
+            <span className="dashboard-navigation__text">Reports</span>
+          </NavLink>
+        )}
+
+        {(currentUser?.roles.includes('admin') ||
+          currentUser?.roles.includes('moderator') ||
+          currentUser?.roles.includes('content creator')) && (
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? 'dashboard-navigation__element dashboard-navigation__element--active'
+                : 'dashboard-navigation__element'
+            }
+            onClick={() => window.scrollTo(0, 0)}
+            to="/dashboard/feedback"
+          >
+            <FeedbackIcon className="dashboard-navigation__icon" />
+            <span className="dashboard-navigation__text">Feedback</span>
+          </NavLink>
+        )}
       </nav>
     </>
   );
