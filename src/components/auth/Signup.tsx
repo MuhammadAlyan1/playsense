@@ -8,6 +8,8 @@ import WraithImage from '../../assets/characters/wraith.svg?react';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import Loader from '../ui/Loader';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +51,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.log('There was an issue while trying to signup: ', error);
+      toast.error('Failed to sign up.');
     } finally {
       setIsLoading(false);
     }
@@ -112,7 +115,7 @@ const Signup = () => {
           className="signup__signin-button"
           disabled={isLoading}
         >
-          {isLoading ? 'Loading' : 'Sign Up'}
+          {isLoading ? <Loader size={26} /> : 'Sign Up'}
         </button>
         <p className="signup__signup-call-to-action">
           Already have an account?{' '}
