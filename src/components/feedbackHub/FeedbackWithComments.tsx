@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import Report from '../report';
 import { RedditShareButton, TwitterShareButton } from 'react-share';
 import { TwitterIcon, RedditIcon } from 'react-share';
+import Loader from '../ui/Loader';
 
 const FeedbackWithComments = () => {
   const { feedbackId } = useParams();
@@ -46,7 +47,7 @@ const FeedbackWithComments = () => {
   }, [feedbackId]);
 
   if (isLoading) {
-    return <h1>Loading..</h1>;
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
   }
 
   if (!feedbackData) return;
