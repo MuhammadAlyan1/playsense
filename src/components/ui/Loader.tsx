@@ -1,13 +1,12 @@
+import React from 'react';
+
 type LoaderPropsType = {
-  width?: string;
-  height?: string;
+  size?: number;
+  style?: React.CSSProperties;
 };
-const Loader: React.FC<LoaderPropsType> = ({
-  width = '36px',
-  height = '36px'
-}) => {
+const Loader: React.FC<LoaderPropsType> = ({ size = 36, style }) => {
   return (
-    <div style={{ width: width, height: height }}>
+    <div style={{ width: size, height: size, marginInline: 'auto', ...style }}>
       <span className="loader"></span>
     </div>
   );
