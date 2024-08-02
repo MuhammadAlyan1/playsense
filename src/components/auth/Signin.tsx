@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { AxiosErrorType } from '../../types/AxiosErrorType';
+import Loader from '../ui/Loader';
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +106,11 @@ const Signin = () => {
           className="signin__signin-button"
           disabled={isLoading}
         >
-          {isLoading ? 'Loading' : 'Sign In'}
+          {isLoading ? (
+            <Loader size={26} style={{ marginBlock: '0rem' }} />
+          ) : (
+            'Sign In'
+          )}
         </button>
         <p className="signin__signup-call-to-action">
           Not registered yet?{' '}
