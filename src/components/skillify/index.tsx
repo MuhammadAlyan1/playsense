@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { ServiceType } from '../../types/ServiceType';
 import Service from './service';
 import AddService from './addService';
+import Loader from '../ui/Loader';
 
 const Skillify = () => {
   const [services, setServices] = useState<ServiceType[] | []>([]);
@@ -29,7 +30,7 @@ const Skillify = () => {
   }, []);
 
   if (isLoading) {
-    <h1>Loading..</h1>;
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
   }
 
   return (
