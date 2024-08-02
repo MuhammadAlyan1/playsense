@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
 import MatchAnalyticsTable from './MatchAnalyticsTable';
 import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
+import Loader from '../ui/Loader';
 
 const Analytics = () => {
   const auth = useAuth();
@@ -63,7 +64,7 @@ const Analytics = () => {
           </Link>
         </button>
       </div>
-      {isLoading && <p>Loading..</p>}
+      {isLoading && <Loader size={150} style={{ marginBlock: '1rem' }} />}
       <MatchAnalyticsTable matchData={matchData} />
     </div>
   );
