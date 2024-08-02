@@ -10,6 +10,7 @@ import CustomRadarChart from './utils/CustomRadarChart';
 import { formatBarChartData } from './utils/formatBarChartData';
 import { getHighestValueItem } from './utils/getHighestValueItem';
 import { keyToLabel } from './utils/keyToLabel';
+import Loader from '../../ui/Loader';
 
 const DashboardAnalytics = () => {
   const [statistics, setStatistics] = useState<StatisticsType | null>(null);
@@ -34,7 +35,7 @@ const DashboardAnalytics = () => {
   }, [profileId]);
 
   if (!statistics) {
-    return <h1>Loading..</h1>;
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
   }
 
   return (
