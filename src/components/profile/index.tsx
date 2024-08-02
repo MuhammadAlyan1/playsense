@@ -11,6 +11,7 @@ import axios from '../../api/axios';
 import { MatchAnalyticsType } from '../../types/MatchAnalyticsType';
 import MatchAnalyticsTable from '../analytics/MatchAnalyticsTable';
 import { useParams } from 'react-router-dom';
+import Loader from '../ui/Loader';
 const Profile = () => {
   const [currentNavigationItem, setCurrentNavigationItem] = useState('about');
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -128,7 +129,7 @@ const Profile = () => {
       {currentNavigationItem === 'analysis' && (
         <div className="profile__analysis">
           {isLoading ? (
-            'Loading..'
+            <Loader size={150} style={{ marginBlock: '1rem' }} />
           ) : (
             <MatchAnalyticsTable matchData={matchData} />
           )}
