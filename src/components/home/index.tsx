@@ -8,6 +8,7 @@ import CreatePost from '../shared/posts/CreatePost';
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
 import { PostType } from '../../types/PostType';
+import Loader from '../ui/Loader';
 
 const Home = () => {
   const [selectedFilter, setSelectedFilter] = useState('new');
@@ -112,7 +113,7 @@ const Home = () => {
         </button>
       </div>
       <CreatePost posts={posts} setPosts={setPosts} />
-      {isLoading && <p>Loading..</p>}
+      {isLoading && <Loader size={150} style={{ marginBlock: '1rem' }} />}
       {posts?.length !== 0 && <Posts posts={posts} />}
     </div>
   );
