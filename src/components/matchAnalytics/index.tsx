@@ -9,6 +9,7 @@ import EliminationLocation from './EliminationLocation';
 import { WeaponType } from '../../types/WeaponType';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../ui/Loader';
 
 const MatchAnalytics = () => {
   const [selectedMap, setSelectedMap] = useState<string>('Kings Canyon');
@@ -82,7 +83,7 @@ const MatchAnalytics = () => {
         className="match-analytics__submit-button"
         onClick={handleSubmit}
       >
-        {isLoading ? 'Loading..' : 'Submit'}
+        {isLoading ? <Loader size={26} /> : 'Submit'}
       </button>
     </div>
   );
