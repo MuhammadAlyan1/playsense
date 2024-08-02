@@ -8,6 +8,7 @@ import Report from '../report';
 import RedditIcon from '../../assets/icons/socials/reddit.svg?react';
 import DiscordIcon from '../../assets/icons/socials/discord.svg?react';
 import TwitterIcon from '../../assets/icons/socials/twitter.svg?react';
+import Loader from '../ui/Loader';
 
 const FeedbackHub = () => {
   const [feedbacks, setFeedbacks] = useState<FeedbackType[] | []>([]);
@@ -17,7 +18,7 @@ const FeedbackHub = () => {
   const [reportedProfileId, setReportedProfileId] = useState('');
   const [reportedFeedbackItemId, setReportedFeedbackItemId] = useState('');
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchFeedbacks = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get('/feedback/');
@@ -31,11 +32,11 @@ const FeedbackHub = () => {
       }
     };
 
-    fetchPosts();
+    fetchFeedbacks();
   }, []);
 
   if (isLoading) {
-    return <p>Loading..</p>;
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
   }
 
   return (
