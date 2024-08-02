@@ -7,6 +7,7 @@ import Comment from '../comment';
 import AddComment from '../comment/AddComment';
 import { CommentType } from '../../../types/CommentType';
 import Report from '../../report';
+import Loader from '../../ui/Loader';
 
 const PostWithComments = () => {
   const { postId } = useParams();
@@ -40,7 +41,7 @@ const PostWithComments = () => {
   }, [postId]);
 
   if (isLoading) {
-    return <h1>Loading..</h1>;
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
   }
 
   if (!postData) return;
