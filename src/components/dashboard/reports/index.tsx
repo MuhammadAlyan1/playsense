@@ -5,10 +5,11 @@ import axios from '../../../api/axios';
 import toast from 'react-hot-toast';
 import ReportsTableHeaders from './ReportsTableHeaders';
 import DataGrid from '../../dataGrid';
+import Loader from '../../ui/Loader';
 
 const Reports = () => {
   const [reports, setReports] = useState<ReportType[] | []>([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useAuth();
   const profileData = auth?.auth && auth?.auth;
   const profileId = profileData && profileData?._id;
@@ -42,6 +43,7 @@ const Reports = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get('/report', {
           withCredentials: true
         });
@@ -59,14 +61,17 @@ const Reports = () => {
       } catch (error) {
         console.log('Failed to fetch reports: ', error);
         toast.error('Failed to fetch reports.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchReports();
   }, [profileId]);
 
-  if (!profileId) return;
-  if (!reports || reports.length === 0) return;
+  if (!profileId || !reports || isLoading) {
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
+  }
 
   return (
     <div className="reports">
