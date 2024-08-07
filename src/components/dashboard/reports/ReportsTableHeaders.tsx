@@ -1,8 +1,12 @@
 import { ReportType } from '../../../types/ReportType';
 import { getTimeDifference } from '../../../utils/getTimeDifference';
 import { TableColumn } from 'react-data-table-component';
-
-const ReportsTableHeaders = (): TableColumn<ReportType>[] => {
+type OrderTableHeadersType = {
+  handleDeleteReportedContent: (value: string) => void;
+};
+const ReportsTableHeaders = ({
+  handleDeleteReportedContent
+}: OrderTableHeadersType): TableColumn<ReportType>[] => {
   return [
     {
       name: 'Id',
@@ -36,6 +40,14 @@ const ReportsTableHeaders = (): TableColumn<ReportType>[] => {
       }
     },
     {
+      name: 'Status',
+      sortable: true,
+      minWidth: '150px',
+      selector: (row: ReportType) => {
+        return row.status;
+      }
+    },
+    {
       name: 'Report Reason',
       sortable: true,
       minWidth: '200px',
@@ -50,6 +62,24 @@ const ReportsTableHeaders = (): TableColumn<ReportType>[] => {
       minWidth: '150px',
       selector: (row: ReportType) =>
         getTimeDifference(row?.createdAt) || 'Just now'
+    },
+    {
+      name: 'Actions',
+      sortable: true,
+      minWidth: '350px',
+      cell: (row: ReportType) => (
+        <div className="table-headers-actions">
+          <button
+            className="table-headers-actions--view-button"
+            onClick={() => {
+              handleDeleteReportedContent(row._id);
+            }}
+            disabled={row.status === 'removed'}
+          >
+            Delete Content
+          </button>
+        </div>
+      )
     }
   ];
 };
