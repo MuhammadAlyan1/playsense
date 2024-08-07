@@ -6,18 +6,20 @@ import FeedbackTableHeaders from './FeedbackTableHeaders';
 import DataGrid from '../../dataGrid';
 import { FeedbackType } from '../../../types/FeedbacKType';
 import UpdateStatus from './UpdateStatus';
+import Loader from '../../ui/Loader';
 
 const Feedbacks = () => {
   const [feedbacks, setFeedbacks] = useState<FeedbackType[] | []>([]);
   const [isChangeStatusModalOpen, setIsChangeStatusModalOpen] = useState(false);
   const [openedModalFeedbackId, setOpenedModalFeedbackId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useAuth();
   const profileData = auth?.auth && auth?.auth;
   const profileId = profileData && profileData?._id;
-  console.log('PROFILE ID: ', profileId);
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get('/feedback', {
           withCredentials: true
         });
@@ -35,14 +37,17 @@ const Feedbacks = () => {
       } catch (error) {
         console.log('Failed to fetch feedbacks: ', error);
         toast.error('Failed to fetch feedbacks.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchFeedbacks();
   }, [profileId]);
 
-  if (!profileId) return;
-  if (!feedbacks || feedbacks.length === 0) return;
+  if (!profileId || !feedbacks || isLoading) {
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
+  }
 
   return (
     <div className="dashboard-feedback">
