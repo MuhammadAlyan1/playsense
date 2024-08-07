@@ -1,12 +1,24 @@
 @use '../../abstract/index' as *;
 @forward './detailedLegend';
 @forward './detailedWeapon';
-
+@use '../../components/buttons' as *;
 .game-database {
   margin-inline: $default-margin-inline;
 
+  &__header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
   &__heading {
     @include heading;
+  }
+
+  &__button {
+    @include button--outlined($clr-secondary, $clr-secondary);
   }
 
   .legends {
