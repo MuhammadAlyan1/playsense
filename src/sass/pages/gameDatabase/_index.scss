@@ -1,6 +1,7 @@
 @use '../../abstract/index' as *;
 @forward './detailedLegend';
 @forward './detailedWeapon';
+@forward './addDatabaseItem';
 @use '../../components/buttons' as *;
 .game-database {
   margin-inline: $default-margin-inline;
