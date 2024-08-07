@@ -7,10 +7,12 @@ import OrderTableHeaders from './OrderTableHeaders';
 import DataGrid from '../../dataGrid';
 import ScheduleSession from './ScheduleSession';
 import ViewOrderDetails from './ViewOrderDetails';
+import Loader from '../../ui/Loader';
 
 const Orders = () => {
   const [orders, setOrders] = useState<OrderType[] | []>([]);
   const [fetchAs, setFetchAs] = useState<'customer' | 'seller'>('customer');
+  const [isLoading, setIsLoading] = useState(false);
   const [isScheduleAppointmentModalOpen, setIsScheduleAppointmentModalOpen] =
     useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
@@ -22,6 +24,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(
           `/order?profileId=${profileId}${
             profileData?.roles?.includes('admin')
@@ -46,14 +49,17 @@ const Orders = () => {
       } catch (error) {
         console.log('Failed to fetch orders: ', error);
         toast.error('Failed to fetch orders.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchOrders();
   }, [profileId, fetchAs]);
 
-  if (!profileId) return;
-  if (!orders) return;
+  if (!profileId || !orders || isLoading) {
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
+  }
   return (
     <div className="orders">
       <div className="orders__header">
