@@ -17,15 +17,17 @@ const UploadImage: React.FC<UploadImageType> = ({
     <div className={`image-upload ${className}`}>
       <p className="image-upload__label">{label}</p>
       <div className="image-upload__image-container">
-        <img
-          className="image-upload__image"
-          src={
-            typeof image !== 'string'
-              ? URL.createObjectURL(image as File)
-              : image
-          }
-          alt="image"
-        />
+        {image && (
+          <img
+            className="image-upload__image"
+            src={
+              typeof image !== 'string'
+                ? URL.createObjectURL(image as File)
+                : image
+            }
+            alt="image"
+          />
+        )}
       </div>
       <input
         className="image-upload__upload-button"
