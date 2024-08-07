@@ -66,7 +66,7 @@ const ReportsTableHeaders = ({
     {
       name: 'Actions',
       sortable: true,
-      minWidth: '350px',
+      minWidth: '100px',
       cell: (row: ReportType) => (
         <div className="table-headers-actions">
           <button
