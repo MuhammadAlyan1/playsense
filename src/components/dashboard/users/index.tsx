@@ -7,12 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import DataGrid from '../../dataGrid';
 import UsersTableHeaders from './UsersTableHeaders';
 import AssignRoles from './AssignRoles';
+import Loader from '../../ui/Loader';
 
 const Users = () => {
   const [allProfiles, setAllProfiles] = useState<ProfileType[] | []>([]);
   const [isAssignRolesModalOpen, setIsAssignRolesModalOpen] = useState(false);
   const [selectedProfileId, setSelectedProfileId] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useAuth();
   const profileData = auth?.auth && auth?.auth;
   const profileId = profileData && profileData?._id;
@@ -21,6 +22,7 @@ const Users = () => {
     const fetchProfiles = async () => {
       if (!profileId) return;
       try {
+        setIsLoading(true);
         const response = await axios.get(
           `/profile/${profileId}?fetchAllProfiles=true`,
           {
@@ -41,14 +43,18 @@ const Users = () => {
       } catch (error) {
         console.log('Failed to fetch users: ', error);
         toast.error('Failed to fetch users');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchProfiles();
   }, [profileId]);
 
-  if (!profileId) return;
-  if (!allProfiles || allProfiles.length === 0) return;
+  if (!profileId || !allProfiles || isLoading) {
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
+  }
+
   if (
     !profileData?.roles?.includes('admin') &&
     !profileData?.roles?.includes('moderator')
