@@ -12,7 +12,33 @@ const Reports = () => {
   const auth = useAuth();
   const profileData = auth?.auth && auth?.auth;
   const profileId = profileData && profileData?._id;
-  console.log('PROFILE ID: ', profileId);
+
+  const handleDeleteReportedContent = async (reportId: string) => {
+    try {
+      const response = await axios.delete(
+        `/report/delete-content/${reportId}`,
+        { withCredentials: true }
+      );
+      if (response?.data?.success) {
+        const newReports = reports.map((report) => {
+          if (report._id === reportId) {
+            return {
+              ...report,
+              status: 'removed'
+            };
+          } else {
+            return report;
+          }
+        });
+
+        setReports(newReports);
+        toast.success('Successfully deleted reported content.');
+      }
+    } catch (error) {
+      console.log('Failed to delete content: ', error);
+      toast.error('Failed to delete content.');
+    }
+  };
   useEffect(() => {
     const fetchReports = async () => {
       try {
@@ -47,7 +73,10 @@ const Reports = () => {
       <div className="notifications__header">
         <h1 className="notifications__heading">Reports</h1>
       </div>
-      <DataGrid columns={ReportsTableHeaders()} data={reports} />
+      <DataGrid
+        columns={ReportsTableHeaders({ handleDeleteReportedContent })}
+        data={reports}
+      />
     </div>
   );
 };
