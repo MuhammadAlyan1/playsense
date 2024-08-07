@@ -3,8 +3,8 @@ import Modal from '../../ui/Modal';
 import Select from '../../ui/Select';
 import GameSvg from '../../../assets/icons/game.svg?react';
 import TypeSvg from '../../../assets/icons/tag.svg?react';
-import AddWeapon from './addWeapon';
 import AddLegend from './AddLegend';
+import AddWeapon from './AddWeapon';
 
 type AddDatabaseItem = {
   isModalOpen: boolean;
