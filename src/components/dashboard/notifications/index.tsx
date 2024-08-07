@@ -5,19 +5,20 @@ import axios from '../../../api/axios';
 import toast from 'react-hot-toast';
 import NotificationTableHeaders from './NotificationTableHeaders';
 import DataGrid from '../../dataGrid';
+import Loader from '../../ui/Loader';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState<NotificationType[] | []>(
     []
   );
-
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useAuth();
   const profileData = auth?.auth && auth?.auth;
   const profileId = profileData && profileData?._id;
-  console.log('PROFILE ID: ', profileId);
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(
           '/notification?getAllNotifications=true',
           {
@@ -40,6 +41,8 @@ const Notifications = () => {
       } catch (error) {
         console.log('Failed to fetch notifications: ', error);
         toast.error('Failed to fetch notifications.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -79,8 +82,9 @@ const Notifications = () => {
     }
   };
 
-  if (!profileId) return;
-  if (!notifications || notifications.length === 0) return;
+  if (!profileId || !notifications || isLoading) {
+    return <Loader size={150} style={{ marginBlock: '1rem' }} />;
+  }
 
   return (
     <div className="notifications">
