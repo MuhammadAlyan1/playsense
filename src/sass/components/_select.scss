@@ -43,6 +43,11 @@
     overflow: hidden;
   }
 
+  &__start-icon {
+    width: 32px;
+    height: 32px;
+  }
+
   &__dropdown-icon {
     font-size: $text-xl;
     transition: transform 250ms ease-in;
@@ -89,6 +94,10 @@
 
     &:hover {
       background-color: $clr-bg-primary;
+    }
+
+    &--selected {
+      color: $clr-secondary;
     }
   }
 }
